@@ -1,0 +1,11 @@
+T__0=1
+T__1=2
+PROJECT=3
+RELATION=4
+NUM=5
+INT_TYPE=6
+COMMENT=7
+WS=8
+'('=1
+')'=2
+'INT'=6

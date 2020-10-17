@@ -1,7 +1,14 @@
 package de.hsh.genrelalg;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.antlr.v4.runtime.ANTLRFileStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
@@ -25,6 +32,28 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 
+		/*
+		try {
+			CharStream input = (CharStream) new ANTLRFileStream("C:/Users/Firas/Documents/Studium/Bachelorprojekt/Bachelorprojekt/BA/src/de/hsh/genrelalg/interpreter/Testcode.txt");
+			RelLex lexer = new RelLex(input);
+			RelParserParser parser = new RelParserParser(new CommonTokenStream(lexer));
+			parser.addParseListener(new RelCustomListener());
+			parser.expression();
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// Angest Tabelle mit Daten füllen
 		ANGEST = new Relation("ANGEST", "ANGNR", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
 		ANGEST.addTuple(new Tuple("112", "MÃ¼ller", "Karlsruhe", "Programmiererin", "4500", "3"));
@@ -91,7 +120,7 @@ public class Main {
 
 //		aufgabe5_1_a();
 //		aufgabe5_1_b();
-		aufgabe5_1_c();
+//		aufgabe5_1_c();
 //		aufgabe5_1_d();
 //		aufgabe5_1_e();
 //		aufgabe5_1_f();
