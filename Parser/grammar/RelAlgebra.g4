@@ -1,27 +1,31 @@
 grammar RelAlgebra;
 
-
-expression: select | project | EOF;
-
-// parser rules
-select:
-	SELECT PREDICATE '(' RELATION ')'
+prog: 
+	expr (',' expr)* # Program | EOF #EOF
 ;
 
+expr: SELECT PREDICATE+ '(' RELATION ')'   # Selection 
+	| PROJECT ATTRIBUT+ '(' RELATION ')'   # Projection 
+	| JOIN # Join_
+;
+
+// parser rules
+/*select:
+	SELECT PREDICATE+ '(' RELATION ')'  
+;
 
 project:
-	PROJECT ATTRIBUT+ '(' RELATION ')'
+	PROJECT ATTRIBUT+ '(' RELATION ')' 
 ;
 
 
 join:
-	JOIN
+	JOIN 
 ;
-
 
 cartesian:
-	CARTESIAN
-;
+	CARTESIAN # Cartesian_
+;*/
 
 // lexer rules
 SELECT: 
@@ -41,7 +45,7 @@ CARTESIAN:
 ;
 
 PREDICATE:
-	[P]
+	[/] [a-zA-Z0-9_] [=] [a-zA-Z0-9_]
 	//'[' .*? ']'
 ;
 

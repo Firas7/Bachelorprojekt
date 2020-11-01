@@ -25,6 +25,9 @@ public class Relation extends RelationalAlgebra {
 		}
 	}
 	
+	public Relation(String name) {
+		this.name = name;
+	}
 	/* Konstruktur legt eine leere Relation an*/
 	public Relation() {
 		this.name = "RES";
@@ -96,5 +99,9 @@ public class Relation extends RelationalAlgebra {
 
 	public boolean contains(Tuple t) {
 		return tuples.contains(t);
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }
