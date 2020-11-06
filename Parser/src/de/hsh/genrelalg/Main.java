@@ -32,26 +32,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 
-		/*
-		try {
-			CharStream input = (CharStream) new ANTLRFileStream("C:/Users/Firas/Documents/Studium/Bachelorprojekt/Bachelorprojekt/BA/src/de/hsh/genrelalg/interpreter/Testcode.txt");
-			RelLex lexer = new RelLex(input);
-			RelParserParser parser = new RelParserParser(new CommonTokenStream(lexer));
-			parser.addParseListener(new RelCustomListener());
-			parser.expression();
-		}catch(IOException ex) {
-			ex.printStackTrace();
-		}*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 		// Angest Tabelle mit Daten füllen

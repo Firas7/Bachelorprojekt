@@ -17,7 +17,7 @@ public class Relation extends RelationalAlgebra {
 	List<Tuple> tuples = new LinkedList<>();
 	String name;
 	
-	/* diese Methode setzt den Namen + Attribute einer Relation */
+	/* this constructor set the name and the attributes of a relation  */
 	public Relation(String name, String ... attNames) {
 		this.name = name;
 		for (String att : attNames) {
@@ -25,6 +25,9 @@ public class Relation extends RelationalAlgebra {
 		}
 	}
 	
+	public Relation(String name) {
+		this.name = name;
+	}
 	/* Konstruktur legt eine leere Relation an*/
 	public Relation() {
 		this.name = "RES";
@@ -96,5 +99,9 @@ public class Relation extends RelationalAlgebra {
 
 	public boolean contains(Tuple t) {
 		return tuples.contains(t);
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }
