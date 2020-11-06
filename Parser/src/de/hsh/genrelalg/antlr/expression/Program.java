@@ -3,6 +3,9 @@ package de.hsh.genrelalg.antlr.expression;
 import java.util.ArrayList;
 import java.util.List;
 
+/* a model class for a program 
+ * 
+ * */
 public class Program {
 	
 	public List<Expr> expressions;

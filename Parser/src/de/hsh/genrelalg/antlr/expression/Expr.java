@@ -3,8 +3,15 @@ package de.hsh.genrelalg.antlr.expression;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
-public interface Expr {
+/* a model class for expression */
+public abstract class Expr extends RelationalAlgebra{
 
-	public RelationalAlgebra getBase();
-	public Relation getResult();
+	public abstract String printSomething();
+	public abstract RelationalAlgebra getRelation();
+	@Override
+	public Relation getResult() {
+		return this.getResult();
+	}
+	
+	
 }

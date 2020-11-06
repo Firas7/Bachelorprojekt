@@ -1,4 +1,4 @@
-package de.compiler.parser;
+package de.hsh.genrelalg.parser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.SyntaxTree;
 
-import de.compiler.parser.*;
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Expr;
 import de.hsh.genrelalg.antlr.expression.Program;
@@ -22,10 +21,12 @@ import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.database.Database;
 import de.hsh.genrelalg.database.Database_employee;
+import de.hsh.genrelalg.parser.*;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {
 	
+	public static Database database;
 	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args){
@@ -36,7 +37,7 @@ public class Main {
 		final TreeViewer view = new TreeViewer(ruleNames, tree);
 		view.open();*/
 		
-		Database database = new Database();
+		database = new Database();
 		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"Lösung");
 		
 		RelAlgebraParser parser = getParser();
@@ -48,9 +49,7 @@ public class Main {
 		Program prog = progVisitor.visit(antlrAST);
 		
 		for(int i=0; i< prog.expressions.size();i++) {
-			//System.out.println("SIZE in Main: "+prog.expressions.size());
-			//System.out.println("SIZE: "+prog.expressions.get(i).getResult().toText("", true));
-			//writeOutput((RelationalAlgebra)prog.expressions.get(i), "Test");
+			System.out.println("Ouput in Main: "+prog.expressions.get(i).printSomething());
 		}
 	}
 	

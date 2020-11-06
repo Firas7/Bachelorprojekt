@@ -17,7 +17,7 @@ public class Relation extends RelationalAlgebra {
 	List<Tuple> tuples = new LinkedList<>();
 	String name;
 	
-	/* diese Methode setzt den Namen + Attribute einer Relation */
+	/* this constructor set the name and the attributes of a relation  */
 	public Relation(String name, String ... attNames) {
 		this.name = name;
 		for (String att : attNames) {

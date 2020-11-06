@@ -8,10 +8,15 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 
-public class Projection extends RelationalAlgebra implements Expr {
+public class Projection extends Expr{
 
 	List<Attribute> attributes = new LinkedList<>();
 	RelationalAlgebra base;
+	
+	/* this constructor will get a list of attributes and a base and both have the type String */
+	public Projection() {
+		
+	}
 
 	public Projection(RelationalAlgebra base, Attribute ... attributes) {
 		this.base = base;
@@ -19,10 +24,6 @@ public class Projection extends RelationalAlgebra implements Expr {
 			this.attributes.add(att);
 	}
 	
-	@Override 
-	public RelationalAlgebra getBase() {
-		return this.base;
-	}
 	@Override
 	public Relation getResult() {
 		Relation rbase = base.getResult();
@@ -35,8 +36,7 @@ public class Projection extends RelationalAlgebra implements Expr {
 				if (rbase.getAttributes().get(i).equals(attribute)) {
 					ok = true;
 					indices[j++] = i;
-					result.addAttribute(rbase.getAttributes().get(i));
-					
+					result.addAttribute(rbase.getAttributes().get(i));	
 				}
 			}
 			if (!ok) {
@@ -74,5 +74,16 @@ public class Projection extends RelationalAlgebra implements Expr {
 		return res;
 	}
 	
+	@Override
+	public RelationalAlgebra getRelation(){
+		return this.base;
+	}
+
+	@Override
+	public String printSomething() {
+		// TODO Auto-generated method stub
+		return "Here is a proejktion";
+	}
+
 	
 }

@@ -1,52 +1,60 @@
 grammar RelAlgebra;
 
 prog: 
-	expr (',' expr)* # Program | EOF #EOF
+	expr # Program  
+	
 ;
 
-expr: SELECT PREDICATE+ '(' RELATION ')'   # Selection 
-	| PROJECT ATTRIBUT+ '(' RELATION ')'   # Projection 
-	| JOIN # Join_
-;
-
-// parser rules
-/*select:
-	SELECT PREDICATE+ '(' RELATION ')'  
-;
-
-project:
-	PROJECT ATTRIBUT+ '(' RELATION ')' 
+expr: select #Selection
+	| project #Projection
+	| cartesian #Carstesian
+	| join #Join_ 
+	| EOF #EOF
 ;
 
 
-join:
-	JOIN 
+predicate:
+	PREDICATE #Predicate_
+;
+
+relation: 
+	RELATION #simple | expr #nested
+;
+// lexer rules
+SELECT: 
+	'SL'
+;
+
+select:
+	SELECT predicate '('relation')'
+;
+
+project: 
+	PROJECT ATTRIBUT+ '('relation')' 
 ;
 
 cartesian:
-	CARTESIAN # Cartesian_
-;*/
-
-// lexer rules
-SELECT: 
-	[S][L]
+	CARTESIAN  '(' relation ( ',' relation )+ ')'
 ;
 
-PROJECT: 
-	[P][R]
+join:
+	JOIN predicate '(' relation ( ',' relation )+ ')'
+;
+
+PROJECT:
+	'PR'
 ;
 
 JOIN: 
-	[j]
+	'JN'
 ;
 
 CARTESIAN: 
-	[x]
+	'X'
 ;
 
 PREDICATE:
-	[/] [a-zA-Z0-9_] [=] [a-zA-Z0-9_]
-	//'[' .*? ']'
+	'['.*?']'
 ;
 
 RELATION:
@@ -54,8 +62,7 @@ RELATION:
 ;
 
 ATTRIBUT:
-	[_][a-zA-Z] [a-zA-Z0-9_]*
-	//'\''.*?'\''
+	[_][a-zA-Z0-9_]*
 ;
 
 WS:

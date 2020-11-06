@@ -88,5 +88,17 @@ public class Database {
 	public ArrayList<Relation> getRelations() {
 		return this.relations;
 	}
-
+	
+	public Relation getRelation(Relation r) {
+		Relation relation = new Relation();
+		for(int i=0; i < this.relations.size()-1; i++) {
+			if(!relations.get(i).getName().equals(r.getName())) {
+				
+			}else {
+				relation = relations.get(i);
+				break;
+			}
+		}
+		return relation;
+	}
 }
