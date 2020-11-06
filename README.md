@@ -1,2 +1,2 @@
 # Bachelorprojekt
-automatische Auswertung der Ausdrücke in relationaler Algebra
+Ein System zur Lernunterstützung und Bewertung für relationale Algebra
