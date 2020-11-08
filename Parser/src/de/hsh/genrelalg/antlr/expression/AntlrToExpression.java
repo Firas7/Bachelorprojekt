@@ -1,12 +1,7 @@
 package de.hsh.genrelalg.antlr.expression;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import de.hsh.genrelalg.Entities.ProjectionEntity;
-import de.hsh.genrelalg.data.Attribute;
-import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CartesianContext;
@@ -20,7 +15,6 @@ import de.hsh.genrelalg.parser.RelAlgebraParser.ProjectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SelectContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SelectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SimpleContext;
-import de.hsh.genrelalg.relalg.Projection;
 
 /* visitor class of the expression rule
  * here we will instantiate this to an expression <Expr>
@@ -106,30 +100,18 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 	@SuppressWarnings("null")
 	@Override
 	public Expr visitProjection(ProjectionContext ctx) {
-		String project = ctx.project().getText();
-		System.out.println("Operation: " + project);
-		
-		String relationName = ctx.project().relation().getText();
-		System.out.println("Relation: " + ctx.project().relation().getText() );
-		int countOfAttributes = ctx.project().ATTRIBUT().size();
-		/* create a relation as relationName */
-		Relation relation_ = new Relation(relationName);
-		
-		Attribute[] attributesOfRelation = new Attribute [countOfAttributes] ;
-		Attribute att;
-		String attribute;
+		String name = ctx.project().PROJECT().getText();
+		String relation = ctx.project().relation().getText();
+		List<String> atts = new ArrayList<>();
+		String a;
 		for(int i = 0 ; i < ctx.project().ATTRIBUT().size(); i++) {
-			attribute = ctx.project().ATTRIBUT().get(i).getText();
-			attribute = convertAttributWithout_(attribute);
-			att = new Attribute(relationName,attribute);
-			attributesOfRelation[i] = att;
-			System.out.println("Attribut "+ attribute + " will be added to list" );
+			a = convertAttributWithout_(ctx.project().ATTRIBUT().get(i).toString());
+			atts.add(a);
+			System.out.println("ATT in antlrToExpr: "+a);
 		}
 		
-		// now we should create a projection object that get a relation_ and a list of attributes as parameters 
-		Projection projection = new Projection(relation_,attributesOfRelation);
-		System.out.println(projection.getResult().toText("", true));
-		return projection;
+		Project proj = new Project(name,relation,atts);
+		return proj;
 	}
 
 /*	@Override
@@ -147,10 +129,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 	
 	public String convertAttributWithout_ (String att){
 		String s = att;
-		System.out.println("Attribut befor convertion: " + s);
 		s = att.substring(1,att.length());
-		System.out.println("Attribut after convertion: " + s);
-		
 		return s;
 	}
 	
@@ -158,6 +137,5 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 	 * a method to check if relation is an Expression or a Relation?
 	 * 
 	 * */
-	
-	
+
 }

@@ -1,46 +1,41 @@
 package de.hsh.genrelalg.parser;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.antlr.v4.gui.TestRig;
-import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.antlr.v4.runtime.tree.SyntaxTree;
+
 
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
-import de.hsh.genrelalg.antlr.expression.Expr;
+
 import de.hsh.genrelalg.antlr.expression.Program;
+import de.hsh.genrelalg.antlr.expression.Project;
+import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Aufgabe;
 import de.hsh.genrelalg.data.Relation;
-import de.hsh.genrelalg.data.Tuple;
+import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.database.Database;
-import de.hsh.genrelalg.database.Database_employee;
-import de.hsh.genrelalg.parser.*;
+import de.hsh.genrelalg.relalg.Projection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {
 	
 	public static Database database;
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	public static void main(String[] args){
-		//MyListener listener = new MyListener(parser);
-		//walker.walk(listener, tree);
-		// frame öffnet sich nicht
-		/*final List<String> ruleNames = Arrays.asList(parser.ruleNames);
-		final TreeViewer view = new TreeViewer(ruleNames, tree);
-		view.open();*/
 		
+		/* Database, which contains all necessary data */
 		database = new Database();
+		
+		/* A task that must be solved */
 		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"Lösung");
 		
+		/* this method returns a parser */
 		RelAlgebraParser parser = getParser();
+		
 		// tell Antlr to build a parse tree
 		// parse from the start symbol 'prog'
 		ParseTree antlrAST = parser.prog();
@@ -48,9 +43,20 @@ public class Main {
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
 		
-		for(int i=0; i< prog.expressions.size();i++) {
-			System.out.println("Ouput in Main: "+prog.expressions.get(i).printSomething());
+		/*** muss überarbeitet werden */
+		Projection pro = null;
+		Relation r  = DBFactory.findRelationByName(database, prog.expressions.get(0).getBase());
+		
+		Attribute [] atts = new Attribute[prog.expressions.get(0).getAttributes().size()];
+		atts = DBFactory.findAttributByName(r, prog.expressions.get(0).getAttributes());
+		
+				
+		
+		if( prog.expressions.get(0) instanceof Project) {
+			pro = new Projection(r,atts);
 		}
+		writeOutput(pro, "Test");
+		/*****bis dahin ****/
 	}
 	
 	/*

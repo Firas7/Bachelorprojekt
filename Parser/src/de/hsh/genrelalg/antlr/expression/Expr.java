@@ -1,17 +1,15 @@
 package de.hsh.genrelalg.antlr.expression;
 
-import de.hsh.genrelalg.data.Relation;
-import de.hsh.genrelalg.relalg.RelationalAlgebra;
+import java.util.List;
+
 
 /* a model class for expression */
-public abstract class Expr extends RelationalAlgebra{
+public abstract class Expr {
 
-	public abstract String printSomething();
-	public abstract RelationalAlgebra getRelation();
-	@Override
-	public Relation getResult() {
-		return this.getResult();
-	}
+	public abstract String getName();
+	public abstract String getBase();
+	public abstract List<String> getAttributes();
 	
+	public abstract String printSomething();
 	
 }

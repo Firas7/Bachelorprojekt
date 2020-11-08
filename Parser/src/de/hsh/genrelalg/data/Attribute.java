@@ -63,4 +63,11 @@ public class Attribute {
 	public String getRelation() {
 		return relation;
 	}
+	
+	public Attribute searchAttributByName(String name) {
+		
+		
+		return null;
+		
+	}
 }

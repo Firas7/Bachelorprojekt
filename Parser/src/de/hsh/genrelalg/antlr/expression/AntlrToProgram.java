@@ -21,7 +21,6 @@ public class AntlrToProgram extends RelAlgebraBaseVisitor<Program>{
 				System.out.println("Program has no Input");
 			}else {
 				prog.addExpression(exprVisitor.visit(ctx.getChild(i)));
-				System.out.println("OUTPUT LIST: "+ prog.getExpressions().get(i).getResult().toText("", true));
 			}
 		}
 		return prog;

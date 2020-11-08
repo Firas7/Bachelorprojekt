@@ -1,14 +1,9 @@
 package de.hsh.genrelalg;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.antlr.v4.runtime.ANTLRFileStream;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
+
+
 
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;

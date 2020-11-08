@@ -1,7 +1,6 @@
 package de.hsh.genrelalg.database;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;

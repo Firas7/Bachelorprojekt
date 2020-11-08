@@ -3,12 +3,11 @@ package de.hsh.genrelalg.relalg;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.hsh.genrelalg.antlr.expression.Expr;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 
-public class Projection extends Expr{
+public class Projection extends RelationalAlgebra{
 
 	List<Attribute> attributes = new LinkedList<>();
 	RelationalAlgebra base;
@@ -73,17 +72,4 @@ public class Projection extends Expr{
 		res += "\n" + indent + ")";
 		return res;
 	}
-	
-	@Override
-	public RelationalAlgebra getRelation(){
-		return this.base;
-	}
-
-	@Override
-	public String printSomething() {
-		// TODO Auto-generated method stub
-		return "Here is a proejktion";
-	}
-
-	
 }
