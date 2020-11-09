@@ -7,6 +7,7 @@ import java.util.List;
 import de.hsh.genrelalg.Entities.ProjectionEntity;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
+import de.hsh.genrelalg.database.Controller;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CartesianContext;
@@ -50,7 +51,8 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 
 	@Override
 	public Expr visitSimple(SimpleContext ctx) {
-		// TODO Auto-generated method stub
+		String s = ctx.getText();
+		System.out.println("Simple output: " + s);
 		return super.visitSimple(ctx);
 	}
 
@@ -68,9 +70,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 
 	@Override
 	public Expr visitProject(ProjectContext ctx) {
-		String project = ctx.PROJECT().getText();
-		System.out.println("Operation_: " + project);
-		
 		return super.visitProject(ctx);
 	}
 
@@ -106,15 +105,15 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 	@SuppressWarnings("null")
 	@Override
 	public Expr visitProjection(ProjectionContext ctx) {
-		String project = ctx.project().getText();
+		String project = ctx.project().PROJECT().getText();
 		System.out.println("Operation: " + project);
 		
 		String relationName = ctx.project().relation().getText();
 		System.out.println("Relation: " + ctx.project().relation().getText() );
-		int countOfAttributes = ctx.project().ATTRIBUT().size();
-		/* create a relation as relationName */
-		Relation relation_ = new Relation(relationName);
 		
+		int countOfAttributes = ctx.project().ATTRIBUT().size();
+		
+		Relation relation_ = new Relation(relationName);
 		Attribute[] attributesOfRelation = new Attribute [countOfAttributes] ;
 		Attribute att;
 		String attribute;
@@ -123,12 +122,11 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Expr>{
 			attribute = convertAttributWithout_(attribute);
 			att = new Attribute(relationName,attribute);
 			attributesOfRelation[i] = att;
-			System.out.println("Attribut "+ attribute + " will be added to list" );
 		}
 		
 		// now we should create a projection object that get a relation_ and a list of attributes as parameters 
 		Projection projection = new Projection(relation_,attributesOfRelation);
-		System.out.println(projection.getResult().toText("", true));
+		
 		return projection;
 	}
 

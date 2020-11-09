@@ -1,5 +1,8 @@
 package de.hsh.genrelalg.antlr.expression;
 
+import java.util.List;
+
+import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
@@ -13,5 +16,5 @@ public abstract class Expr extends RelationalAlgebra{
 		return this.getResult();
 	}
 	
-	
+	public abstract List<Attribute> getAttributes();
 }

@@ -100,7 +100,7 @@ public class Relation extends RelationalAlgebra {
 	public boolean contains(Tuple t) {
 		return tuples.contains(t);
 	}
-	
+	@Override
 	public String getName() {
 		return this.name;
 	}

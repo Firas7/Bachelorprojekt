@@ -13,15 +13,18 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.SyntaxTree;
 
+
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Expr;
 import de.hsh.genrelalg.antlr.expression.Program;
+import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Aufgabe;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
+import de.hsh.genrelalg.database.Controller;
 import de.hsh.genrelalg.database.Database;
-import de.hsh.genrelalg.database.Database_employee;
 import de.hsh.genrelalg.parser.*;
+import de.hsh.genrelalg.relalg.Projection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {
@@ -44,13 +47,24 @@ public class Main {
 		// tell Antlr to build a parse tree
 		// parse from the start symbol 'prog'
 		ParseTree antlrAST = parser.prog();
+		//System.out.println(antlrAST.toStringTree(parser));
 		// create a visitor for converting the parse tree to Program/Expression object
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
 		
-		for(int i=0; i< prog.expressions.size();i++) {
-			System.out.println("Ouput in Main: "+prog.expressions.get(i).printSomething());
+		
+		RelationalAlgebra operation = null;
+		Relation r =  Controller.getRelationFromDB(prog.expressions.get(0),database);
+		Attribute [] atts = new Attribute [prog.expressions.get(0).getAttributes().size()];
+		atts = Controller.getAttributesFromDB(prog.expressions.get(0), r);
+		
+		for(int i = 0 ; i < prog.expressions.size(); i++) {
+			if(prog.expressions.get(i) instanceof Projection) {
+				operation = new Projection(r,atts);
+			}
 		}
+		writeOutput(operation, "Test");
+		
 	}
 	
 	/*

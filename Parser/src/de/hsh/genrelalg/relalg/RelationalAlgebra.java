@@ -11,4 +11,5 @@ public abstract class RelationalAlgebra {
 			return getResult().contentToText(indent) + "\n";
 		return "";
 	}
+	public abstract String getName();
 }

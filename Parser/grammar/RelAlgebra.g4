@@ -7,8 +7,8 @@ prog:
 
 expr: select #Selection
 	| project #Projection
-	| cartesian #Carstesian
-	| join #Join_ 
+	| cartesian #Carstesian // nicht alles Prfix sondern A X B
+	| join #Join_ // A Join[predicate] B
 	| EOF #EOF
 ;
 
@@ -54,7 +54,7 @@ CARTESIAN:
 ;
 
 PREDICATE:
-	'['.*?']'
+	'['.*?']' // attribute = attribute
 ;
 
 RELATION:

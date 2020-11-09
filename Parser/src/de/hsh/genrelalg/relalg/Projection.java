@@ -3,6 +3,8 @@ package de.hsh.genrelalg.relalg;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.w3c.dom.Attr;
+
 import de.hsh.genrelalg.antlr.expression.Expr;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
@@ -80,10 +82,20 @@ public class Projection extends Expr{
 	}
 
 	@Override
+	public List<Attribute> getAttributes() {
+		return this.attributes;
+	}
+	
+	@Override
 	public String printSomething() {
 		// TODO Auto-generated method stub
-		return "Here is a proejktion";
+		return "Here is a Projection";
 	}
 
+	@Override
+	public String getName() {
+		
+		return "Projection";
+	}
 	
 }
