@@ -82,6 +82,7 @@ public class Database {
 		ZUTAT_REZEPT.addTuple(new Tuple("2", "8", "..."));
 		ZUTAT_REZEPT.addTuple(new Tuple("2", "3", "..."));
 		relations.add(ZUTAT_REZEPT);
+	
 	}
 
 	public ArrayList<Relation> getRelations() {

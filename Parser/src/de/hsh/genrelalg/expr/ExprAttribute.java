@@ -24,6 +24,8 @@ public class ExprAttribute implements FieldExpression {
 	@Override
 	public String eval(Tuple t, List<Attribute> attributes) {
 		for (int i = 0; i < attributes.size(); i++) {
+			//System.out.println("Attributes: " + attributes.get(i).getName());
+			//System.out.println("Tuple " + t.getField(i).toString());
 			if (attributes.get(i).equals(attribute))
 				return t.getField(i);
 		}

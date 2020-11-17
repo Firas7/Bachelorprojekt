@@ -3,16 +3,20 @@ package de.hsh.genrelalg.antlr.expression;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hsh.genrelalg.data.Relation;
+
+
 public class Project extends Expr{
 
 	String name;
-	String relation ;
+	String relationName ;
 	List<String> attributes;
+	Relation relation;
 	
 	public Project(String name, String rela, List<String> atts) {
 		attributes = new ArrayList<>();
 		this.name = name;
-		this.relation = rela;
+		this.relationName = rela;
 		for(int i = 0; i < atts.size(); i++) {
 			attributes.add(atts.get(i));
 		}
@@ -27,13 +31,13 @@ public class Project extends Expr{
 
 	@Override
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
 	public String getBase() {
 		// TODO Auto-generated method stub
-		return this.relation;
+		return this.relationName;
 	}
 
 
@@ -43,4 +47,17 @@ public class Project extends Expr{
 		return this.attributes;
 	}
 
+
+	@Override
+	public Relation getRelation() {
+		// TODO Auto-generated method stub
+		return this.relation;
+	}
+
+
+	@Override
+	public void setRelation(Relation r) {
+		this.relation = r;
+		
+	}
 }

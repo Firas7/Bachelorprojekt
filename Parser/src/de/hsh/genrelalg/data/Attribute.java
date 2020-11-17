@@ -64,6 +64,9 @@ public class Attribute {
 		return relation;
 	}
 	
+	public void setRelation(String name) {
+		this.relation = name;
+	}
 	public Attribute searchAttributByName(String name) {
 		
 		

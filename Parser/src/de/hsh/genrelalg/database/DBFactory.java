@@ -3,17 +3,22 @@ package de.hsh.genrelalg.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hsh.genrelalg.antlr.expression.Expr;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 
 public class DBFactory {
 
+	
+	static Database base = new Database();
+	static List<Relation> relations = base.getRelations();
+	
 	/* This method searches for the name of a relation in the database and returns a relation object */
-	public static Relation findRelationByName(Database base, String name) {
+	public static Relation findRelationByName(Database base, String string) {
 		ArrayList<Relation> relations = base.getRelations();
 		
 		for (int i = 0; i < relations.size(); i++) {
-			if(relations.get(i).getName().equals(name)) {
+			if(relations.get(i).getName().equals(string)) {
 				return relations.get(i);
 			}
 		}
@@ -51,15 +56,66 @@ public class DBFactory {
 		return attributes;
 	}
 	
-	
 	public static Attribute findAttributByName(List<Attribute> att , String name) {
 		
 		for(int i = 0; i < att.size(); i++) {
-			if(att.get(i).getName().equals(name)) {
+			if(att.get(i).getName().equals(name.toUpperCase())) {
 				return att.get(i);
 			}
 		}
 		System.out.println("This attribut connt be found");
 		return null;
 	}
+	/*************
+	 * 
+	 ****
+	 * 
+	 **/
+	public static Relation getRelationByName(Expr expression) {
+		
+		for (int i = 0; i < relations.size(); i++) {
+			if(relations.get(i).getName().equals(expression.getBase())) {
+				return relations.get(i);
+			}
+		}
+		System.out.println("This relation doesnt exisit in the database!");
+		return null;
+	}
+	
+	public static Attribute [] getAttributesByName(Relation r,Expr expression) {
+		// a list of attributes that have been found and should be returned as a list of type attributes
+		Attribute [] attributes = new Attribute[expression.getAttributes().size()];
+
+		
+		List<Attribute> attOfRelation = r.getAttributes();
+
+		// List for all attribute names of a relation as string  
+		List<String> namesOfAttributs = new ArrayList<>();
+		// add attribute names to the list
+		for(int i = 0 ; i < attOfRelation.size(); i++) {
+			namesOfAttributs.add(r.getAttributes().get(i).getName());
+		}
+		
+		for(int i = 0 ; i < expression.getAttributes().size(); i++) {
+			if(namesOfAttributs.contains(expression.getAttributes().get(i).toUpperCase())) {
+				attributes[i] = findAttributByName(attOfRelation,  expression.getAttributes().get(i));
+			}else {
+				System.out.println("Das Attribut "+ expression.getAttributes().get(i) +" ist nicht in der Relation enthalten!");
+			}
+		}
+		
+		return attributes;
+	}
+	
+	public static Relation getRelationByName(String string) {
+		
+		for (int i = 0; i < relations.size(); i++) {
+			if(relations.get(i).getName().equals(string)) {
+				return relations.get(i);
+			}
+		}
+		System.out.println("This relation doesnt exisit in the database!");
+		return null;
+	}
+	
 }

@@ -19,7 +19,6 @@ public class Join extends RelationalAlgebra {
 	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread) {
 		this(left, right, cond, spread, false, false);
 	}
-	
 	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread, boolean leftOuter, boolean rightOuter) {
 		this.left = left;
 		this.right = right;
@@ -37,7 +36,7 @@ public class Join extends RelationalAlgebra {
 		for (Attribute att : r.getAttributes()) {
 			res.addAttribute(att);
 		}
-		
+
 		// for right outer join, initialize a list unused tuples.
 		List<Tuple> unused = new LinkedList<>();
 		for (Tuple tr : r.getTuples())

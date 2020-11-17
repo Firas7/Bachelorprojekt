@@ -3,22 +3,24 @@ package de.hsh.genrelalg.antlr.expression;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hsh.genrelalg.data.Relation;
+
 /* a model class for a program 
  * 
  * */
 public class Program {
 	
-	public List<Expr> expressions;
+	public List<Relation> expressions;
 	
 	public Program() {
 		this.expressions = new ArrayList<>();
 	}
 	
-	public void addExpression(Expr exp) {
+	public void addExpression(Relation exp) {
 		expressions.add(exp);
 	}
 	
-	public List<Expr> getExpressions(){
+	public List<Relation> getExpressions(){
 		return this.expressions;
 	}
 }

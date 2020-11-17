@@ -44,7 +44,7 @@ public class Main {
 		Program prog = progVisitor.visit(antlrAST);
 		
 		/*** muss überarbeitet werden */
-		Projection pro = null;
+		/*Projection pro = null;
 		Relation r  = DBFactory.findRelationByName(database, prog.expressions.get(0).getBase());
 		
 		Attribute [] atts = new Attribute[prog.expressions.get(0).getAttributes().size()];
@@ -55,7 +55,7 @@ public class Main {
 		if( prog.expressions.get(0) instanceof Project) {
 			pro = new Projection(r,atts);
 		}
-		writeOutput(pro, "Test");
+		writeOutput(pro, "Test");*/
 		/*****bis dahin ****/
 	}
 	
