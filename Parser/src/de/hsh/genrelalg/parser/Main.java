@@ -28,7 +28,7 @@ public class Main {
 	public static void main(String[] args){
 		
 		/* Database, which contains all necessary data */
-		database = new Database();
+		//database = new Database();
 		
 		/* A task that must be solved */
 		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"Lösung");

@@ -8,7 +8,7 @@ import de.hsh.genrelalg.data.Tuple;
 public class Database {
 	
 	private ArrayList<Relation> relations ;
-	static Relation ANGEST, ANG_PRO, PROJEKT;
+	static Relation ANGEST, ANG_PRO, PROJEKT , ANGESTELLTE;
 	static Relation REZEPT, ZUTAT, SCHRITT, ZUTAT_REZEPT;
 	static double spread = 12;
 	
@@ -23,6 +23,17 @@ public class Database {
 		ANGEST.addTuple(new Tuple("198", "Schmidt", "Hannover", "Ingenieur", "6400", "4"));
 		ANGEST.addTuple(new Tuple("199", "Huber", "Hannover", "Administrator", "5000", "3"));
 		relations.add(ANGEST);
+		
+		ANGESTELLTE = new Relation("ANGESTELLTE", "ANGNR", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
+		ANGESTELLTE.addTuple(new Tuple("10", "Firas", "Hannover", "Programmiererin", "6000", "3"));
+		ANGESTELLTE.addTuple(new Tuple("50", "Schulze", "Hamburg", "Analytikerin", "5600", "3"));
+		ANGESTELLTE.addTuple(new Tuple("12", "Heiko", "OsnabrÃ¼ck", "Werbefachfrau", "8000", "5"));
+		ANGESTELLTE.addTuple(new Tuple("22", "Olbrech", "Hannover", "Ingenieur", "6400", "4"));
+		ANGESTELLTE.addTuple(new Tuple("199", "Huber", "Hannover", "Administrator", "5000", "3"));
+		relations.add(ANGESTELLTE);
+		
+		
+		
 		// Ang_pro Tabelle mit Daten füllen
 		ANG_PRO = new Relation("ANG_PRO", "PNR", "ANGNR", "PROZ_ARB");
 		ANG_PRO.addTuple(new Tuple("12", "112", "100"));

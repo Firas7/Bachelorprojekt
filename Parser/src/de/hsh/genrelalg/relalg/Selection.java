@@ -1,5 +1,8 @@
 package de.hsh.genrelalg.relalg;
 
+import java.util.List;
+
+import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.expr.BooleanExpression;
@@ -33,6 +36,12 @@ public class Selection extends RelationalAlgebra {
 		res += "\n" + base.toText(indent + "  ", results);
 		res += "\n" + indent + ")";
 		return res;
+	}
+
+	@Override
+	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

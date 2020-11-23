@@ -8,11 +8,29 @@ expr: select #Selection
 	| project #Projection
 	| cartesian #Carstesian
 	| join #Join_ 
+	| rename #Rename_
+	| union #Union_
+	| intersection #Intersection_
+	| difference #Difference_
 	| EOF #EOF
 ;
 
+difference:
+	'(' relation ')' DIFFERENCE '(' relation ')' 
+;
+
+intersection:
+	'(' relation ')' INTERSECTION '(' relation ')'
+;
+union:
+	'(' relation ')' UNION '(' relation ')'
+;
+
+rename:
+	RENAME '[' ID ']' '(' (relation  | attribut)')'
+;
 predicate:
-	'[' attribut comparator attribut ']' #Predicate_
+	attribut comparator attribut #Predicate_
 ;
 
 relation: 
@@ -20,7 +38,7 @@ relation:
 ;
 
 select:
-	SELECT predicate '('relation')'
+	SELECT '[' predicate (operator predicate)* ']' '('relation')'
 ;
 
 project: 
@@ -32,17 +50,20 @@ cartesian:
 ;
 
 join:
-	'(' relation ')' JOIN predicate '(' relation ')' 
+	'(' relation ')' JOIN '[' predicate ']' '(' relation ')' 
 ;
 
 attribut:
-	ID '.' ID | ID
+	relation '.' ID | ID
 ;
 
 comparator:
-	'=' | '<' | '>'
+	'=' | '<' | '>'| '>=' | '<='
 ;
 
+operator:
+	'&' | '|' | '~'
+;
 
 // lexer rules
 
@@ -64,6 +85,23 @@ JOIN:
 CARTESIAN: 
 	'X'
 ;
+
+RENAME:
+	'P'
+;
+
+UNION:
+	'UN'
+;
+
+INTERSECTION:
+	'IN'
+;
+
+DIFFERENCE:
+	'DI'
+;
+
 /* Relation Token */
 
 ID:

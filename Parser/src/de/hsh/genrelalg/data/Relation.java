@@ -104,4 +104,14 @@ public class Relation extends RelationalAlgebra {
 	public String getName() {
 		return this.name;
 	}
+	
+	public void setName(String newName) {
+		this.name = newName;
+	}
+
+	@Override
+	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+		// TODO Auto-generated method stub
+		
+	}
 }

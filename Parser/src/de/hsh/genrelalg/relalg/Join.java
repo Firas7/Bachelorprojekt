@@ -88,5 +88,10 @@ public class Join extends RelationalAlgebra {
 		res += "\n" + indent + ")";
 		return res;
 	}
+	@Override
+	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
