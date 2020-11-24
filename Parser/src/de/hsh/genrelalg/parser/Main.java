@@ -1,6 +1,5 @@
 package de.hsh.genrelalg.parser;
 import java.io.IOException;
-import java.util.List;
 
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -9,15 +8,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
-
 import de.hsh.genrelalg.antlr.expression.Program;
-import de.hsh.genrelalg.antlr.expression.Project;
-import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Aufgabe;
-import de.hsh.genrelalg.data.Relation;
-import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.database.Database;
-import de.hsh.genrelalg.relalg.Projection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {

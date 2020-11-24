@@ -1,1 +1,1 @@
-(ANGEST) JN[ANGEST.angnr=ANG_PRO.ANgnr] (ANG_PRO)
+PR[ANGESTELLTE.name,beruf]((ANGESTELLTE) JN N[ANGESTELLTE.angnr=projekt.p_leiter] (PROJEKT))

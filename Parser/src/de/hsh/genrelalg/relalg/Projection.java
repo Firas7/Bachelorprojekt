@@ -27,7 +27,7 @@ public class Projection extends RelationalAlgebra{
 	public Relation getResult() {
 		Relation rbase = base.getResult();
 		Relation result = new Relation();
-		int [] indices = new int[attributes.size()]; 
+		int [] indices = new int[attributes.size()];
 		int j = 0;
 		for (Attribute attribute : attributes) {
 			boolean ok = false;

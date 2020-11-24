@@ -82,29 +82,19 @@ public class DBFactory {
 		return null;
 	}
 	
-	public static Attribute [] getAttributesByName(Relation r,Expr expression) {
+	public static Attribute getAttributeByName(Relation r, String att) {
 		// a list of attributes that have been found and should be returned as a list of type attributes
-		Attribute [] attributes = new Attribute[expression.getAttributes().size()];
 
-		
+		Attribute attribut = null;
 		List<Attribute> attOfRelation = r.getAttributes();
-
-		// List for all attribute names of a relation as string  
-		List<String> namesOfAttributs = new ArrayList<>();
-		// add attribute names to the list
-		for(int i = 0 ; i < attOfRelation.size(); i++) {
-			namesOfAttributs.add(r.getAttributes().get(i).getName());
-		}
-		
-		for(int i = 0 ; i < expression.getAttributes().size(); i++) {
-			if(namesOfAttributs.contains(expression.getAttributes().get(i).toUpperCase())) {
-				attributes[i] = findAttributByName(attOfRelation,  expression.getAttributes().get(i));
-			}else {
-				System.out.println("Das Attribut "+ expression.getAttributes().get(i) +" ist nicht in der Relation enthalten!");
+		for(int i = 0; i< attOfRelation.size(); i++){
+			if(attOfRelation.get(i).getName().toUpperCase().equals(att.toUpperCase())) {
+				attribut = attOfRelation.get(i);
 			}
 		}
 		
-		return attributes;
+		
+		return attribut;
 	}
 	
 	public static Relation getRelationByName(String string) {

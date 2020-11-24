@@ -27,7 +27,7 @@ union:
 ;
 
 rename:
-	RENAME '[' ID ']' '(' (relation  | attribut)')'
+	RENAME '[' ID ']' '(' relation ')'
 ;
 predicate:
 	attribut comparator attribut #Predicate_
@@ -50,11 +50,11 @@ cartesian:
 ;
 
 join:
-	'(' relation ')' JOIN '[' predicate ']' '(' relation ')' 
+	'(' relation ')' JOIN var '[' predicate ']' '(' relation ')' 
 ;
 
 attribut:
-	relation '.' ID | ID
+	(ID'.')? ID
 ;
 
 comparator:
@@ -65,6 +65,9 @@ operator:
 	'&' | '|' | '~'
 ;
 
+var:
+	'R' | 'L' | 'V' | 'N'
+;
 // lexer rules
 
 // Terminaltype: SELECT , nicht terminaltype: 'SL'
@@ -110,10 +113,6 @@ ID:
 
 VALUE:
 	'"' .*? '"'
-;
-
-COMPERATOR:
-	'=' | '<' | '>'
 ;
 
 WS:

@@ -547,9 +547,6 @@ public class RelAlgebraParser extends Parser {
 		public RelationContext relation() {
 			return getRuleContext(RelationContext.class,0);
 		}
-		public AttributContext attribut() {
-			return getRuleContext(AttributContext.class,0);
-		}
 		public RenameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -580,23 +577,9 @@ public class RelAlgebraParser extends Parser {
 			match(T__3);
 			setState(71);
 			match(T__0);
-			setState(74);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-			case 1:
-				{
-				setState(72);
-				relation();
-				}
-				break;
-			case 2:
-				{
-				setState(73);
-				attribut();
-				}
-				break;
-			}
-			setState(76);
+			setState(72);
+			relation();
+			setState(73);
 			match(T__1);
 			}
 		}
@@ -650,11 +633,11 @@ public class RelAlgebraParser extends Parser {
 			_localctx = new Predicate_Context(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
+			setState(75);
 			attribut();
-			setState(79);
+			setState(76);
 			comparator();
-			setState(80);
+			setState(77);
 			attribut();
 			}
 		}
@@ -711,14 +694,14 @@ public class RelAlgebraParser extends Parser {
 		RelationContext _localctx = new RelationContext(_ctx, getState());
 		enterRule(_localctx, 14, RULE_relation);
 		try {
-			setState(84);
+			setState(81);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				_localctx = new SimpleContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(82);
+				setState(79);
 				match(ID);
 				}
 				break;
@@ -730,7 +713,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new NestedContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(83);
+				setState(80);
 				expr();
 				}
 				break;
@@ -787,35 +770,35 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(86);
+			setState(83);
 			match(SELECT);
-			setState(87);
+			setState(84);
 			match(T__2);
-			setState(88);
+			setState(85);
 			predicate();
-			setState(94);
+			setState(91);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__12) | (1L << T__13))) != 0)) {
 				{
 				{
-				setState(89);
+				setState(86);
 				operator();
-				setState(90);
+				setState(87);
 				predicate();
 				}
 				}
-				setState(96);
+				setState(93);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(97);
+			setState(94);
 			match(T__3);
-			setState(98);
+			setState(95);
 			match(T__0);
-			setState(99);
+			setState(96);
 			relation();
-			setState(100);
+			setState(97);
 			match(T__1);
 			}
 		}
@@ -862,45 +845,45 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(102);
+			setState(99);
 			match(PROJECT);
-			setState(103);
+			setState(100);
 			match(T__2);
-			setState(108); 
+			setState(105); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(108);
+				setState(105);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 				case 1:
 					{
-					setState(104);
+					setState(101);
 					attribut();
-					setState(105);
+					setState(102);
 					match(T__4);
 					}
 					break;
 				case 2:
 					{
-					setState(107);
+					setState(104);
 					attribut();
 					}
 					break;
 				}
 				}
-				setState(110); 
+				setState(107); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( ((((_la - -1)) & ~0x3f) == 0 && ((1L << (_la - -1)) & ((1L << (EOF - -1)) | (1L << (T__0 - -1)) | (1L << (SELECT - -1)) | (1L << (PROJECT - -1)) | (1L << (RENAME - -1)) | (1L << (ID - -1)))) != 0) );
-			setState(112);
+			} while ( _la==ID );
+			setState(109);
 			match(T__3);
-			setState(113);
+			setState(110);
 			match(T__0);
-			setState(114);
+			setState(111);
 			relation();
-			setState(115);
+			setState(112);
 			match(T__1);
 			}
 		}
@@ -947,29 +930,29 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(117);
+			setState(114);
 			match(T__0);
-			setState(118);
+			setState(115);
 			relation();
-			setState(119);
+			setState(116);
 			match(T__1);
-			setState(125); 
+			setState(122); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(120);
+				setState(117);
 				match(CARTESIAN);
-				setState(121);
+				setState(118);
 				match(T__0);
-				setState(122);
+				setState(119);
 				relation();
-				setState(123);
+				setState(120);
 				match(T__1);
 				}
 				}
-				setState(127); 
+				setState(124); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CARTESIAN );
@@ -1017,25 +1000,25 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(129);
+			setState(126);
 			match(T__0);
-			setState(130);
+			setState(127);
 			relation();
-			setState(131);
+			setState(128);
 			match(T__1);
-			setState(132);
+			setState(129);
 			match(JOIN);
-			setState(133);
+			setState(130);
 			match(T__2);
-			setState(134);
+			setState(131);
 			predicate();
-			setState(135);
+			setState(132);
 			match(T__3);
-			setState(136);
+			setState(133);
 			match(T__0);
-			setState(137);
+			setState(134);
 			relation();
-			setState(138);
+			setState(135);
 			match(T__1);
 			}
 		}
@@ -1051,10 +1034,10 @@ public class RelAlgebraParser extends Parser {
 	}
 
 	public static class AttributContext extends ParserRuleContext {
-		public RelationContext relation() {
-			return getRuleContext(RelationContext.class,0);
+		public List<TerminalNode> ID() { return getTokens(RelAlgebraParser.ID); }
+		public TerminalNode ID(int i) {
+			return getToken(RelAlgebraParser.ID, i);
 		}
-		public TerminalNode ID() { return getToken(RelAlgebraParser.ID, 0); }
 		public AttributContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1073,27 +1056,22 @@ public class RelAlgebraParser extends Parser {
 		AttributContext _localctx = new AttributContext(_ctx, getState());
 		enterRule(_localctx, 24, RULE_attribut);
 		try {
-			setState(145);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(139);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
-				enterOuterAlt(_localctx, 1);
 				{
-				setState(140);
-				relation();
-				setState(141);
+				setState(137);
+				match(ID);
+				setState(138);
 				match(T__5);
-				setState(142);
-				match(ID);
 				}
 				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(144);
-				match(ID);
-				}
-				break;
+			}
+			setState(141);
+			match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1129,7 +1107,7 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(143);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1174,7 +1152,7 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(149);
+			setState(145);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__12) | (1L << T__13))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1198,46 +1176,44 @@ public class RelAlgebraParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34\u009a\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34\u0096\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3,\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
 		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\5\7M\n\7\3\7\3\7\3\b\3\b\3\b\3\b\3\t\3\t\5\tW\n\t"+
-		"\3\n\3\n\3\n\3\n\3\n\3\n\7\n_\n\n\f\n\16\nb\13\n\3\n\3\n\3\n\3\n\3\n\3"+
-		"\13\3\13\3\13\3\13\3\13\3\13\6\13o\n\13\r\13\16\13p\3\13\3\13\3\13\3\13"+
-		"\3\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\6\f\u0080\n\f\r\f\16\f\u0081\3\r"+
-		"\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16\3\16\5\16"+
-		"\u0094\n\16\3\17\3\17\3\20\3\20\3\20\2\2\21\2\4\6\b\n\f\16\20\22\24\26"+
-		"\30\32\34\36\2\4\3\2\t\r\3\2\16\20\2\u0099\2 \3\2\2\2\4+\3\2\2\2\6-\3"+
-		"\2\2\2\b\65\3\2\2\2\n=\3\2\2\2\fE\3\2\2\2\16P\3\2\2\2\20V\3\2\2\2\22X"+
-		"\3\2\2\2\24h\3\2\2\2\26w\3\2\2\2\30\u0083\3\2\2\2\32\u0093\3\2\2\2\34"+
-		"\u0095\3\2\2\2\36\u0097\3\2\2\2 !\5\4\3\2!\3\3\2\2\2\",\5\22\n\2#,\5\24"+
-		"\13\2$,\5\26\f\2%,\5\30\r\2&,\5\f\7\2\',\5\n\6\2(,\5\b\5\2),\5\6\4\2*"+
-		",\7\2\2\3+\"\3\2\2\2+#\3\2\2\2+$\3\2\2\2+%\3\2\2\2+&\3\2\2\2+\'\3\2\2"+
-		"\2+(\3\2\2\2+)\3\2\2\2+*\3\2\2\2,\5\3\2\2\2-.\7\3\2\2./\5\20\t\2/\60\7"+
-		"\4\2\2\60\61\7\30\2\2\61\62\7\3\2\2\62\63\5\20\t\2\63\64\7\4\2\2\64\7"+
-		"\3\2\2\2\65\66\7\3\2\2\66\67\5\20\t\2\678\7\4\2\289\7\27\2\29:\7\3\2\2"+
-		":;\5\20\t\2;<\7\4\2\2<\t\3\2\2\2=>\7\3\2\2>?\5\20\t\2?@\7\4\2\2@A\7\26"+
-		"\2\2AB\7\3\2\2BC\5\20\t\2CD\7\4\2\2D\13\3\2\2\2EF\7\25\2\2FG\7\5\2\2G"+
-		"H\7\31\2\2HI\7\6\2\2IL\7\3\2\2JM\5\20\t\2KM\5\32\16\2LJ\3\2\2\2LK\3\2"+
-		"\2\2MN\3\2\2\2NO\7\4\2\2O\r\3\2\2\2PQ\5\32\16\2QR\5\34\17\2RS\5\32\16"+
-		"\2S\17\3\2\2\2TW\7\31\2\2UW\5\4\3\2VT\3\2\2\2VU\3\2\2\2W\21\3\2\2\2XY"+
-		"\7\21\2\2YZ\7\5\2\2Z`\5\16\b\2[\\\5\36\20\2\\]\5\16\b\2]_\3\2\2\2^[\3"+
-		"\2\2\2_b\3\2\2\2`^\3\2\2\2`a\3\2\2\2ac\3\2\2\2b`\3\2\2\2cd\7\6\2\2de\7"+
-		"\3\2\2ef\5\20\t\2fg\7\4\2\2g\23\3\2\2\2hi\7\22\2\2in\7\5\2\2jk\5\32\16"+
-		"\2kl\7\7\2\2lo\3\2\2\2mo\5\32\16\2nj\3\2\2\2nm\3\2\2\2op\3\2\2\2pn\3\2"+
-		"\2\2pq\3\2\2\2qr\3\2\2\2rs\7\6\2\2st\7\3\2\2tu\5\20\t\2uv\7\4\2\2v\25"+
-		"\3\2\2\2wx\7\3\2\2xy\5\20\t\2y\177\7\4\2\2z{\7\24\2\2{|\7\3\2\2|}\5\20"+
-		"\t\2}~\7\4\2\2~\u0080\3\2\2\2\177z\3\2\2\2\u0080\u0081\3\2\2\2\u0081\177"+
-		"\3\2\2\2\u0081\u0082\3\2\2\2\u0082\27\3\2\2\2\u0083\u0084\7\3\2\2\u0084"+
-		"\u0085\5\20\t\2\u0085\u0086\7\4\2\2\u0086\u0087\7\23\2\2\u0087\u0088\7"+
-		"\5\2\2\u0088\u0089\5\16\b\2\u0089\u008a\7\6\2\2\u008a\u008b\7\3\2\2\u008b"+
-		"\u008c\5\20\t\2\u008c\u008d\7\4\2\2\u008d\31\3\2\2\2\u008e\u008f\5\20"+
-		"\t\2\u008f\u0090\7\b\2\2\u0090\u0091\7\31\2\2\u0091\u0094\3\2\2\2\u0092"+
-		"\u0094\7\31\2\2\u0093\u008e\3\2\2\2\u0093\u0092\3\2\2\2\u0094\33\3\2\2"+
-		"\2\u0095\u0096\t\2\2\2\u0096\35\3\2\2\2\u0097\u0098\t\3\2\2\u0098\37\3"+
-		"\2\2\2\n+LV`np\u0081\u0093";
+		"\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\t\3\t\5\tT\n\t\3\n\3\n\3\n"+
+		"\3\n\3\n\3\n\7\n\\\n\n\f\n\16\n_\13\n\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\6\13l\n\13\r\13\16\13m\3\13\3\13\3\13\3\13\3\13\3\f"+
+		"\3\f\3\f\3\f\3\f\3\f\3\f\3\f\6\f}\n\f\r\f\16\f~\3\r\3\r\3\r\3\r\3\r\3"+
+		"\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\5\16\u008e\n\16\3\16\3\16\3\17\3\17\3"+
+		"\20\3\20\3\20\2\2\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\4\3\2\t"+
+		"\r\3\2\16\20\2\u0094\2 \3\2\2\2\4+\3\2\2\2\6-\3\2\2\2\b\65\3\2\2\2\n="+
+		"\3\2\2\2\fE\3\2\2\2\16M\3\2\2\2\20S\3\2\2\2\22U\3\2\2\2\24e\3\2\2\2\26"+
+		"t\3\2\2\2\30\u0080\3\2\2\2\32\u008d\3\2\2\2\34\u0091\3\2\2\2\36\u0093"+
+		"\3\2\2\2 !\5\4\3\2!\3\3\2\2\2\",\5\22\n\2#,\5\24\13\2$,\5\26\f\2%,\5\30"+
+		"\r\2&,\5\f\7\2\',\5\n\6\2(,\5\b\5\2),\5\6\4\2*,\7\2\2\3+\"\3\2\2\2+#\3"+
+		"\2\2\2+$\3\2\2\2+%\3\2\2\2+&\3\2\2\2+\'\3\2\2\2+(\3\2\2\2+)\3\2\2\2+*"+
+		"\3\2\2\2,\5\3\2\2\2-.\7\3\2\2./\5\20\t\2/\60\7\4\2\2\60\61\7\30\2\2\61"+
+		"\62\7\3\2\2\62\63\5\20\t\2\63\64\7\4\2\2\64\7\3\2\2\2\65\66\7\3\2\2\66"+
+		"\67\5\20\t\2\678\7\4\2\289\7\27\2\29:\7\3\2\2:;\5\20\t\2;<\7\4\2\2<\t"+
+		"\3\2\2\2=>\7\3\2\2>?\5\20\t\2?@\7\4\2\2@A\7\26\2\2AB\7\3\2\2BC\5\20\t"+
+		"\2CD\7\4\2\2D\13\3\2\2\2EF\7\25\2\2FG\7\5\2\2GH\7\31\2\2HI\7\6\2\2IJ\7"+
+		"\3\2\2JK\5\20\t\2KL\7\4\2\2L\r\3\2\2\2MN\5\32\16\2NO\5\34\17\2OP\5\32"+
+		"\16\2P\17\3\2\2\2QT\7\31\2\2RT\5\4\3\2SQ\3\2\2\2SR\3\2\2\2T\21\3\2\2\2"+
+		"UV\7\21\2\2VW\7\5\2\2W]\5\16\b\2XY\5\36\20\2YZ\5\16\b\2Z\\\3\2\2\2[X\3"+
+		"\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2\2\2`a\7\6\2\2ab"+
+		"\7\3\2\2bc\5\20\t\2cd\7\4\2\2d\23\3\2\2\2ef\7\22\2\2fk\7\5\2\2gh\5\32"+
+		"\16\2hi\7\7\2\2il\3\2\2\2jl\5\32\16\2kg\3\2\2\2kj\3\2\2\2lm\3\2\2\2mk"+
+		"\3\2\2\2mn\3\2\2\2no\3\2\2\2op\7\6\2\2pq\7\3\2\2qr\5\20\t\2rs\7\4\2\2"+
+		"s\25\3\2\2\2tu\7\3\2\2uv\5\20\t\2v|\7\4\2\2wx\7\24\2\2xy\7\3\2\2yz\5\20"+
+		"\t\2z{\7\4\2\2{}\3\2\2\2|w\3\2\2\2}~\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177"+
+		"\27\3\2\2\2\u0080\u0081\7\3\2\2\u0081\u0082\5\20\t\2\u0082\u0083\7\4\2"+
+		"\2\u0083\u0084\7\23\2\2\u0084\u0085\7\5\2\2\u0085\u0086\5\16\b\2\u0086"+
+		"\u0087\7\6\2\2\u0087\u0088\7\3\2\2\u0088\u0089\5\20\t\2\u0089\u008a\7"+
+		"\4\2\2\u008a\31\3\2\2\2\u008b\u008c\7\31\2\2\u008c\u008e\7\b\2\2\u008d"+
+		"\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u0090\7\31"+
+		"\2\2\u0090\33\3\2\2\2\u0091\u0092\t\2\2\2\u0092\35\3\2\2\2\u0093\u0094"+
+		"\t\3\2\2\u0094\37\3\2\2\2\t+S]km~\u008d";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
