@@ -24,7 +24,6 @@ public class SetMinus extends RelationalAlgebra {
 		Relation left = this.left.getResult();
 		Relation right = this.right.getResult();
 		Relation res = new Relation(left.getAttributes());
-		System.out.println("Relation name in minus: "+res.getName());
 		int numberOfAttributesRight = right.getAttributes().size();
 		int numberOfAttributesLeft = left.getAttributes().size();
 		

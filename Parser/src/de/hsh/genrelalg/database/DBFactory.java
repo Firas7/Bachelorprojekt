@@ -105,7 +105,7 @@ public class DBFactory {
 			}
 		}
 		System.out.println("This relation doesnt exisit in the database!");
-		return null;
+		return new Relation("relation is not found");
 	}
 	
 }

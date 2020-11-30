@@ -179,6 +179,46 @@ public interface RelAlgebraListener extends ParseTreeListener {
 	 */
 	void exitPredicate_(RelAlgebraParser.Predicate_Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link RelAlgebraParser#exprPredicate}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprPredicate(RelAlgebraParser.ExprPredicateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RelAlgebraParser#exprPredicate}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprPredicate(RelAlgebraParser.ExprPredicateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RelAlgebraParser#andExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAndExpr(RelAlgebraParser.AndExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RelAlgebraParser#andExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAndExpr(RelAlgebraParser.AndExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RelAlgebraParser#orExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrExpr(RelAlgebraParser.OrExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RelAlgebraParser#orExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrExpr(RelAlgebraParser.OrExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RelAlgebraParser#isNot}.
+	 * @param ctx the parse tree
+	 */
+	void enterIsNot(RelAlgebraParser.IsNotContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RelAlgebraParser#isNot}.
+	 * @param ctx the parse tree
+	 */
+	void exitIsNot(RelAlgebraParser.IsNotContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code simple}
 	 * labeled alternative in {@link RelAlgebraParser#relation}.
 	 * @param ctx the parse tree
@@ -272,4 +312,14 @@ public interface RelAlgebraListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOperator(RelAlgebraParser.OperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RelAlgebraParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(RelAlgebraParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RelAlgebraParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(RelAlgebraParser.VarContext ctx);
 }

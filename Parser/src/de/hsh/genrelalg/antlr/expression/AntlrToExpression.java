@@ -3,20 +3,18 @@ package de.hsh.genrelalg.antlr.expression;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+import org.antlr.v4.runtime.RuleContext;
 
 import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.data.Predicate;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.expr.ExprGreater;
-import de.hsh.genrelalg.expr.ExprGreaterEquals;
 import de.hsh.genrelalg.expr.ExprAttribute;
-import de.hsh.genrelalg.expr.ExprConstant;
 import de.hsh.genrelalg.expr.ExprEquals;
-import de.hsh.genrelalg.expr.ExprLess;
-import de.hsh.genrelalg.expr.ExprLessEquals;
+import de.hsh.genrelalg.expr.ExprPredicate;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
+import de.hsh.genrelalg.parser.RelAlgebraParser.AndExprContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.AttributContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Difference_Context;
@@ -44,8 +42,13 @@ import de.hsh.genrelalg.relalg.Join;
 /* visitor class of the expression rule
  * here we will instantiate this to an expression <Expr>
  */
+
 public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	
+	VisitorPredicate visitorPredicate = new VisitorPredicate();
+	public AntlrToExpression() {
+		
+	}
 	
 	/* Implementation of Rename Operation */
 	@Override
@@ -59,6 +62,14 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 
+	@Override
+	public Relation visitAndExpr(AndExprContext ctx) {
+		// TODO Auto-generated method stub
+		return super.visitAndExpr(ctx);
+	}
+
+	
+
 	/* Implementation of Difference Operation */
 	@Override
 	public Relation visitDifference_(Difference_Context ctx) {
@@ -68,12 +79,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		writeOutput(difference, "Test Difference ");
 		return difference.getResult();
 	}
-
-
-	public AntlrToExpression() {
-	
-	}
-
 
 	@Override
 	public Relation visitEOF(EOFContext ctx) {
@@ -94,13 +99,9 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 
 	@Override
 	public Relation visitPredicate_(Predicate_Context ctx) {
-		
+		RuleContext x = ctx.parent;
+		System.out.println("RuleContext: " + x.getText());
 		return super.visitPredicate_(ctx);
-	}
-
-	@Override
-	public Relation visitSelect(SelectContext ctx) {
-		return super.visitSelect(ctx);
 	}
 
 	
@@ -139,7 +140,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		String comperator = ctx.join().predicate().getChild(1).getText();
 		if(!comperator.equals("=")) {
 			System.out.println("the comperator in Join between to Relations must be '=' ");
-			System.exit(-1);
+			return new Relation();
 		}
 		String relationLeftName = leftExpr.substring(0, leftExpr.indexOf("."));
 		String relationRightName = rightExpr.substring(0, rightExpr.indexOf("."));	
@@ -148,24 +149,19 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		
 		// initial a join Operation  
 		Join join = null;
-		String var = ctx.join().var().getText();
-		switch(var) {
-			case "L":
-				join = new Join(relationLeft, relationRight,
-					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,true,false);
-					break;
-			case "R":
-				join = new Join(relationLeft, relationRight,
-						new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,false,true);
-					break;
-			case "V": 
-				join = new Join(relationLeft, relationRight,
-					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,true,true);
-					break;
-			case "N" : 
-				join = new Join(relationLeft, relationRight,
+		if(ctx.join().var().getText().toUpperCase().equals("I")){
+			join = new Join(relationLeft, relationRight,
 					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,false,false); 
-					break;
+		}
+		else if(ctx.join().var().getText().toUpperCase().equals("F")) {
+			join = new Join(relationLeft, relationRight,
+					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,true,true);
+		}else if(ctx.join().var().getText().toUpperCase().equals("R")) {
+			join = new Join(relationLeft, relationRight,
+					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,false,true);
+		}else if(ctx.join().var().getText().toUpperCase().equals("L")) {
+			join = new Join(relationLeft, relationRight,
+					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,true,false);
 		}
 		writeOutput(join, "");
 		return join.getResult();
@@ -202,13 +198,34 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	public Relation visitSelection(SelectionContext ctx) {
 		
 		Relation relation = visit(ctx.select().relation());
-		Selection selection = null;
-
 		@SuppressWarnings("unused")
 		BooleanExpression expr = null;
-
-		for(int i = 0; i < ctx.select().predicate().size(); i++) {	
-				if(ctx.select().predicate(i).getChild(2).getText().contains(".")){
+		List<Predicate> predicate = new ArrayList<>();
+		Selection selection = null;
+		List<ExprPredicate> expressionsPredicates = new ArrayList<>();
+		
+		 for(int i = 0; i < ctx.select().exprPredicate().size(); i++) {
+			 predicate.add( visitorPredicate.visit(ctx.select().exprPredicate(i).predicate()));
+			 System.out.println(predicate.get(i).getExpression().toText());
+		 }
+			/*predicates.add( new Predicate(ctx.select().predicate(i).getChild(0).getText(), ctx.select().predicate(i).getChild(1).getText(),
+							ctx.select().predicate(i).getChild(2).getText()));
+			System.out.println("Predicate: " + predicates.get(i).getLeft()+", " + predicates.get(i).getExpr()+ ", " + predicates.get(i).getRight());
+			selections.add( new Selection(relation, predicates.get(i).getExpression())); 
+			writeOutput(selections.get(i), "Test Selection " + i);
+		}
+		 Selection selection = null;
+		 for(int i = 0; i<ctx.select().operator().size(); i++) {
+			 if(ctx.select().operator(i).getText().equals("&")) {
+				 selection = new Selection(selections.get(i).getResult(),predicates.get(i+1).getExpression());
+				 writeOutput(selection, "Test AND: ");
+			 }else if(ctx.select().operator(i).getText().equals("|")) {
+				 selection = new Selection(relation, predicates.get(i+1).getExpression());
+				 Union union = new Union(selections.get(i).getResult(),selection.getResult());
+				 writeOutput(union, "Test OR: ");
+			 }*/
+		 
+			/*	if(ctx.select().predicate(i).getChild(2).getText().contains(".")){
 					String exp1 = ctx.select().predicate(0).getChild(0).getText();
 					String attributName1 = ctx.select().predicate(0).getChild(0).getText().substring(exp1.indexOf(".")+1, exp1.length());
 					String relationName1 = ctx.select().predicate(0).getChild(0).getText().substring(0,exp1.indexOf("."));
@@ -281,15 +298,10 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 			}
 	}
 		
-		return selection.getResult();
+		return selection.getResult();*/
+			return null;
 	}
-
-	@Override
-	public Relation visitAttribut(AttributContext ctx) {
-		System.out.println("Attribute ist hier..");
-		return super.visitAttribut(ctx);
-	}
-
+	
 
 	/* Implementation of Projection Operation */
 	@Override
@@ -310,7 +322,18 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return projection.getResult();
 	}
 
+	@Override
+	protected Relation aggregateResult(Relation aggregate, Relation nextResult) {
+		// TODO Auto-generated method stub
+		return super.aggregateResult(aggregate, nextResult);
+	}
 
+	@Override
+	protected Relation defaultResult() {
+		// TODO Auto-generated method stub
+		return super.defaultResult();
+	}
+	
 	public static void writeOutput(RelationalAlgebra expr, String task) {
 		System.out.println("Aufgabe: " + task + "\n");		
 		System.out.println(expr.toText("", false));

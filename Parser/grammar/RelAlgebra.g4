@@ -30,7 +30,23 @@ rename:
 	RENAME '[' ID ']' '(' relation ')'
 ;
 predicate:
-	attribut comparator attribut #Predicate_
+	 attribut comparator attribut #Predicate_
+;
+
+exprPredicate:
+	 andExpr | orExpr | predicate | isNot
+;
+
+andExpr:
+	'('predicate '&' predicate')'
+;
+
+orExpr:
+	'('predicate '|' predicate')'
+;
+
+isNot:
+	'(' '<>' predicate ')'
 ;
 
 relation: 
@@ -38,13 +54,14 @@ relation:
 ;
 
 select:
-	SELECT '[' predicate (operator predicate)* ']' '('relation')'
+	SELECT '[' exprPredicate (operator exprPredicate)* ']' '('relation')'
 ;
 
 project: 
 	PROJECT '[' (attribut',' | attribut)+ ']' '('relation')'
 ;
 
+// cross join
 cartesian:
 	'(' relation ')' (CARTESIAN '(' relation ')')+
 ;
@@ -62,11 +79,11 @@ comparator:
 ;
 
 operator:
-	'&' | '|' | '~'
+	AND | OR
 ;
 
 var:
-	'R' | 'L' | 'V' | 'N'
+	'R' | 'L' | 'F' | 'I'
 ;
 // lexer rules
 
@@ -93,6 +110,7 @@ RENAME:
 	'P'
 ;
 
+
 UNION:
 	'UN'
 ;
@@ -115,6 +133,17 @@ VALUE:
 	'"' .*? '"'
 ;
 
+AND:
+	'&'
+;
+
+OR:
+	'|'
+;
+
+ISNOT:
+	'<>'
+;
 WS:
 	[ \t\r\n]+ -> skip	
 ;
