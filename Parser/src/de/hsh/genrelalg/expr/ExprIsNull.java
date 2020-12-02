@@ -20,5 +20,6 @@ public class ExprIsNull implements BooleanExpression {
 	@Override
 	public String toText() {
 		return String.format("%s IS NULL", expr.toString());
-	}	
+	}
+
 }

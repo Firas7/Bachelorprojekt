@@ -167,57 +167,35 @@ public interface RelAlgebraListener extends ParseTreeListener {
 	 */
 	void exitRename(RelAlgebraParser.RenameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Predicate_}
-	 * labeled alternative in {@link RelAlgebraParser#predicate}.
+	 * Enter a parse tree produced by {@link RelAlgebraParser#predicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterPredicate_(RelAlgebraParser.Predicate_Context ctx);
+	void enterPredicate(RelAlgebraParser.PredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Predicate_}
-	 * labeled alternative in {@link RelAlgebraParser#predicate}.
+	 * Exit a parse tree produced by {@link RelAlgebraParser#predicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitPredicate_(RelAlgebraParser.Predicate_Context ctx);
+	void exitPredicate(RelAlgebraParser.PredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RelAlgebraParser#exprPredicate}.
+	 * Enter a parse tree produced by {@link RelAlgebraParser#conditions}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprPredicate(RelAlgebraParser.ExprPredicateContext ctx);
+	void enterConditions(RelAlgebraParser.ConditionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RelAlgebraParser#exprPredicate}.
+	 * Exit a parse tree produced by {@link RelAlgebraParser#conditions}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprPredicate(RelAlgebraParser.ExprPredicateContext ctx);
+	void exitConditions(RelAlgebraParser.ConditionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RelAlgebraParser#andExpr}.
+	 * Enter a parse tree produced by {@link RelAlgebraParser#subPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterAndExpr(RelAlgebraParser.AndExprContext ctx);
+	void enterSubPredicate(RelAlgebraParser.SubPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link RelAlgebraParser#andExpr}.
+	 * Exit a parse tree produced by {@link RelAlgebraParser#subPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitAndExpr(RelAlgebraParser.AndExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link RelAlgebraParser#orExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterOrExpr(RelAlgebraParser.OrExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link RelAlgebraParser#orExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitOrExpr(RelAlgebraParser.OrExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link RelAlgebraParser#isNot}.
-	 * @param ctx the parse tree
-	 */
-	void enterIsNot(RelAlgebraParser.IsNotContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link RelAlgebraParser#isNot}.
-	 * @param ctx the parse tree
-	 */
-	void exitIsNot(RelAlgebraParser.IsNotContext ctx);
+	void exitSubPredicate(RelAlgebraParser.SubPredicateContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code simple}
 	 * labeled alternative in {@link RelAlgebraParser#relation}.

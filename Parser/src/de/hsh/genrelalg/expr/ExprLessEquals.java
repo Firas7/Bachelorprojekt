@@ -31,6 +31,5 @@ public class ExprLessEquals implements BooleanExpression{
 	public String toText() {
 		return String.format("%s <= %s", left.toText(), right.toText());
 	}
-
 	
 }

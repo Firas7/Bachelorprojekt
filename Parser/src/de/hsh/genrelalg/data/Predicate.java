@@ -93,5 +93,12 @@ public class Predicate {
 	public String toText() {
 		return this.left + this.expr + this.right;
 	}
+
+	public Predicate getLeftPredicate() {
+		return this.getLeftPredicate();
+	}
+	public Predicate getRightPredicate() {
+		return this.getRightPredicate();
+	}
 	
 }

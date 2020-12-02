@@ -26,5 +26,5 @@ public class ExprEquals implements BooleanExpression {
 	@Override
 	public String toText() {
 		return String.format("%s = %s", left.toText(), right.toText());
-	}	
+	}
 }

@@ -34,6 +34,5 @@ public class ExprLess implements BooleanExpression{
 		return String.format("%s < %s", left.toText(), right.toText());
 
 	}
-
 	
 }

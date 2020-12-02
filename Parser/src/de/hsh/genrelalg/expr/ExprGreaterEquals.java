@@ -10,9 +10,7 @@ public class ExprGreaterEquals implements BooleanExpression{
 	FieldExpression left, right;
 	public ExprGreaterEquals(FieldExpression left, FieldExpression right) {
 		this.left = left;
-		System.out.println("Left: " + left.toText());
 		this.right = right;
-		System.out.println("Right: " + right.toText());
 	}
 	@Override
 	public boolean eval(Tuple t, List<Attribute> attributes) {
@@ -32,6 +30,5 @@ public class ExprGreaterEquals implements BooleanExpression{
 	public String toText() {
 		return String.format("%s >= %s", left.toText(), right.toText());
 	}
-
 	
 }

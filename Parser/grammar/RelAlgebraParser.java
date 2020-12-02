@@ -22,16 +22,15 @@ public class RelAlgebraParser extends Parser {
 		DIFFERENCE=23, ID=24, VALUE=25, AND=26, OR=27, ISNOT=28, WS=29;
 	public static final int
 		RULE_prog = 0, RULE_expr = 1, RULE_difference = 2, RULE_intersection = 3, 
-		RULE_union = 4, RULE_rename = 5, RULE_predicate = 6, RULE_exprPredicate = 7, 
-		RULE_andExpr = 8, RULE_orExpr = 9, RULE_isNot = 10, RULE_relation = 11, 
-		RULE_select = 12, RULE_project = 13, RULE_cartesian = 14, RULE_join = 15, 
-		RULE_attribut = 16, RULE_comparator = 17, RULE_operator = 18, RULE_var = 19;
+		RULE_union = 4, RULE_rename = 5, RULE_predicate = 6, RULE_conditions = 7, 
+		RULE_subPredicate = 8, RULE_relation = 9, RULE_select = 10, RULE_project = 11, 
+		RULE_cartesian = 12, RULE_join = 13, RULE_attribut = 14, RULE_comparator = 15, 
+		RULE_operator = 16, RULE_var = 17;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"prog", "expr", "difference", "intersection", "union", "rename", "predicate", 
-			"exprPredicate", "andExpr", "orExpr", "isNot", "relation", "select", 
-			"project", "cartesian", "join", "attribut", "comparator", "operator", 
-			"var"
+			"conditions", "subPredicate", "relation", "select", "project", "cartesian", 
+			"join", "attribut", "comparator", "operator", "var"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -136,7 +135,7 @@ public class RelAlgebraParser extends Parser {
 			_localctx = new ProgramContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(36);
 			expr();
 			}
 		}
@@ -291,14 +290,14 @@ public class RelAlgebraParser extends Parser {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_expr);
 		try {
-			setState(51);
+			setState(47);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				_localctx = new SelectionContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(42);
+				setState(38);
 				select();
 				}
 				break;
@@ -306,7 +305,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new ProjectionContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(43);
+				setState(39);
 				project();
 				}
 				break;
@@ -314,7 +313,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new CarstesianContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(44);
+				setState(40);
 				cartesian();
 				}
 				break;
@@ -322,7 +321,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new Join_Context(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(45);
+				setState(41);
 				join();
 				}
 				break;
@@ -330,7 +329,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new Rename_Context(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(46);
+				setState(42);
 				rename();
 				}
 				break;
@@ -338,7 +337,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new Union_Context(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(47);
+				setState(43);
 				union();
 				}
 				break;
@@ -346,7 +345,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new Intersection_Context(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(48);
+				setState(44);
 				intersection();
 				}
 				break;
@@ -354,7 +353,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new Difference_Context(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(49);
+				setState(45);
 				difference();
 				}
 				break;
@@ -362,7 +361,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new EOFContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(50);
+				setState(46);
 				match(EOF);
 				}
 				break;
@@ -407,19 +406,19 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(49);
+			match(T__0);
+			setState(50);
+			relation();
+			setState(51);
+			match(T__1);
+			setState(52);
+			match(DIFFERENCE);
 			setState(53);
 			match(T__0);
 			setState(54);
 			relation();
 			setState(55);
-			match(T__1);
-			setState(56);
-			match(DIFFERENCE);
-			setState(57);
-			match(T__0);
-			setState(58);
-			relation();
-			setState(59);
 			match(T__1);
 			}
 		}
@@ -462,19 +461,19 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(57);
+			match(T__0);
+			setState(58);
+			relation();
+			setState(59);
+			match(T__1);
+			setState(60);
+			match(INTERSECTION);
 			setState(61);
 			match(T__0);
 			setState(62);
 			relation();
 			setState(63);
-			match(T__1);
-			setState(64);
-			match(INTERSECTION);
-			setState(65);
-			match(T__0);
-			setState(66);
-			relation();
-			setState(67);
 			match(T__1);
 			}
 		}
@@ -517,19 +516,19 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			setState(65);
+			match(T__0);
+			setState(66);
+			relation();
+			setState(67);
+			match(T__1);
+			setState(68);
+			match(UNION);
 			setState(69);
 			match(T__0);
 			setState(70);
 			relation();
 			setState(71);
-			match(T__1);
-			setState(72);
-			match(UNION);
-			setState(73);
-			match(T__0);
-			setState(74);
-			relation();
-			setState(75);
 			match(T__1);
 			}
 		}
@@ -570,19 +569,19 @@ public class RelAlgebraParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(73);
 			match(RENAME);
-			setState(78);
+			setState(74);
 			match(T__2);
-			setState(79);
+			setState(75);
 			match(ID);
-			setState(80);
+			setState(76);
 			match(T__3);
-			setState(81);
+			setState(77);
 			match(T__0);
-			setState(82);
+			setState(78);
 			relation();
-			setState(83);
+			setState(79);
 			match(T__1);
 			}
 		}
@@ -598,17 +597,6 @@ public class RelAlgebraParser extends Parser {
 	}
 
 	public static class PredicateContext extends ParserRuleContext {
-		public PredicateContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_predicate; }
-	 
-		public PredicateContext() { }
-		public void copyFrom(PredicateContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class Predicate_Context extends PredicateContext {
 		public List<AttributContext> attribut() {
 			return getRuleContexts(AttributContext.class);
 		}
@@ -618,14 +606,17 @@ public class RelAlgebraParser extends Parser {
 		public ComparatorContext comparator() {
 			return getRuleContext(ComparatorContext.class,0);
 		}
-		public Predicate_Context(PredicateContext ctx) { copyFrom(ctx); }
+		public PredicateContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_predicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterPredicate_(this);
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitPredicate_(this);
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitPredicate(this);
 		}
 	}
 
@@ -633,14 +624,13 @@ public class RelAlgebraParser extends Parser {
 		PredicateContext _localctx = new PredicateContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_predicate);
 		try {
-			_localctx = new Predicate_Context(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(81);
 			attribut();
-			setState(86);
+			setState(82);
 			comparator();
-			setState(87);
+			setState(83);
 			attribut();
 			}
 		}
@@ -655,216 +645,127 @@ public class RelAlgebraParser extends Parser {
 		return _localctx;
 	}
 
-	public static class ExprPredicateContext extends ParserRuleContext {
-		public AndExprContext andExpr() {
-			return getRuleContext(AndExprContext.class,0);
+	public static class ConditionsContext extends ParserRuleContext {
+		public SubPredicateContext subPredicate() {
+			return getRuleContext(SubPredicateContext.class,0);
 		}
-		public OrExprContext orExpr() {
-			return getRuleContext(OrExprContext.class,0);
+		public TerminalNode OR() { return getToken(RelAlgebraParser.OR, 0); }
+		public ConditionsContext conditions() {
+			return getRuleContext(ConditionsContext.class,0);
 		}
-		public PredicateContext predicate() {
-			return getRuleContext(PredicateContext.class,0);
-		}
-		public IsNotContext isNot() {
-			return getRuleContext(IsNotContext.class,0);
-		}
-		public ExprPredicateContext(ParserRuleContext parent, int invokingState) {
+		public ConditionsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_exprPredicate; }
+		@Override public int getRuleIndex() { return RULE_conditions; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterExprPredicate(this);
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterConditions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitExprPredicate(this);
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitConditions(this);
 		}
 	}
 
-	public final ExprPredicateContext exprPredicate() throws RecognitionException {
-		ExprPredicateContext _localctx = new ExprPredicateContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_exprPredicate);
+	public final ConditionsContext conditions() throws RecognitionException {
+		ConditionsContext _localctx = new ConditionsContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_conditions);
 		try {
-			setState(93);
+			setState(90);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(89);
-				andExpr();
+				setState(85);
+				subPredicate();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(90);
-				orExpr();
+				setState(86);
+				subPredicate();
+				setState(87);
+				match(OR);
+				setState(88);
+				conditions();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class SubPredicateContext extends ParserRuleContext {
+		public PredicateContext predicate() {
+			return getRuleContext(PredicateContext.class,0);
+		}
+		public TerminalNode AND() { return getToken(RelAlgebraParser.AND, 0); }
+		public SubPredicateContext subPredicate() {
+			return getRuleContext(SubPredicateContext.class,0);
+		}
+		public ConditionsContext conditions() {
+			return getRuleContext(ConditionsContext.class,0);
+		}
+		public SubPredicateContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_subPredicate; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterSubPredicate(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitSubPredicate(this);
+		}
+	}
+
+	public final SubPredicateContext subPredicate() throws RecognitionException {
+		SubPredicateContext _localctx = new SubPredicateContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_subPredicate);
+		try {
+			setState(101);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(92);
+				predicate();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(93);
+				predicate();
+				setState(94);
+				match(AND);
+				setState(95);
+				subPredicate();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(91);
-				predicate();
+				setState(97);
+				match(T__0);
+				setState(98);
+				conditions();
+				setState(99);
+				match(T__1);
 				}
 				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(92);
-				isNot();
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class AndExprContext extends ParserRuleContext {
-		public List<PredicateContext> predicate() {
-			return getRuleContexts(PredicateContext.class);
-		}
-		public PredicateContext predicate(int i) {
-			return getRuleContext(PredicateContext.class,i);
-		}
-		public TerminalNode AND() { return getToken(RelAlgebraParser.AND, 0); }
-		public AndExprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_andExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterAndExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitAndExpr(this);
-		}
-	}
-
-	public final AndExprContext andExpr() throws RecognitionException {
-		AndExprContext _localctx = new AndExprContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_andExpr);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(95);
-			match(T__0);
-			setState(96);
-			predicate();
-			setState(97);
-			match(AND);
-			setState(98);
-			predicate();
-			setState(99);
-			match(T__1);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class OrExprContext extends ParserRuleContext {
-		public List<PredicateContext> predicate() {
-			return getRuleContexts(PredicateContext.class);
-		}
-		public PredicateContext predicate(int i) {
-			return getRuleContext(PredicateContext.class,i);
-		}
-		public TerminalNode OR() { return getToken(RelAlgebraParser.OR, 0); }
-		public OrExprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_orExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterOrExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitOrExpr(this);
-		}
-	}
-
-	public final OrExprContext orExpr() throws RecognitionException {
-		OrExprContext _localctx = new OrExprContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_orExpr);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(101);
-			match(T__0);
-			setState(102);
-			predicate();
-			setState(103);
-			match(OR);
-			setState(104);
-			predicate();
-			setState(105);
-			match(T__1);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class IsNotContext extends ParserRuleContext {
-		public TerminalNode ISNOT() { return getToken(RelAlgebraParser.ISNOT, 0); }
-		public PredicateContext predicate() {
-			return getRuleContext(PredicateContext.class,0);
-		}
-		public IsNotContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_isNot; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).enterIsNot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RelAlgebraListener ) ((RelAlgebraListener)listener).exitIsNot(this);
-		}
-	}
-
-	public final IsNotContext isNot() throws RecognitionException {
-		IsNotContext _localctx = new IsNotContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_isNot);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(107);
-			match(T__0);
-			setState(108);
-			match(ISNOT);
-			setState(109);
-			predicate();
-			setState(110);
-			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -918,16 +819,16 @@ public class RelAlgebraParser extends Parser {
 
 	public final RelationContext relation() throws RecognitionException {
 		RelationContext _localctx = new RelationContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_relation);
+		enterRule(_localctx, 18, RULE_relation);
 		try {
-			setState(114);
+			setState(105);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				_localctx = new SimpleContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(112);
+				setState(103);
 				match(ID);
 				}
 				break;
@@ -939,7 +840,7 @@ public class RelAlgebraParser extends Parser {
 				_localctx = new NestedContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(113);
+				setState(104);
 				expr();
 				}
 				break;
@@ -960,20 +861,11 @@ public class RelAlgebraParser extends Parser {
 
 	public static class SelectContext extends ParserRuleContext {
 		public TerminalNode SELECT() { return getToken(RelAlgebraParser.SELECT, 0); }
-		public List<ExprPredicateContext> exprPredicate() {
-			return getRuleContexts(ExprPredicateContext.class);
-		}
-		public ExprPredicateContext exprPredicate(int i) {
-			return getRuleContext(ExprPredicateContext.class,i);
+		public ConditionsContext conditions() {
+			return getRuleContext(ConditionsContext.class,0);
 		}
 		public RelationContext relation() {
 			return getRuleContext(RelationContext.class,0);
-		}
-		public List<OperatorContext> operator() {
-			return getRuleContexts(OperatorContext.class);
-		}
-		public OperatorContext operator(int i) {
-			return getRuleContext(OperatorContext.class,i);
 		}
 		public SelectContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -991,40 +883,23 @@ public class RelAlgebraParser extends Parser {
 
 	public final SelectContext select() throws RecognitionException {
 		SelectContext _localctx = new SelectContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_select);
-		int _la;
+		enterRule(_localctx, 20, RULE_select);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(116);
+			setState(107);
 			match(SELECT);
-			setState(117);
+			setState(108);
 			match(T__2);
-			setState(118);
-			exprPredicate();
-			setState(124);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==AND || _la==OR) {
-				{
-				{
-				setState(119);
-				operator();
-				setState(120);
-				exprPredicate();
-				}
-				}
-				setState(126);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(127);
+			setState(109);
+			conditions();
+			setState(110);
 			match(T__3);
-			setState(128);
+			setState(111);
 			match(T__0);
-			setState(129);
+			setState(112);
 			relation();
-			setState(130);
+			setState(113);
 			match(T__1);
 			}
 		}
@@ -1066,50 +941,50 @@ public class RelAlgebraParser extends Parser {
 
 	public final ProjectContext project() throws RecognitionException {
 		ProjectContext _localctx = new ProjectContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_project);
+		enterRule(_localctx, 22, RULE_project);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(132);
+			setState(115);
 			match(PROJECT);
-			setState(133);
+			setState(116);
 			match(T__2);
-			setState(138); 
+			setState(121); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(138);
+				setState(121);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 				case 1:
 					{
-					setState(134);
+					setState(117);
 					attribut();
-					setState(135);
+					setState(118);
 					match(T__4);
 					}
 					break;
 				case 2:
 					{
-					setState(137);
+					setState(120);
 					attribut();
 					}
 					break;
 				}
 				}
-				setState(140); 
+				setState(123); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==ID );
-			setState(142);
+			setState(125);
 			match(T__3);
-			setState(143);
+			setState(126);
 			match(T__0);
-			setState(144);
+			setState(127);
 			relation();
-			setState(145);
+			setState(128);
 			match(T__1);
 			}
 		}
@@ -1151,34 +1026,34 @@ public class RelAlgebraParser extends Parser {
 
 	public final CartesianContext cartesian() throws RecognitionException {
 		CartesianContext _localctx = new CartesianContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_cartesian);
+		enterRule(_localctx, 24, RULE_cartesian);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(130);
 			match(T__0);
-			setState(148);
+			setState(131);
 			relation();
-			setState(149);
+			setState(132);
 			match(T__1);
-			setState(155); 
+			setState(138); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(150);
+				setState(133);
 				match(CARTESIAN);
-				setState(151);
+				setState(134);
 				match(T__0);
-				setState(152);
+				setState(135);
 				relation();
-				setState(153);
+				setState(136);
 				match(T__1);
 				}
 				}
-				setState(157); 
+				setState(140); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==CARTESIAN );
@@ -1202,10 +1077,10 @@ public class RelAlgebraParser extends Parser {
 		public RelationContext relation(int i) {
 			return getRuleContext(RelationContext.class,i);
 		}
-		public TerminalNode JOIN() { return getToken(RelAlgebraParser.JOIN, 0); }
 		public VarContext var() {
 			return getRuleContext(VarContext.class,0);
 		}
+		public TerminalNode JOIN() { return getToken(RelAlgebraParser.JOIN, 0); }
 		public PredicateContext predicate() {
 			return getRuleContext(PredicateContext.class,0);
 		}
@@ -1225,31 +1100,31 @@ public class RelAlgebraParser extends Parser {
 
 	public final JoinContext join() throws RecognitionException {
 		JoinContext _localctx = new JoinContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_join);
+		enterRule(_localctx, 26, RULE_join);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(159);
+			setState(142);
 			match(T__0);
-			setState(160);
+			setState(143);
 			relation();
-			setState(161);
+			setState(144);
 			match(T__1);
-			setState(162);
-			match(JOIN);
-			setState(163);
+			setState(145);
 			var();
-			setState(164);
+			setState(146);
+			match(JOIN);
+			setState(147);
 			match(T__2);
-			setState(165);
+			setState(148);
 			predicate();
-			setState(166);
+			setState(149);
 			match(T__3);
-			setState(167);
+			setState(150);
 			match(T__0);
-			setState(168);
+			setState(151);
 			relation();
-			setState(169);
+			setState(152);
 			match(T__1);
 			}
 		}
@@ -1285,23 +1160,23 @@ public class RelAlgebraParser extends Parser {
 
 	public final AttributContext attribut() throws RecognitionException {
 		AttributContext _localctx = new AttributContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_attribut);
+		enterRule(_localctx, 28, RULE_attribut);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(173);
+			setState(156);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				{
-				setState(171);
+				setState(154);
 				match(ID);
-				setState(172);
+				setState(155);
 				match(T__5);
 				}
 				break;
 			}
-			setState(175);
+			setState(158);
 			match(ID);
 			}
 		}
@@ -1333,12 +1208,12 @@ public class RelAlgebraParser extends Parser {
 
 	public final ComparatorContext comparator() throws RecognitionException {
 		ComparatorContext _localctx = new ComparatorContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_comparator);
+		enterRule(_localctx, 30, RULE_comparator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(177);
+			setState(160);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1380,12 +1255,12 @@ public class RelAlgebraParser extends Parser {
 
 	public final OperatorContext operator() throws RecognitionException {
 		OperatorContext _localctx = new OperatorContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_operator);
+		enterRule(_localctx, 32, RULE_operator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(179);
+			setState(162);
 			_la = _input.LA(1);
 			if ( !(_la==AND || _la==OR) ) {
 			_errHandler.recoverInline(this);
@@ -1425,12 +1300,12 @@ public class RelAlgebraParser extends Parser {
 
 	public final VarContext var() throws RecognitionException {
 		VarContext _localctx = new VarContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_var);
+		enterRule(_localctx, 34, RULE_var);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(181);
+			setState(164);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1454,59 +1329,52 @@ public class RelAlgebraParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37\u00ba\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\37\u00a9\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\5\3\66\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7"+
-		"\3\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\5\t`\n\t\3\n\3\n\3\n\3\n\3\n\3\n"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f\3\r\3\r\5\ru\n\r\3"+
-		"\16\3\16\3\16\3\16\3\16\3\16\7\16}\n\16\f\16\16\16\u0080\13\16\3\16\3"+
-		"\16\3\16\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\6\17\u008d\n\17\r\17"+
-		"\16\17\u008e\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20\3"+
-		"\20\3\20\6\20\u009e\n\20\r\20\16\20\u009f\3\21\3\21\3\21\3\21\3\21\3\21"+
-		"\3\21\3\21\3\21\3\21\3\21\3\21\3\22\3\22\5\22\u00b0\n\22\3\22\3\22\3\23"+
-		"\3\23\3\24\3\24\3\25\3\25\3\25\2\2\26\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(\2\5\3\2\t\r\3\2\34\35\3\2\16\21\2\u00b6\2*\3\2\2\2\4\65\3"+
-		"\2\2\2\6\67\3\2\2\2\b?\3\2\2\2\nG\3\2\2\2\fO\3\2\2\2\16W\3\2\2\2\20_\3"+
-		"\2\2\2\22a\3\2\2\2\24g\3\2\2\2\26m\3\2\2\2\30t\3\2\2\2\32v\3\2\2\2\34"+
-		"\u0086\3\2\2\2\36\u0095\3\2\2\2 \u00a1\3\2\2\2\"\u00af\3\2\2\2$\u00b3"+
-		"\3\2\2\2&\u00b5\3\2\2\2(\u00b7\3\2\2\2*+\5\4\3\2+\3\3\2\2\2,\66\5\32\16"+
-		"\2-\66\5\34\17\2.\66\5\36\20\2/\66\5 \21\2\60\66\5\f\7\2\61\66\5\n\6\2"+
-		"\62\66\5\b\5\2\63\66\5\6\4\2\64\66\7\2\2\3\65,\3\2\2\2\65-\3\2\2\2\65"+
-		".\3\2\2\2\65/\3\2\2\2\65\60\3\2\2\2\65\61\3\2\2\2\65\62\3\2\2\2\65\63"+
-		"\3\2\2\2\65\64\3\2\2\2\66\5\3\2\2\2\678\7\3\2\289\5\30\r\29:\7\4\2\2:"+
-		";\7\31\2\2;<\7\3\2\2<=\5\30\r\2=>\7\4\2\2>\7\3\2\2\2?@\7\3\2\2@A\5\30"+
-		"\r\2AB\7\4\2\2BC\7\30\2\2CD\7\3\2\2DE\5\30\r\2EF\7\4\2\2F\t\3\2\2\2GH"+
-		"\7\3\2\2HI\5\30\r\2IJ\7\4\2\2JK\7\27\2\2KL\7\3\2\2LM\5\30\r\2MN\7\4\2"+
-		"\2N\13\3\2\2\2OP\7\26\2\2PQ\7\5\2\2QR\7\32\2\2RS\7\6\2\2ST\7\3\2\2TU\5"+
-		"\30\r\2UV\7\4\2\2V\r\3\2\2\2WX\5\"\22\2XY\5$\23\2YZ\5\"\22\2Z\17\3\2\2"+
-		"\2[`\5\22\n\2\\`\5\24\13\2]`\5\16\b\2^`\5\26\f\2_[\3\2\2\2_\\\3\2\2\2"+
-		"_]\3\2\2\2_^\3\2\2\2`\21\3\2\2\2ab\7\3\2\2bc\5\16\b\2cd\7\34\2\2de\5\16"+
-		"\b\2ef\7\4\2\2f\23\3\2\2\2gh\7\3\2\2hi\5\16\b\2ij\7\35\2\2jk\5\16\b\2"+
-		"kl\7\4\2\2l\25\3\2\2\2mn\7\3\2\2no\7\36\2\2op\5\16\b\2pq\7\4\2\2q\27\3"+
-		"\2\2\2ru\7\32\2\2su\5\4\3\2tr\3\2\2\2ts\3\2\2\2u\31\3\2\2\2vw\7\22\2\2"+
-		"wx\7\5\2\2x~\5\20\t\2yz\5&\24\2z{\5\20\t\2{}\3\2\2\2|y\3\2\2\2}\u0080"+
-		"\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177\u0081\3\2\2\2\u0080~\3\2\2\2\u0081"+
-		"\u0082\7\6\2\2\u0082\u0083\7\3\2\2\u0083\u0084\5\30\r\2\u0084\u0085\7"+
-		"\4\2\2\u0085\33\3\2\2\2\u0086\u0087\7\23\2\2\u0087\u008c\7\5\2\2\u0088"+
-		"\u0089\5\"\22\2\u0089\u008a\7\7\2\2\u008a\u008d\3\2\2\2\u008b\u008d\5"+
-		"\"\22\2\u008c\u0088\3\2\2\2\u008c\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e"+
-		"\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u0090\3\2\2\2\u0090\u0091\7\6"+
-		"\2\2\u0091\u0092\7\3\2\2\u0092\u0093\5\30\r\2\u0093\u0094\7\4\2\2\u0094"+
-		"\35\3\2\2\2\u0095\u0096\7\3\2\2\u0096\u0097\5\30\r\2\u0097\u009d\7\4\2"+
-		"\2\u0098\u0099\7\25\2\2\u0099\u009a\7\3\2\2\u009a\u009b\5\30\r\2\u009b"+
-		"\u009c\7\4\2\2\u009c\u009e\3\2\2\2\u009d\u0098\3\2\2\2\u009e\u009f\3\2"+
-		"\2\2\u009f\u009d\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0\37\3\2\2\2\u00a1\u00a2"+
-		"\7\3\2\2\u00a2\u00a3\5\30\r\2\u00a3\u00a4\7\4\2\2\u00a4\u00a5\7\24\2\2"+
-		"\u00a5\u00a6\5(\25\2\u00a6\u00a7\7\5\2\2\u00a7\u00a8\5\16\b\2\u00a8\u00a9"+
-		"\7\6\2\2\u00a9\u00aa\7\3\2\2\u00aa\u00ab\5\30\r\2\u00ab\u00ac\7\4\2\2"+
-		"\u00ac!\3\2\2\2\u00ad\u00ae\7\32\2\2\u00ae\u00b0\7\b\2\2\u00af\u00ad\3"+
-		"\2\2\2\u00af\u00b0\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\7\32\2\2\u00b2"+
-		"#\3\2\2\2\u00b3\u00b4\t\2\2\2\u00b4%\3\2\2\2\u00b5\u00b6\t\3\2\2\u00b6"+
-		"\'\3\2\2\2\u00b7\u00b8\t\4\2\2\u00b8)\3\2\2\2\n\65_t~\u008c\u008e\u009f"+
-		"\u00af";
+		"\4\23\t\23\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\62\n\3\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b"+
+		"\3\t\3\t\3\t\3\t\3\t\5\t]\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n"+
+		"h\n\n\3\13\3\13\5\13l\n\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r"+
+		"\3\r\3\r\3\r\6\r|\n\r\r\r\16\r}\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16"+
+		"\3\16\3\16\3\16\3\16\6\16\u008d\n\16\r\16\16\16\u008e\3\17\3\17\3\17\3"+
+		"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\20\3\20\5\20\u009f\n\20"+
+		"\3\20\3\20\3\21\3\21\3\22\3\22\3\23\3\23\3\23\2\2\24\2\4\6\b\n\f\16\20"+
+		"\22\24\26\30\32\34\36 \"$\2\5\3\2\t\r\3\2\34\35\3\2\16\21\2\u00a6\2&\3"+
+		"\2\2\2\4\61\3\2\2\2\6\63\3\2\2\2\b;\3\2\2\2\nC\3\2\2\2\fK\3\2\2\2\16S"+
+		"\3\2\2\2\20\\\3\2\2\2\22g\3\2\2\2\24k\3\2\2\2\26m\3\2\2\2\30u\3\2\2\2"+
+		"\32\u0084\3\2\2\2\34\u0090\3\2\2\2\36\u009e\3\2\2\2 \u00a2\3\2\2\2\"\u00a4"+
+		"\3\2\2\2$\u00a6\3\2\2\2&\'\5\4\3\2\'\3\3\2\2\2(\62\5\26\f\2)\62\5\30\r"+
+		"\2*\62\5\32\16\2+\62\5\34\17\2,\62\5\f\7\2-\62\5\n\6\2.\62\5\b\5\2/\62"+
+		"\5\6\4\2\60\62\7\2\2\3\61(\3\2\2\2\61)\3\2\2\2\61*\3\2\2\2\61+\3\2\2\2"+
+		"\61,\3\2\2\2\61-\3\2\2\2\61.\3\2\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\5\3"+
+		"\2\2\2\63\64\7\3\2\2\64\65\5\24\13\2\65\66\7\4\2\2\66\67\7\31\2\2\678"+
+		"\7\3\2\289\5\24\13\29:\7\4\2\2:\7\3\2\2\2;<\7\3\2\2<=\5\24\13\2=>\7\4"+
+		"\2\2>?\7\30\2\2?@\7\3\2\2@A\5\24\13\2AB\7\4\2\2B\t\3\2\2\2CD\7\3\2\2D"+
+		"E\5\24\13\2EF\7\4\2\2FG\7\27\2\2GH\7\3\2\2HI\5\24\13\2IJ\7\4\2\2J\13\3"+
+		"\2\2\2KL\7\26\2\2LM\7\5\2\2MN\7\32\2\2NO\7\6\2\2OP\7\3\2\2PQ\5\24\13\2"+
+		"QR\7\4\2\2R\r\3\2\2\2ST\5\36\20\2TU\5 \21\2UV\5\36\20\2V\17\3\2\2\2W]"+
+		"\5\22\n\2XY\5\22\n\2YZ\7\35\2\2Z[\5\20\t\2[]\3\2\2\2\\W\3\2\2\2\\X\3\2"+
+		"\2\2]\21\3\2\2\2^h\5\16\b\2_`\5\16\b\2`a\7\34\2\2ab\5\22\n\2bh\3\2\2\2"+
+		"cd\7\3\2\2de\5\20\t\2ef\7\4\2\2fh\3\2\2\2g^\3\2\2\2g_\3\2\2\2gc\3\2\2"+
+		"\2h\23\3\2\2\2il\7\32\2\2jl\5\4\3\2ki\3\2\2\2kj\3\2\2\2l\25\3\2\2\2mn"+
+		"\7\22\2\2no\7\5\2\2op\5\20\t\2pq\7\6\2\2qr\7\3\2\2rs\5\24\13\2st\7\4\2"+
+		"\2t\27\3\2\2\2uv\7\23\2\2v{\7\5\2\2wx\5\36\20\2xy\7\7\2\2y|\3\2\2\2z|"+
+		"\5\36\20\2{w\3\2\2\2{z\3\2\2\2|}\3\2\2\2}{\3\2\2\2}~\3\2\2\2~\177\3\2"+
+		"\2\2\177\u0080\7\6\2\2\u0080\u0081\7\3\2\2\u0081\u0082\5\24\13\2\u0082"+
+		"\u0083\7\4\2\2\u0083\31\3\2\2\2\u0084\u0085\7\3\2\2\u0085\u0086\5\24\13"+
+		"\2\u0086\u008c\7\4\2\2\u0087\u0088\7\25\2\2\u0088\u0089\7\3\2\2\u0089"+
+		"\u008a\5\24\13\2\u008a\u008b\7\4\2\2\u008b\u008d\3\2\2\2\u008c\u0087\3"+
+		"\2\2\2\u008d\u008e\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008f\3\2\2\2\u008f"+
+		"\33\3\2\2\2\u0090\u0091\7\3\2\2\u0091\u0092\5\24\13\2\u0092\u0093\7\4"+
+		"\2\2\u0093\u0094\5$\23\2\u0094\u0095\7\24\2\2\u0095\u0096\7\5\2\2\u0096"+
+		"\u0097\5\16\b\2\u0097\u0098\7\6\2\2\u0098\u0099\7\3\2\2\u0099\u009a\5"+
+		"\24\13\2\u009a\u009b\7\4\2\2\u009b\35\3\2\2\2\u009c\u009d\7\32\2\2\u009d"+
+		"\u009f\7\b\2\2\u009e\u009c\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a0\3\2"+
+		"\2\2\u00a0\u00a1\7\32\2\2\u00a1\37\3\2\2\2\u00a2\u00a3\t\2\2\2\u00a3!"+
+		"\3\2\2\2\u00a4\u00a5\t\3\2\2\u00a5#\3\2\2\2\u00a6\u00a7\t\4\2\2\u00a7"+
+		"%\3\2\2\2\n\61\\gk{}\u008e\u009e";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -2,32 +2,33 @@ package de.hsh.genrelalg.antlr.expression;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.antlr.v4.runtime.RuleContext;
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Predicate;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.expr.BooleanExpression;
+import de.hsh.genrelalg.expr.ExprAnd;
 import de.hsh.genrelalg.expr.ExprAttribute;
+import de.hsh.genrelalg.expr.ExprConstant;
 import de.hsh.genrelalg.expr.ExprEquals;
-import de.hsh.genrelalg.expr.ExprPredicate;
+import de.hsh.genrelalg.expr.ExprGreater;
+import de.hsh.genrelalg.expr.ExprGreaterEquals;
+import de.hsh.genrelalg.expr.ExprIsNot;
+import de.hsh.genrelalg.expr.ExprOr;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
-import de.hsh.genrelalg.parser.RelAlgebraParser.AndExprContext;
-import de.hsh.genrelalg.parser.RelAlgebraParser.AttributContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
+import de.hsh.genrelalg.parser.RelAlgebraParser.ConditionsContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Difference_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.EOFContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Intersection_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Join_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.NestedContext;
-import de.hsh.genrelalg.parser.RelAlgebraParser.Predicate_Context;
+import de.hsh.genrelalg.parser.RelAlgebraParser.PredicateContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.ProjectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Rename_Context;
-import de.hsh.genrelalg.parser.RelAlgebraParser.SelectContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SelectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SimpleContext;
+import de.hsh.genrelalg.parser.RelAlgebraParser.SubPredicateContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Union_Context;
 import de.hsh.genrelalg.relalg.Projection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
@@ -35,9 +36,11 @@ import de.hsh.genrelalg.relalg.Rename;
 import de.hsh.genrelalg.relalg.Selection;
 import de.hsh.genrelalg.relalg.SetMinus;
 import de.hsh.genrelalg.relalg.Union;
+import de.hsh.genrelalg.relalg.AND;
 import de.hsh.genrelalg.relalg.Carstesian;
 import de.hsh.genrelalg.relalg.Intersection;
 import de.hsh.genrelalg.relalg.Join;
+import de.hsh.genrelalg.relalg.OR;
 
 /* visitor class of the expression rule
  * here we will instantiate this to an expression <Expr>
@@ -46,6 +49,8 @@ import de.hsh.genrelalg.relalg.Join;
 public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	
 	VisitorPredicate visitorPredicate = new VisitorPredicate();
+	public static Relation r = new Relation();
+	
 	public AntlrToExpression() {
 		
 	}
@@ -61,14 +66,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return rename.getResult();
 	}
 
-
-	@Override
-	public Relation visitAndExpr(AndExprContext ctx) {
-		// TODO Auto-generated method stub
-		return super.visitAndExpr(ctx);
-	}
-
-	
 
 	/* Implementation of Difference Operation */
 	@Override
@@ -96,14 +93,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		writeOutput(carstesian, "Test Carstesian: ");
 		return carstesian.getResult();
 	}
-
-	@Override
-	public Relation visitPredicate_(Predicate_Context ctx) {
-		RuleContext x = ctx.parent;
-		System.out.println("RuleContext: " + x.getText());
-		return super.visitPredicate_(ctx);
-	}
-
 	
 	/* this method is visited, if the relation is a simple relation name */
 	@Override
@@ -196,112 +185,73 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	 */
 	@Override
 	public Relation visitSelection(SelectionContext ctx) {
-		
+
 		Relation relation = visit(ctx.select().relation());
+		this.r = relation; 
 		@SuppressWarnings("unused")
 		BooleanExpression expr = null;
 		List<Predicate> predicate = new ArrayList<>();
-		Selection selection = null;
-		List<ExprPredicate> expressionsPredicates = new ArrayList<>();
+		Selection selection ;
+		//new Selection(relation, new ExprOr(new ExprGreater(new ExprAttribute("GEHALT"), new ExprConstant("5000")) , 
+				//new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
 		
-		 for(int i = 0; i < ctx.select().exprPredicate().size(); i++) {
-			 predicate.add( visitorPredicate.visit(ctx.select().exprPredicate(i).predicate()));
-			 System.out.println(predicate.get(i).getExpression().toText());
-		 }
-			/*predicates.add( new Predicate(ctx.select().predicate(i).getChild(0).getText(), ctx.select().predicate(i).getChild(1).getText(),
-							ctx.select().predicate(i).getChild(2).getText()));
-			System.out.println("Predicate: " + predicates.get(i).getLeft()+", " + predicates.get(i).getExpr()+ ", " + predicates.get(i).getRight());
-			selections.add( new Selection(relation, predicates.get(i).getExpression())); 
-			writeOutput(selections.get(i), "Test Selection " + i);
-		}
-		 Selection selection = null;
-		 for(int i = 0; i<ctx.select().operator().size(); i++) {
-			 if(ctx.select().operator(i).getText().equals("&")) {
-				 selection = new Selection(selections.get(i).getResult(),predicates.get(i+1).getExpression());
-				 writeOutput(selection, "Test AND: ");
-			 }else if(ctx.select().operator(i).getText().equals("|")) {
-				 selection = new Selection(relation, predicates.get(i+1).getExpression());
-				 Union union = new Union(selections.get(i).getResult(),selection.getResult());
-				 writeOutput(union, "Test OR: ");
-			 }*/
-		 
-			/*	if(ctx.select().predicate(i).getChild(2).getText().contains(".")){
-					String exp1 = ctx.select().predicate(0).getChild(0).getText();
-					String attributName1 = ctx.select().predicate(0).getChild(0).getText().substring(exp1.indexOf(".")+1, exp1.length());
-					String relationName1 = ctx.select().predicate(0).getChild(0).getText().substring(0,exp1.indexOf("."));
-					String exp2 = ctx.select().predicate(0).getChild(2).getText();
-					String attributName2 = ctx.select().predicate(0).getChild(2).getText().substring(exp2.indexOf(".")+1, exp2.length());
-					String relationName2 = ctx.select().predicate(0).getChild(2).getText().substring(0,exp2.indexOf("."));
-					expr = new ExprEquals(new ExprAttribute(relationName1,attributName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
-					
-					if(ctx.select().predicate(i).getChild(1).getText().equals(">")) {
-						expr = new ExprGreater(new ExprAttribute(relationName1,attributName1.toUpperCase()),new ExprAttribute(relationName2,attributName2.toUpperCase()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("<")) {
-						expr = new ExprLess(new ExprAttribute(relationName1,attributName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("=")) {
-						expr = new ExprEquals(new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals(">=")) {
-						expr = new ExprGreaterEquals (new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("<=")) {
-						expr = new ExprLessEquals(new ExprAttribute(relationName1,relationName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
-						selection = new Selection(relation,expr);
-					}
-					writeOutput(selection, "Test Selection: ");
-				}
-
-				else if(ctx.select().predicate(i).getChild(0).getText().contains(".")) {
-				String exp = ctx.select().predicate(i).getChild(0).getText();
-				String attributName = ctx.select().predicate(i).getChild(0).getText().substring(exp.indexOf(".")+1, exp.length());
-				String relationName = ctx.select().predicate(i).getChild(0).getText().substring(0,exp.indexOf("."));
-					if(ctx.select().predicate(i).getChild(1).getText().equals(">")) {
-						expr = new ExprGreater(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("<")) {
-						expr = new ExprLess(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("=")) {
-						expr = new ExprEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals(">=")) {
-						expr = new ExprGreaterEquals (new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-						selection = new Selection(relation,expr);
-					}else if(ctx.select().predicate(i).getChild(1).getText().equals("<=")) {
-						expr = new ExprLessEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-						selection = new Selection(relation,expr);
-					}
-					writeOutput(selection, "Test Selection: ");
-			} else {
-						if(ctx.select().predicate(i).getChild(1).getText().equals(">")) {
-							expr = new ExprGreater(new ExprAttribute(ctx.select().predicate(i).getChild(0).getText().toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-							selection = new Selection(relation,expr);
-						}else if(ctx.select().predicate(i).getChild(1).getText().equals("<")) {
-							expr = new ExprLess(new ExprAttribute(ctx.select().predicate(i).getChild(0).getText().toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-							selection = new Selection(relation,expr);
-						}else if(ctx.select().predicate(i).getChild(1).getText().equals("=")) {
-							expr = new ExprEquals(new ExprAttribute(ctx.select().predicate(i).getChild(0).getText().toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-							selection = new Selection(relation,expr);
-						}else if(ctx.select().predicate(i).getChild(1).getText().equals(">=")) {
-							expr = new ExprGreaterEquals (new ExprAttribute(ctx.select().predicate(i).getChild(0).getText().toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-							selection = new Selection(relation,expr);
-						}else if(ctx.select().predicate(i).getChild(1).getText().equals("<=")) {
-							expr = new ExprLessEquals(new ExprAttribute(ctx.select().predicate(i).getChild(0).getText().toUpperCase()), new ExprConstant(ctx.select().predicate(i).getChild(2).getText()));
-							selection = new Selection(relation,expr);
-						}
-						else {
-							System.out.println("This Comperator " + ctx.select().predicate(i).getChild(1).getText() +" is not correct");
-						}
-						writeOutput(selection, "Test Selection: ");
-			}
+		selection = new Selection(relation, new ExprIsNot(new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
+		writeOutput(selection, "JOOO");
+		return null;
 	}
-		
-		return selection.getResult();*/
-			return null;
+
+
+	@Override
+	public Relation visitSubPredicate(SubPredicateContext ctx) {
+		Relation result = new Relation();
+		System.out.println("Childer Subpredicate: " + ctx.getChildCount());
+		if(ctx.getChildCount() == 1) {
+			System.out.println("1 Kind in Subpredicate also visit Predicate ");
+			result = visit(ctx.predicate());
+			return result;
+		}else if(ctx.getChild(1).getText().equals("&")) {
+			System.out.println("Subpredicate hat ein AND Operator ");
+			AND and = new AND(r,visitorPredicate.visitPredicate(ctx.predicate()),visitorPredicate.visitPredicate(ctx.subPredicate().predicate()));
+			writeOutput(and, "Test AND: ");
+			return and.getResult();
+		}else if(ctx.getChild(1).getText().equals("predicates")) {
+			System.out.println("Subpredicate enthält weitere Predicates ");
+			result = visit(ctx.conditions());
+		}
+		return result;
+	}
+
+	
+	@Override
+	public Relation visitPredicate(PredicateContext ctx) {
+		Predicate p = new Predicate(ctx.attribut(0).getText(), ctx.comparator().getText() ,ctx.attribut(1).getText());
+		Selection s = new Selection(r,p.getExpression());
+		System.out.println("visitPredicate is here.");
+		writeOutput(s, "Selection simple predicate ");
+		return s.getResult();
 	}
 	
+	
+	
+	
+	@Override
+	public Relation visitConditions(ConditionsContext ctx) {
+		System.out.println("visitConditions is visited ");
+		System.out.println("Kinder: " + ctx.getChildCount());
+		Relation r = new Relation();
+		if(ctx.getChildCount()==1) {
+			System.out.println("visit subPredicate");
+			 r = visit(ctx.subPredicate());
+		}else if(ctx.getChildCount()==3) {
+			System.out.println("create OR ");
+			r = visit(ctx.subPredicate());
+			r = visit(ctx.conditions());
+			OR or = new OR(r,visitorPredicate.visitPredicate(ctx.subPredicate().predicate()),
+					visitorPredicate.visitPredicate(ctx.subPredicate().predicate()));
+			writeOutput(or, "Test OR");
+		}
+		return null;
+	}
 
 	/* Implementation of Projection Operation */
 	@Override

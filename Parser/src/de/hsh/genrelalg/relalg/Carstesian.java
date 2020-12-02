@@ -7,12 +7,10 @@ import java.util.List;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
-import de.hsh.genrelalg.expr.BooleanExpression;
 
 public class Carstesian extends RelationalAlgebra{
 
 	RelationalAlgebra left, right;
-	BooleanExpression cond;
 	double spread;
 	
 	public Carstesian(RelationalAlgebra left, RelationalAlgebra right ,double spread) {

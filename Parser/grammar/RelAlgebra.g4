@@ -30,23 +30,16 @@ rename:
 	RENAME '[' ID ']' '(' relation ')'
 ;
 predicate:
-	 attribut comparator attribut #Predicate_
+	 attribut comparator attribut
+	 
 ;
 
-exprPredicate:
-	 andExpr | orExpr | predicate | isNot
+conditions:
+	 subPredicate | subPredicate OR conditions
 ;
 
-andExpr:
-	'('predicate '&' predicate')'
-;
-
-orExpr:
-	'('predicate '|' predicate')'
-;
-
-isNot:
-	'(' '<>' predicate ')'
+subPredicate:
+	predicate | predicate AND subPredicate | '(' conditions ')'
 ;
 
 relation: 
@@ -54,7 +47,7 @@ relation:
 ;
 
 select:
-	SELECT '[' exprPredicate (operator exprPredicate)* ']' '('relation')'
+	SELECT '[' conditions ']' '('relation')'
 ;
 
 project: 
@@ -67,7 +60,7 @@ cartesian:
 ;
 
 join:
-	'(' relation ')' JOIN var '[' predicate ']' '(' relation ')' 
+	'(' relation ')' var JOIN  '[' predicate ']' '(' relation ')'
 ;
 
 attribut:

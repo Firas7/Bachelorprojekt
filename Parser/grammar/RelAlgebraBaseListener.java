@@ -183,61 +183,37 @@ public class RelAlgebraBaseListener implements RelAlgebraListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPredicate_(RelAlgebraParser.Predicate_Context ctx) { }
+	@Override public void enterPredicate(RelAlgebraParser.PredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPredicate_(RelAlgebraParser.Predicate_Context ctx) { }
+	@Override public void exitPredicate(RelAlgebraParser.PredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprPredicate(RelAlgebraParser.ExprPredicateContext ctx) { }
+	@Override public void enterConditions(RelAlgebraParser.ConditionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExprPredicate(RelAlgebraParser.ExprPredicateContext ctx) { }
+	@Override public void exitConditions(RelAlgebraParser.ConditionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAndExpr(RelAlgebraParser.AndExprContext ctx) { }
+	@Override public void enterSubPredicate(RelAlgebraParser.SubPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAndExpr(RelAlgebraParser.AndExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOrExpr(RelAlgebraParser.OrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOrExpr(RelAlgebraParser.OrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIsNot(RelAlgebraParser.IsNotContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIsNot(RelAlgebraParser.IsNotContext ctx) { }
+	@Override public void exitSubPredicate(RelAlgebraParser.SubPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

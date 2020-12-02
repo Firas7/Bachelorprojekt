@@ -6,6 +6,7 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.expr.BooleanExpression;
+import de.hsh.genrelalg.expr.ExprAnd;
 
 public class Selection extends RelationalAlgebra {
 
@@ -21,6 +22,7 @@ public class Selection extends RelationalAlgebra {
 	public Relation getResult() {
 		Relation baserel = base.getResult();
 		Relation res = new Relation(baserel.getAttributes());
+		System.out.println("Expr is: " + this.expr.toText());
 		for (Tuple t : baserel.getTuples()) {
 			if (expr.eval(t, baserel.getAttributes()) == true) {
 				res.addTuple(t);
