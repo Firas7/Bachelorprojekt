@@ -190,9 +190,10 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		writeOutput(selection, "JOOO");*/
 		
 		List<BooleanExpression> expresssions = new ArrayList<>();
+		System.out.println(ctx.select().conditions().depth());
 		expresssions.add(visitorPredicate.visit(ctx));
 		for(int i = 0 ; i < expresssions.size();i++) {
-			//System.out.println("Expr: " + expresssions.get(i).toText());
+			//System.out.println("Expr: " + expresssions.get(i));
 		}
 		return null;
 	}

@@ -41,6 +41,10 @@ public class Predicate {
 	public void setBooleanexprisson(BooleanExpression expr) {
 		this.booleanexpression = expr;
 	}
+	public BooleanExpression getBooleanExpression() {
+		return this.booleanexpression;
+	}
+	
 	public BooleanExpression getExpression() {
 		BooleanExpression expr = null;
 		

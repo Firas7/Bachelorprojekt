@@ -28,5 +28,4 @@ public class ExprAnd implements BooleanExpression{
 	public String toText() {
 		return String.format("%s AND %s", left.toText(), right.toText());
 	}
-
 }
