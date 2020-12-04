@@ -11,6 +11,7 @@ import de.hsh.genrelalg.expr.ExprLessEquals;
 
 public class Predicate {
 	String right, left, expr;
+	BooleanExpression booleanexpression;
 	
 	//  the left is an Attribute, the right one could be an attribute or a value (ExprConstant)
 	public Predicate() {
@@ -37,7 +38,9 @@ public class Predicate {
 		this.right = right;
 	}
 	
-	
+	public void setBooleanexprisson(BooleanExpression expr) {
+		this.booleanexpression = expr;
+	}
 	public BooleanExpression getExpression() {
 		BooleanExpression expr = null;
 		

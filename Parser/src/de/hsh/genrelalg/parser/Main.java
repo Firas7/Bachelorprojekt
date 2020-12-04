@@ -1,5 +1,8 @@
 package de.hsh.genrelalg.parser;
 
+import java.io.IOException;
+
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.antlr.v4.runtime.tree.ParseTree;
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Program;
@@ -13,22 +16,36 @@ public class Main {
 	
 	public static void main(String[] args){
 		
-		/* Database, which contains all necessary data */
-		//database = new Database();
 		
 		/* A task that must be solved */
-		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"Lösung");
+		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"PR [name] (ANGEST)");
 		
 		RelAlgebraParser parser = AntlrParser.getParser();
+		RelAlgebraParser parserOfAnswer = null;
+		try {
+			parserOfAnswer = AntlrParser.getParserForRightAnswer(aufgabe.getAnswer());
+		} catch (ParseCancellationException | IOException e) {
+			e.printStackTrace();
+		}
 		
-		// tell Antlr to build a parse tree
-		// parse from the start symbol 'prog'
+		// get Parser for correct answer
+		ParseTree ast = parserOfAnswer.prog();
+		// create a visitor for the correct answer
+		//AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
+		//Program progOfAnswer = progVisitorOfAnswer.visit(ast);
+		/*writeOutput(progOfAnswer.getExpressions().get(0).getResult(), "correct Answer");*/
+		
+		// get Parser for input answer
 		ParseTree antlrAST = parser.prog();
-		// create a visitor for converting the parse tree to Program/Expression object
+		// create a visitor for input answer
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
+		/*for(int i = 0 ; i < prog.expressions.size(); i++ ) {
+			prog.getExpressions().get(i).setName("Endergebnis");
+			writeOutput(prog.getExpressions().get(i).getResult(), "Endergebnis");	
+		}*/
+		
 	}
-	
 	
 	public static void writeOutput(RelationalAlgebra expr, String task) {
 		System.out.println("Aufgabe: " + task + "\n");		

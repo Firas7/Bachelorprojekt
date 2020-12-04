@@ -6,7 +6,6 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Tuple;
 
 public interface BooleanExpression {
-
 	boolean eval(Tuple t, List<Attribute> attributes);
 	String toText();
 }

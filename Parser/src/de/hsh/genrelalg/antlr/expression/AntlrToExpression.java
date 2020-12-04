@@ -7,14 +7,8 @@ import de.hsh.genrelalg.data.Predicate;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.expr.ExprAnd;
 import de.hsh.genrelalg.expr.ExprAttribute;
-import de.hsh.genrelalg.expr.ExprConstant;
 import de.hsh.genrelalg.expr.ExprEquals;
-import de.hsh.genrelalg.expr.ExprGreater;
-import de.hsh.genrelalg.expr.ExprGreaterEquals;
-import de.hsh.genrelalg.expr.ExprIsNot;
-import de.hsh.genrelalg.expr.ExprOr;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.ConditionsContext;
@@ -36,7 +30,6 @@ import de.hsh.genrelalg.relalg.Rename;
 import de.hsh.genrelalg.relalg.Selection;
 import de.hsh.genrelalg.relalg.SetMinus;
 import de.hsh.genrelalg.relalg.Union;
-import de.hsh.genrelalg.relalg.AND;
 import de.hsh.genrelalg.relalg.Carstesian;
 import de.hsh.genrelalg.relalg.Intersection;
 import de.hsh.genrelalg.relalg.Join;
@@ -61,7 +54,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation relation = visit(ctx.rename().relation());
 		String newName = ctx.rename().ID().getText();
 		Rename rename = new Rename(relation,newName);
-		System.err.println(rename.getResult().toText("", true));
 		writeOutput(rename, "Test Rename: ");
 		return rename.getResult();
 	}
@@ -179,7 +171,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return intersection.getResult();
 	}
 
-
 	/*
 	 * Implementation of selection operation
 	 */
@@ -192,11 +183,17 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		BooleanExpression expr = null;
 		List<Predicate> predicate = new ArrayList<>();
 		Selection selection ;
-		//new Selection(relation, new ExprOr(new ExprGreater(new ExprAttribute("GEHALT"), new ExprConstant("5000")) , 
-				//new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
 		
+		/*new Selection(relation, new ExprOr(new ExprGreater(new ExprAttribute("GEHALT"), new ExprConstant("5000")) , 
+				//new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
 		selection = new Selection(relation, new ExprIsNot(new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
-		writeOutput(selection, "JOOO");
+		writeOutput(selection, "JOOO");*/
+		
+		List<BooleanExpression> expresssions = new ArrayList<>();
+		expresssions.add(visitorPredicate.visit(ctx));
+		for(int i = 0 ; i < expresssions.size();i++) {
+			//System.out.println("Expr: " + expresssions.get(i).toText());
+		}
 		return null;
 	}
 
@@ -204,17 +201,18 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	@Override
 	public Relation visitSubPredicate(SubPredicateContext ctx) {
 		Relation result = new Relation();
+		Relation result2 = new Relation();
+		Selection select = null;
 		System.out.println("Childer Subpredicate: " + ctx.getChildCount());
 		if(ctx.getChildCount() == 1) {
 			System.out.println("1 Kind in Subpredicate also visit Predicate ");
-			result = visit(ctx.predicate());
-			return result;
+			return result = visit(ctx.predicate());
 		}else if(ctx.getChild(1).getText().equals("&")) {
 			System.out.println("Subpredicate hat ein AND Operator ");
-			AND and = new AND(r,visitorPredicate.visitPredicate(ctx.predicate()),visitorPredicate.visitPredicate(ctx.subPredicate().predicate()));
-			writeOutput(and, "Test AND: ");
-			return and.getResult();
-		}else if(ctx.getChild(1).getText().equals("predicates")) {
+			result = visit(ctx.predicate());
+			result2 = visit(ctx.subPredicate());
+			
+		}else if(ctx.getChild(1).getText().equals("conditions")) {
 			System.out.println("Subpredicate enthält weitere Predicates ");
 			result = visit(ctx.conditions());
 		}
@@ -231,9 +229,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return s.getResult();
 	}
 	
-	
-	
-	
 	@Override
 	public Relation visitConditions(ConditionsContext ctx) {
 		System.out.println("visitConditions is visited ");
@@ -246,9 +241,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 			System.out.println("create OR ");
 			r = visit(ctx.subPredicate());
 			r = visit(ctx.conditions());
-			OR or = new OR(r,visitorPredicate.visitPredicate(ctx.subPredicate().predicate()),
-					visitorPredicate.visitPredicate(ctx.subPredicate().predicate()));
-			writeOutput(or, "Test OR");
 		}
 		return null;
 	}
@@ -263,7 +255,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		for(int i=0 ;i<ctx.project().attribut().size(); i++) {	
 			if(ctx.project().attribut().get(i).getText().contains(".")) {
 				attributObj[i] = new Attribute(ctx.project().attribut().get(i).getChild(0).getText().toUpperCase(), ctx.project().attribut().get(i).getChild(2).getText().toUpperCase());
-			}else {
+			} else {
 				attributObj[i] = new Attribute (ctx.project().attribut(i).getText().toUpperCase());
 			}
 		}

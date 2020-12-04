@@ -31,7 +31,7 @@ public class Aufgabe {
 		this.answer = solution;
 	}
 	
-	public String getSolution() {
+	public String getAnswer() {
 		return this.answer;
 	}
 	
