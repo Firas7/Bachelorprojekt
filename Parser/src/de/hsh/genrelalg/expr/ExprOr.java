@@ -12,8 +12,6 @@ public class ExprOr implements BooleanExpression{
 	public ExprOr (BooleanExpression p1 , BooleanExpression p2) {
 		this.left = p1;
 		this.right= p2;
-		System.out.println("BooleanExpr Left OR: " + this.left.toText());
-		System.out.println("BooleanExpr Right OR: " + this.right.toText());
 	}
 	
 	@Override
@@ -26,7 +24,7 @@ public class ExprOr implements BooleanExpression{
 
 	@Override
 	public String toText() {
-		return String.format("%s OR %s", left.toText(), right.toText());
+		return String.format("%s OR %s", this.left.toText(), this.right.toText());
 	}
 
 	

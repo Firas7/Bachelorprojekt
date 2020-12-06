@@ -12,27 +12,46 @@ import de.hsh.genrelalg.parser.RelAlgebraParser.SubPredicateContext;
 public class VisitorPredicate extends RelAlgebraBaseVisitor<BooleanExpression>{
 
 
+	public  VisitorPredicate() {
+		
+	}
 	@Override
 	public BooleanExpression visitSubPredicate(SubPredicateContext ctx) {
 		System.out.println("SubPredicate");
-		Predicate p = new Predicate();
-		
-		System.out.println("Anzahl Kinder in SubPreidcate:" + ctx.getChildCount());
+		BooleanExpression p = null;
 			if(ctx.getChildCount() == 1) {
-				p.setBooleanexprisson(visit(ctx.predicate()));
-				return p.getBooleanExpression();
-			}else if(ctx.getChildCount()==3) {
+				p = visit(ctx.predicate());
+				System.out.println("+++++ "+ p.toText());
+				return p;
+			}else {
 				if(ctx.getChild(1).getText().equals("&")) {
-					System.out.println("AND muss erstellt werden.");
+					System.out.println("AND");
 					ExprAnd and  = new ExprAnd(visit(ctx.predicate()), visit(ctx.subPredicate()));
+					System.out.println("AND Expression: " + and.toText());
 					return and;
 				}else {
-					p.setBooleanexprisson(visit(ctx.conditions()));
+					p = visit(ctx.conditions());
+					System.out.println("Condition boolean: " + p.toText());
+					return p;
 				}
 			}
-		return p.getExpression();
 	}
 
+	@Override
+	public BooleanExpression visitConditions(ConditionsContext ctx) {
+		System.out.println("Conditions");
+		
+		if(ctx.getChildCount() == 1) {
+			BooleanExpression p  = visit(ctx.subPredicate());
+			return p;
+		}else {
+			System.out.println("OR muss erstellt werden");
+			ExprOr or = new ExprOr(visit(ctx.subPredicate()),visit(ctx.conditions()));
+			System.out.println("OR Expression: " + or.toText());
+			return or;
+		}
+	}
+	
 	@Override
 	public BooleanExpression visitPredicate(PredicateContext ctx) {
 		System.out.println("Predicate");
@@ -40,22 +59,5 @@ public class VisitorPredicate extends RelAlgebraBaseVisitor<BooleanExpression>{
 		System.out.println("Predicate in visitPredicate: " + p.getExpression().toText());
 		return p.getExpression();
 	}
-
-	@Override
-	public BooleanExpression visitConditions(ConditionsContext ctx) {
-		System.out.println("Conditions");
-		Predicate p = new Predicate();
-		if(ctx.getChildCount() == 1) {
-			p.setBooleanexprisson(visit(ctx.subPredicate()));
-			return p.getExpression();
-		}else if (ctx.getChildCount() == 3) {
-			System.out.println("OR muss erstellt werden");
-			ExprOr or = new ExprOr(visit(ctx.subPredicate()),visit(ctx.conditions()));
-			return or;
-		}
-		return p.getExpression();
-	}
-
-	
 	
 }

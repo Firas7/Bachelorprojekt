@@ -26,6 +26,6 @@ public class ExprAnd implements BooleanExpression{
 
 	@Override
 	public String toText() {
-		return String.format("%s AND %s", left.toText(), right.toText());
+		return String.format("%s AND %s", this.left.toText(), this.right.toText());
 	}
 }

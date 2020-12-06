@@ -7,8 +7,15 @@ import de.hsh.genrelalg.data.Predicate;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.expr.BooleanExpression;
+import de.hsh.genrelalg.expr.ExprAnd;
 import de.hsh.genrelalg.expr.ExprAttribute;
+import de.hsh.genrelalg.expr.ExprConstant;
 import de.hsh.genrelalg.expr.ExprEquals;
+import de.hsh.genrelalg.expr.ExprGreater;
+import de.hsh.genrelalg.expr.ExprGreaterEquals;
+import de.hsh.genrelalg.expr.ExprLess;
+import de.hsh.genrelalg.expr.ExprLessEquals;
+import de.hsh.genrelalg.expr.ExprOr;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.ConditionsContext;
@@ -42,7 +49,6 @@ import de.hsh.genrelalg.relalg.OR;
 public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	
 	VisitorPredicate visitorPredicate = new VisitorPredicate();
-	public static Relation r = new Relation();
 	
 	public AntlrToExpression() {
 		
@@ -178,73 +184,13 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	public Relation visitSelection(SelectionContext ctx) {
 
 		Relation relation = visit(ctx.select().relation());
-		this.r = relation; 
-		@SuppressWarnings("unused")
-		BooleanExpression expr = null;
-		List<Predicate> predicate = new ArrayList<>();
-		Selection selection ;
-		
-		/*new Selection(relation, new ExprOr(new ExprGreater(new ExprAttribute("GEHALT"), new ExprConstant("5000")) , 
-				//new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
-		selection = new Selection(relation, new ExprIsNot(new ExprEquals(new ExprAttribute("WOHNORT"), new ExprConstant("Hannover"))));
-		writeOutput(selection, "JOOO");*/
-		
-		List<BooleanExpression> expresssions = new ArrayList<>();
-		System.out.println(ctx.select().conditions().depth());
-		expresssions.add(visitorPredicate.visit(ctx));
-		for(int i = 0 ; i < expresssions.size();i++) {
-			//System.out.println("Expr: " + expresssions.get(i));
-		}
-		return null;
+		BooleanExpression bol = visitorPredicate.visit(ctx.select().conditions());
+		Selection selection = new Selection(relation,bol);
+		writeOutput(selection, "Test");
+		return selection.getResult();
+
 	}
 
-
-	@Override
-	public Relation visitSubPredicate(SubPredicateContext ctx) {
-		Relation result = new Relation();
-		Relation result2 = new Relation();
-		Selection select = null;
-		System.out.println("Childer Subpredicate: " + ctx.getChildCount());
-		if(ctx.getChildCount() == 1) {
-			System.out.println("1 Kind in Subpredicate also visit Predicate ");
-			return result = visit(ctx.predicate());
-		}else if(ctx.getChild(1).getText().equals("&")) {
-			System.out.println("Subpredicate hat ein AND Operator ");
-			result = visit(ctx.predicate());
-			result2 = visit(ctx.subPredicate());
-			
-		}else if(ctx.getChild(1).getText().equals("conditions")) {
-			System.out.println("Subpredicate enthält weitere Predicates ");
-			result = visit(ctx.conditions());
-		}
-		return result;
-	}
-
-	
-	@Override
-	public Relation visitPredicate(PredicateContext ctx) {
-		Predicate p = new Predicate(ctx.attribut(0).getText(), ctx.comparator().getText() ,ctx.attribut(1).getText());
-		Selection s = new Selection(r,p.getExpression());
-		System.out.println("visitPredicate is here.");
-		writeOutput(s, "Selection simple predicate ");
-		return s.getResult();
-	}
-	
-	@Override
-	public Relation visitConditions(ConditionsContext ctx) {
-		System.out.println("visitConditions is visited ");
-		System.out.println("Kinder: " + ctx.getChildCount());
-		Relation r = new Relation();
-		if(ctx.getChildCount()==1) {
-			System.out.println("visit subPredicate");
-			 r = visit(ctx.subPredicate());
-		}else if(ctx.getChildCount()==3) {
-			System.out.println("create OR ");
-			r = visit(ctx.subPredicate());
-			r = visit(ctx.conditions());
-		}
-		return null;
-	}
 
 	/* Implementation of Projection Operation */
 	@Override

@@ -1,5 +1,6 @@
 package de.hsh.genrelalg.data;
 
+
 import de.hsh.genrelalg.expr.BooleanExpression;
 import de.hsh.genrelalg.expr.ExprAttribute;
 import de.hsh.genrelalg.expr.ExprConstant;
@@ -11,13 +12,10 @@ import de.hsh.genrelalg.expr.ExprLessEquals;
 
 public class Predicate {
 	String right, left, expr;
-	BooleanExpression booleanexpression;
+	BooleanExpression booleanexpression = null;
 	
 	//  the left is an Attribute, the right one could be an attribute or a value (ExprConstant)
 	public Predicate() {
-		this.left = "";
-		this.right = "";
-		this.expr = "";
 	}
 	
 	public String getRight() {
@@ -36,6 +34,7 @@ public class Predicate {
 		this.left = left;
 		this.expr = expr;
 		this.right = right;
+		this.setBooleanexprisson(this.getBooleanExpression());
 	}
 	
 	public void setBooleanexprisson(BooleanExpression expr) {
@@ -46,7 +45,6 @@ public class Predicate {
 	}
 	
 	public BooleanExpression getExpression() {
-		BooleanExpression expr = null;
 		
 		if(this.right.contains(".") && this.left.contains(".")) {
 			String attributName1 = this.left.substring(this.left.indexOf(".")+1, this.left.length());
@@ -55,46 +53,45 @@ public class Predicate {
 			String relationName2 = this.right.substring(0,this.right.indexOf("."));
 			
 			if(this.expr.equals(">")) {
-				expr = new ExprGreater(new ExprAttribute(relationName1,attributName1.toUpperCase()),new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprGreater(new ExprAttribute(relationName1,attributName1.toUpperCase()),new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}else if(this.expr.equals("<")) {
-				expr = new ExprLess(new ExprAttribute(relationName1,attributName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprLess(new ExprAttribute(relationName1,attributName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}else if(this.expr.equals("=")) {
-				expr = new ExprEquals(new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprEquals(new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}else if(this.expr.equals(">=")) {
-				expr = new ExprGreaterEquals (new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprGreaterEquals (new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}else if(this.expr.equals("<=")) {
-				expr = new ExprLessEquals(new ExprAttribute(relationName1,relationName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprLessEquals(new ExprAttribute(relationName1,relationName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}
 		}else if(this.left.contains(".")) {
 
 			String attributName = this.left.substring(this.left.indexOf(".")+1, this.left.length());
 			String relationName = this.left.substring(0,this.left.indexOf("."));
 				if(this.expr.equals(">")) {
-					expr = new ExprGreater(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+					booleanexpression = new ExprGreater(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}else if(this.expr.equals("<")) {
-					expr = new ExprLess(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+					booleanexpression = new ExprLess(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}else if(this.expr.equals("=")) {
-					expr = new ExprEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+					booleanexpression = new ExprEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}else if(this.expr.equals(">=")) {
-					expr = new ExprGreaterEquals (new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+					booleanexpression = new ExprGreaterEquals (new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}else if(this.expr.equals("<=")) {
-					expr = new ExprLessEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+					booleanexpression = new ExprLessEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}
 		}else {
 			if(this.expr.equals(">")) {
-				expr = new ExprGreater(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+				booleanexpression = new ExprGreater(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}else if(this.expr.equals("<")) {
-				expr = new ExprLess(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+				booleanexpression = new ExprLess(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}else if(this.expr.equals("=")) {
-				expr = new ExprEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+				booleanexpression = new ExprEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}else if(this.expr.equals(">=")) {
-				expr = new ExprGreaterEquals (new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+				booleanexpression = new ExprGreaterEquals (new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}else if(this.expr.equals("<=")) {
-				expr = new ExprLessEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+				booleanexpression = new ExprLessEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}
 		}
-		
-		return expr;
+		return booleanexpression;
 	}
 	
 	public String toText() {

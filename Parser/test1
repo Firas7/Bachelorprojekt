@@ -1,1 +1,1 @@
-SL [(Wohnort = Hannover & gehalt > 4500) | name = Firas] (ANGEST)
+SL [ angest.WOHNORT = Hannover & gehalt > 5000 ] (ANGEST)
