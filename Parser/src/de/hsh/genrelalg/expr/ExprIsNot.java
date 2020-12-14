@@ -10,7 +10,6 @@ public class ExprIsNot implements BooleanExpression{
 	BooleanExpression p;
 	public ExprIsNot (BooleanExpression p) {
 		this.p = p;
-		System.out.println("BooleanExpr Left IsNot: " + this.p.toText());
 	}
 	@Override
 	public boolean eval(Tuple t, List<Attribute> attributes) {

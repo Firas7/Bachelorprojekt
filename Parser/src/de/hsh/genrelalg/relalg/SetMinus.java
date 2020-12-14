@@ -1,5 +1,6 @@
 package de.hsh.genrelalg.relalg;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
@@ -9,8 +10,9 @@ import de.hsh.genrelalg.data.Tuple;
 public class SetMinus extends RelationalAlgebra {
 
 	RelationalAlgebra left, right;
+	List<Attribute> faultyAttributes = new ArrayList<>();
 	double spread;
-	boolean matched = false;
+	boolean matched = true;
 
 	
 	public SetMinus(RelationalAlgebra left, RelationalAlgebra right, double spread) {
@@ -18,28 +20,27 @@ public class SetMinus extends RelationalAlgebra {
 		this.right = right;
 		this.spread = spread;
 	}
+	
+	public List<Attribute> getFaultyAttributes(){
+		return this.faultyAttributes;
+	}
 
 	@Override
 	public Relation getResult() {
 		Relation left = this.left.getResult();
 		Relation right = this.right.getResult();
 		Relation res = new Relation(left.getAttributes());
-		int numberOfAttributesRight = right.getAttributes().size();
-		int numberOfAttributesLeft = left.getAttributes().size();
+				
+		checkAttributesNumber(left, right);
 		
-		// check count of attributes in every relation
-		if(numberOfAttributesLeft == numberOfAttributesRight) {
-			//Compare the contents of the attributes			
-			checkAttributesNames(left.getAttributes(), right.getAttributes());
-		}else { 
-				System.out.println("An Difference is not possible, because Number of attributes of both relations is unequal!");
-		}
 		
-		if(matched) {
-			for (Tuple tl : left.getTuples()) {
+		if(matched) { 
+			for(Tuple tl : left.getTuples()) {
 				if (!right.contains(tl))
 					res.addTuple(tl);
+				
 			}
+			return res;
 		}
 		return res;
 	}
@@ -54,17 +55,47 @@ public class SetMinus extends RelationalAlgebra {
 		res += "\n" + indent + ")";
 		return res;
 	}
+	
+	/*
+	 * Diese Methode prüft die Anzahl der Attribute beider Relationen
+	 * gleiche Anzahl: werden dann die Namen der Attribute geprüft.
+	 * ungleiche Anzahl: Fehlererzeugung.
+	 * 
+	 */
+	public void checkAttributesNumber(Relation left, Relation right) {
+			
+			int anzahlLeft = left.getAttributes().size();
+			int anzahlRight = right.getAttributes().size();
+			if(anzahlLeft == anzahlRight) {
+				// gleich
+				checkAttributesNames(left.getAttributes(),right.getAttributes());
+			}else {
+				// ungleich
+				matched = false;
+			}
+		
+		}
 
+	/*
+	 * Diese Methode prüft die Gleichheit der Namen sowie die Reihenfolge der Attribute in beider Relationen.
+	 * wenn ein Attribute fehlt oder überflüssig ist, wird dies zu einer Liste hinzugefügt, die später zum Feedback beiträgt
+	 * Außerdem wird ein Fehler erzeugt, dass Schemen beider Relationen voneinander abweichen
+	 */
 	@Override
 	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
 
-		for(int i = 0; i < left.size(); i++) {
-			if(!left.get(i).getName().toUpperCase().equals(right.get(i).getName().toUpperCase())) {
-				System.out.println("A Difference is not possible, because the relations have different schemes ");
-				matched = false;
-				break;
+
+		for(int i = 0; i < right.size(); i++) {
+			boolean found = false;
+				if(right.get(i).getName().toUpperCase().equals(left.get(i).getName().toUpperCase())) {
+					found = true;
+				}
+			if(!found) {
+			// Attribute stimmen miteinander nicht überein oder die Reihfolge der Attribute
+			faultyAttributes.add(right.get(i));
+			matched = false;
+			System.out.println("Attribute stimmen nicht überein oder die Reihenfolge der Attribute");
 			}
-			matched =true;
 		}
 	}
 	

@@ -31,7 +31,7 @@ public class ExprAttribute implements FieldExpression {
 		}
 		return "NULL";
 	}
-
+	
 	@Override
 	public String toText() {
 		return attribute.toText();

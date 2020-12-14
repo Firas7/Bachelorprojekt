@@ -13,7 +13,7 @@ public class ExprOr implements BooleanExpression{
 		this.left = p1;
 		this.right= p2;
 	}
-	
+
 	@Override
 	public boolean eval(Tuple t, List<Attribute> attributes) {
 		if(this.left.eval(t, attributes) || this.right.eval(t, attributes)) {
@@ -27,5 +27,4 @@ public class ExprOr implements BooleanExpression{
 		return String.format("%s OR %s", this.left.toText(), this.right.toText());
 	}
 
-	
 }

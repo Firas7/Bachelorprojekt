@@ -3,33 +3,22 @@ package de.hsh.genrelalg.antlr.expression;
 import java.util.ArrayList;
 import java.util.List;
 import de.hsh.genrelalg.data.Attribute;
-import de.hsh.genrelalg.data.Predicate;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.expr.ExprAnd;
 import de.hsh.genrelalg.expr.ExprAttribute;
-import de.hsh.genrelalg.expr.ExprConstant;
 import de.hsh.genrelalg.expr.ExprEquals;
-import de.hsh.genrelalg.expr.ExprGreater;
-import de.hsh.genrelalg.expr.ExprGreaterEquals;
-import de.hsh.genrelalg.expr.ExprLess;
-import de.hsh.genrelalg.expr.ExprLessEquals;
-import de.hsh.genrelalg.expr.ExprOr;
 import de.hsh.genrelalg.parser.RelAlgebraBaseVisitor;
 import de.hsh.genrelalg.parser.RelAlgebraParser.CarstesianContext;
-import de.hsh.genrelalg.parser.RelAlgebraParser.ConditionsContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Difference_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.EOFContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Intersection_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Join_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.NestedContext;
-import de.hsh.genrelalg.parser.RelAlgebraParser.PredicateContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.ProjectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Rename_Context;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SelectionContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.SimpleContext;
-import de.hsh.genrelalg.parser.RelAlgebraParser.SubPredicateContext;
 import de.hsh.genrelalg.parser.RelAlgebraParser.Union_Context;
 import de.hsh.genrelalg.relalg.Projection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
@@ -40,7 +29,6 @@ import de.hsh.genrelalg.relalg.Union;
 import de.hsh.genrelalg.relalg.Carstesian;
 import de.hsh.genrelalg.relalg.Intersection;
 import de.hsh.genrelalg.relalg.Join;
-import de.hsh.genrelalg.relalg.OR;
 
 /* visitor class of the expression rule
  * here we will instantiate this to an expression <Expr>
@@ -60,7 +48,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation relation = visit(ctx.rename().relation());
 		String newName = ctx.rename().ID().getText();
 		Rename rename = new Rename(relation,newName);
-		writeOutput(rename, "Test Rename: ");
+		//writeOutput(rename, "Rename: ");
 		return rename.getResult();
 	}
 
@@ -71,7 +59,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation left =  visit(ctx.difference().relation(0));
 		Relation right =  visit(ctx.difference().relation(1));
 		SetMinus difference = new SetMinus(left, right, 16);
-		writeOutput(difference, "Test Difference ");
+		//writeOutput(difference, "Difference :");
 		return difference.getResult();
 	}
 
@@ -88,7 +76,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation relationLeft = visit(ctx.cartesian().relation(0));
 		Relation relationRight = visit(ctx.cartesian().relation(1));
 		Carstesian carstesian = new Carstesian(relationLeft,relationRight, 12);
-		writeOutput(carstesian, "Test Carstesian: ");
+		//writeOutput(carstesian, "Carstesian :");
 		return carstesian.getResult();
 	}
 	
@@ -136,7 +124,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		
 		// initial a join Operation  
 		Join join = null;
-		if(ctx.join().var().getText().toUpperCase().equals("I")){
+		if(ctx.join().var().getText().toUpperCase().equals("")){
 			join = new Join(relationLeft, relationRight,
 					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,false,false); 
 		}
@@ -150,7 +138,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 			join = new Join(relationLeft, relationRight,
 					new ExprEquals(new ExprAttribute(relationLeftName, attributes.get(0).toUpperCase()),  new ExprAttribute(relationRightName, attributes.get(1).toUpperCase())), 12,true,false);
 		}
-		writeOutput(join, "");
+		//writeOutput(join, "Join :");
 		return join.getResult();
 	}
 
@@ -162,7 +150,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation left = visit(ctx.union().relation(0));
 		Relation right = visit(ctx.union().relation(1));
 		Union union = new Union(left,right);
-		writeOutput(union, "Test Union");
+		//writeOutput(union, "Union :");
 		return union.getResult();
 	}
 
@@ -173,7 +161,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation left = visit(ctx.intersection().relation(0));
 		Relation right = visit(ctx.intersection().relation(1));
 		Intersection intersection = new Intersection(left,right);
-		writeOutput(intersection, "Test Intersection ");
+		//writeOutput(intersection, "Intersection :");
 		return intersection.getResult();
 	}
 
@@ -186,7 +174,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation relation = visit(ctx.select().relation());
 		BooleanExpression bol = visitorPredicate.visit(ctx.select().conditions());
 		Selection selection = new Selection(relation,bol);
-		writeOutput(selection, "Test");
+		writeOutput(selection, "Selection :");
 		return selection.getResult();
 
 	}
@@ -207,7 +195,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 			}
 		}
 		projection = new Projection(relationObj,attributObj);
-		writeOutput(projection, "Test Projektion");
+		//writeOutput(projection, "Projection :");
 		return projection.getResult();
 	}
 
@@ -224,7 +212,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 	
 	public static void writeOutput(RelationalAlgebra expr, String task) {
-		System.out.println("Aufgabe: " + task + "\n");		
+		System.out.println("performed operation " + task + "\n");
 		System.out.println(expr.toText("", false));
 		System.out.println("\n");
 		System.out.println(expr.toText("", true));

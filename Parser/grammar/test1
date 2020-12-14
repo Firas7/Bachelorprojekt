@@ -1,1 +1,1 @@
-SL [(WOHNORT = Hannover & GEHALT > 4500) | name = Winter] (ANGEST)
+SL [ <> wohnort = Hannover ] (ANGEST)

@@ -20,10 +20,10 @@ public class AntlrToProgram extends RelAlgebraBaseVisitor<Program>{
 				// Do not visit this child and attempt to convert it to an Expression object
 				System.out.println("Program has no Input");
 			}else {
-				prog.addExpression(exprVisitor.visit(ctx.getChild(i)));
-				System.out.println("****" + prog.getExpressions().get(0).getName());
+				prog.setResult(exprVisitor.visit(ctx.getChild(i)));
 			}
 		}
+		
 		return prog;
 	}
 	

@@ -7,14 +7,12 @@ import de.hsh.genrelalg.data.Tuple;
 
 public class ExprAnd implements BooleanExpression{
 
-	
+
 	// select (relation , ExprAnd(ExprGreater, ExprEqual()));
 	BooleanExpression left, right;
 	public ExprAnd (BooleanExpression p1 , BooleanExpression p2) {
 		this.left = p1;
 		this.right= p2;
-		System.out.println("BooleanExpr Left and: " + this.left.toText());
-		System.out.println("BooleanExpr Right and: " + this.right.toText());
 	}
 	@Override
 	public boolean eval(Tuple t, List<Attribute> attributes) {

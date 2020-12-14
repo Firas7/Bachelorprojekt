@@ -21,7 +21,6 @@ public class Selection extends RelationalAlgebra {
 	public Relation getResult() {
 		Relation baserel = base.getResult();
 		Relation res = new Relation(baserel.getAttributes());
-		System.out.println("Expr is: " + this.expr.toText());
 		for (Tuple t : baserel.getTuples()) {
 			if (expr.eval(t, baserel.getAttributes()) == true) {
 				res.addTuple(t);

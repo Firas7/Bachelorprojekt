@@ -315,18 +315,6 @@ public class RelAlgebraBaseListener implements RelAlgebraListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperator(RelAlgebraParser.OperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOperator(RelAlgebraParser.OperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVar(RelAlgebraParser.VarContext ctx) { }
 	/**
 	 * {@inheritDoc}

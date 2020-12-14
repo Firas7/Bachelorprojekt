@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.antlr.v4.runtime.tree.ParseTree;
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Program;
+import de.hsh.genrelalg.comparison.Comperator;
 import de.hsh.genrelalg.data.Aufgabe;
 import de.hsh.genrelalg.database.Database;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
@@ -18,7 +19,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Aufgabe aufgabe = new Aufgabe("Geben Sie eine Lösung ein", database,"PR [name] (ANGEST)");
+		Aufgabe aufgabe = new Aufgabe("Aufgabe 1", database,"(ANGEST) UN (ANGESTELLTE)");
 		
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
@@ -28,22 +29,30 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		// get Parser for correct answer
+		/*
+		 * get Parser for correct answer
+		 * */
 		ParseTree ast = parserOfAnswer.prog();
-		// create a visitor for the correct answer
-		//AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
-		//Program progOfAnswer = progVisitorOfAnswer.visit(ast);
-		/*writeOutput(progOfAnswer.getExpressions().get(0).getResult(), "correct Answer");*/
+		/*
+		 * create a visitor for the correct answer
+		 * */
+		AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
+		Program progOfAnswer = progVisitorOfAnswer.visit(ast);
+		//writeOutput(progOfAnswer.getResult().getResult(), "The correct Answer is");
 		
-		// get Parser for input answer
+		/*
+		 * get Parser for input answer
+		 * */
 		ParseTree antlrAST = parser.prog();
-		// create a visitor for input answer
+		/* 
+		 * create a visitor for input answer 
+		 * */
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
-		/*for(int i = 0 ; i < prog.expressions.size(); i++ ) {
-			prog.getExpressions().get(i).setName("Endergebnis");
-			writeOutput(prog.getExpressions().get(i).getResult(), "Endergebnis");	
-		}*/
+		prog.getResult().setName("Answer of student");
+		//writeOutput(prog.getResult().getResult(), aufgabe.getText());	
+		
+		Comperator com = new Comperator(progOfAnswer.getResult().getResult(),prog.getResult().getResult());
 		
 	}
 	

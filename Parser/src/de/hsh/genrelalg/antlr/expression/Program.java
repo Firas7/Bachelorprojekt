@@ -1,7 +1,6 @@
 package de.hsh.genrelalg.antlr.expression;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import de.hsh.genrelalg.data.Relation;
 
@@ -10,17 +9,17 @@ import de.hsh.genrelalg.data.Relation;
  * */
 public class Program {
 	
-	public List<Relation> expressions;
+	public Relation result;
 	
 	public Program() {
-		this.expressions = new ArrayList<>();
+		this.result = new Relation("Ergebnis");
 	}
 	
-	public void addExpression(Relation exp) {
-		expressions.add(exp);
+	public void setResult(Relation res) {
+		this.result = res;
 	}
 	
-	public List<Relation> getExpressions(){
-		return this.expressions;
+	public Relation getResult(){
+		return this.result;
 	}
 }

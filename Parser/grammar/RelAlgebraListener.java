@@ -281,16 +281,6 @@ public interface RelAlgebraListener extends ParseTreeListener {
 	 */
 	void exitComparator(RelAlgebraParser.ComparatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RelAlgebraParser#operator}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperator(RelAlgebraParser.OperatorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link RelAlgebraParser#operator}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperator(RelAlgebraParser.OperatorContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link RelAlgebraParser#var}.
 	 * @param ctx the parse tree
 	 */

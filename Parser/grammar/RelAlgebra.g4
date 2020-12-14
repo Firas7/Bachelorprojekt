@@ -39,7 +39,7 @@ conditions:
 ;
 
 subPredicate:
-	predicate | predicate AND subPredicate | '(' conditions ')'
+	predicate | predicate AND subPredicate | '(' conditions ')' | ISNOT conditions
 ;
 
 relation: 
@@ -71,12 +71,9 @@ comparator:
 	'=' | '<' | '>'| '>=' | '<='
 ;
 
-operator:
-	AND | OR
-;
 
 var:
-	'R' | 'L' | 'F' | 'I'
+	( 'R' | 'L' | 'F' )?
 ;
 // lexer rules
 
@@ -102,7 +99,6 @@ CARTESIAN:
 RENAME:
 	'P'
 ;
-
 
 UNION:
 	'UN'
