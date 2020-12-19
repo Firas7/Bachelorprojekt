@@ -1,6 +1,5 @@
 package de.hsh.genrelalg.relalg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
@@ -8,22 +7,20 @@ import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.errors.Discrepancy;
 import de.hsh.genrelalg.errors.ErrorService;
+import de.hsh.genrelalg.errors.Inequality;
 
 public class Union extends RelationalAlgebra {
 
 	
 	RelationalAlgebra left, right;
 	boolean matched = true;
-	List<Attribute> faultyAttributes = new ArrayList<>();
 	// constructor of Union
 	public Union(RelationalAlgebra left, RelationalAlgebra right) {
 		this.left = left;
 		this.right = right;
 	}
 
-	public List<Attribute> getFaultyAttributes(){
-		return this.faultyAttributes;
-	}
+	
 	
 	public boolean getMatched() {
 		return this.matched;
@@ -38,7 +35,12 @@ public class Union extends RelationalAlgebra {
 		}
 		Relation result = new Relation("RES", names);
 		
-		checkAttributesNumber(left, right);
+		if(left.getAttributes().size() == right.getAttributes().size()) {
+			checkAttributesNumber(left, right);
+		}else {
+			System.out.println("Anzahl der Attribute ist ungleich");
+		}
+
 		
 			if(matched) {
 				for(Tuple tl : left.getTuples()) {
@@ -75,14 +77,12 @@ public class Union extends RelationalAlgebra {
 		int anzahlLeft = left.getAttributes().size();
 		int anzahlRight = right.getAttributes().size();
 		if(anzahlLeft == anzahlRight) {
-			// gleich
+			// check the consistency of the attribute names
 			checkAttributesNames(left.getAttributes(),right.getAttributes());
-		}else {
-			// ungleich TODO ErrorService.addError(new Inequality());
-			System.out.println("Anzahl der Attribute ist ungleich");
+		} else {
 			matched = false;
+			ErrorService.addError(new Inequality(left.getAttributes(),right.getAttributes()));
 		}
-	
 	}
 	
 	/*
@@ -94,16 +94,20 @@ public class Union extends RelationalAlgebra {
 	@Override
 	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
 	
+		boolean found = false;
 		for(int i = 0; i < right.size(); i++) {
-			boolean found = false;
+			for(int j = 0; j< left.size(); j++) {
+				found = false;
 				if(right.get(i).getName().toUpperCase().equals(left.get(i).getName().toUpperCase())) {
 					found = true;	
+				}
 			}
+			
 			if(!found) {
-			// Attribute stimmen nicht überein oder die Reihenfolge der Attribute
-			faultyAttributes.add(right.get(i));
-			matched = false;
-			ErrorService.addError(new Discrepancy());
+				// Attribute stimmen nicht überein oder die Reihenfolge der Attribute
+				System.out.println("Die Namen oder die Reihenfolge stimmen nicht überein");
+				matched = false;
+				ErrorService.addError(new Discrepancy(left,right));
 			}
 		}
 	}

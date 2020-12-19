@@ -51,7 +51,7 @@ select:
 ;
 
 project: 
-	PROJECT '[' (attribut',' | attribut)+ ']' '('relation')'
+	PROJECT '[' attribut  (',' attribut)+ ']' '('relation')'
 ;
 
 // cross join

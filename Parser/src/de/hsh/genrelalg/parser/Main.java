@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Program;
 import de.hsh.genrelalg.comparison.Comperator;
-import de.hsh.genrelalg.data.Aufgabe;
+import de.hsh.genrelalg.data.Assignment;
 import de.hsh.genrelalg.database.Database;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
@@ -19,7 +19,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Aufgabe aufgabe = new Aufgabe("Aufgabe 1", database,"(ANGEST) UN (ANGESTELLTE)");
+		Assignment aufgabe = new Assignment("Aufgabe 1", database,"SL[gehalt > 5000] (ANGEST)",1.0);
 		
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
@@ -52,7 +52,8 @@ public class Main {
 		prog.getResult().setName("Answer of student");
 		//writeOutput(prog.getResult().getResult(), aufgabe.getText());	
 		
-		Comperator com = new Comperator(progOfAnswer.getResult().getResult(),prog.getResult().getResult());
+		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
+		
 		
 	}
 	

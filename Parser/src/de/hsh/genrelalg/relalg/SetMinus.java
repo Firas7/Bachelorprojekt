@@ -1,6 +1,5 @@
 package de.hsh.genrelalg.relalg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
@@ -10,7 +9,6 @@ import de.hsh.genrelalg.data.Tuple;
 public class SetMinus extends RelationalAlgebra {
 
 	RelationalAlgebra left, right;
-	List<Attribute> faultyAttributes = new ArrayList<>();
 	double spread;
 	boolean matched = true;
 
@@ -21,9 +19,6 @@ public class SetMinus extends RelationalAlgebra {
 		this.spread = spread;
 	}
 	
-	public List<Attribute> getFaultyAttributes(){
-		return this.faultyAttributes;
-	}
 
 	@Override
 	public Relation getResult() {
@@ -92,7 +87,6 @@ public class SetMinus extends RelationalAlgebra {
 				}
 			if(!found) {
 			// Attribute stimmen miteinander nicht überein oder die Reihfolge der Attribute
-			faultyAttributes.add(right.get(i));
 			matched = false;
 			System.out.println("Attribute stimmen nicht überein oder die Reihenfolge der Attribute");
 			}

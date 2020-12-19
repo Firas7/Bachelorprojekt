@@ -1,20 +1,28 @@
 package de.hsh.genrelalg.data;
 
-import org.antlr.v4.parse.ATNBuilder.subrule_return;
 
 import de.hsh.genrelalg.database.Database;
 
-public class Aufgabe {
+public class Assignment {
 	String text;
 	Database base;
 	String answer;
+	double score;
 	
-	public Aufgabe(String text, Database base, String answer) {
+	public Assignment(String text, Database base, String answer, double score) {
 		this.setText(text);
 		this.setDatabase(base);
+		this.setScore(score);
 		this.setAnswer(answer);
 	}
 	
+	public double getScore() {
+		return this.score;
+	}
+	
+	public void setScore(double p) {
+		this.score = p;
+	}
 	public  Database getDatabase() {
 		return this.base;
 	};
