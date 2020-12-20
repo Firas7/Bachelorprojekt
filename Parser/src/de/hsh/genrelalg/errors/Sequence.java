@@ -2,8 +2,10 @@ package de.hsh.genrelalg.errors;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.feedback.Feedback;
 
 public class Sequence extends Mistake{
 
@@ -13,6 +15,7 @@ public class Sequence extends Mistake{
 	String difficulty;
 	boolean missing;
 	List<Attribute> atts;
+	List<Feedback> feedbacks;
 	
 	public Sequence(List<Attribute> left, List<Attribute> right) {
 		this.name = "Die Reihenfolge ";
@@ -21,6 +24,7 @@ public class Sequence extends Mistake{
 		this.text = "Die Reihenfolge der Attribute stimmt nicht überein";
 		this.missing = false;
 		atts = new ArrayList<>();
+		this.feedbacks = new ArrayList<>();
 		checkAttributes(left, right);
 	}
 		
@@ -45,11 +49,13 @@ public class Sequence extends Mistake{
 	}
 
 	@Override
-	public void getAttributesOfError() {
-		System.out.println("Die Reihenfolge der folgenden Attributen stimmt nicht: ");
+	public List<Feedback> getFeedbacks() {	
+		String feedback;
 		for(int i=0; i<this.atts.size(); i++) {
-			System.out.println(this.atts.get(i).getName()+" ");
+			feedback = " Die Reihenfolge des "+this.atts.get(i).getName()+" Attributs ist falsch.";
+			this.feedbacks.add(new Feedback(feedback));
 		}
+		return this.feedbacks;
 	}
 
 	public void checkAttributes(List<Attribute> left, List<Attribute> right) {

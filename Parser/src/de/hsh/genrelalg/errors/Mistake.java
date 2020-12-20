@@ -3,6 +3,7 @@ package de.hsh.genrelalg.errors;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.feedback.Feedback;
 
 public abstract class Mistake {
 	String name ;
@@ -19,6 +20,6 @@ public abstract class Mistake {
 	
 	public abstract String getDifficulty();
 	
-	public abstract void getAttributesOfError();
+	public abstract List<Feedback> getFeedbacks();
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.feedback.Feedback;
 
 /*
  * Dieser Fehler repäestiert die Ungleichheit der Spaltenanzahl.
@@ -15,6 +16,7 @@ public class Inequality extends Mistake{
 	double minus ;
 	String difficulty;
 	List<Attribute> atts;
+	List<Feedback> feeedbacks;
 	boolean extra, missing ;
 	public Inequality(List<Attribute> left, List<Attribute> right) {
 		 this.name = "Ungleichheit";
@@ -24,6 +26,7 @@ public class Inequality extends Mistake{
 		 this.extra = false;
 		 this.missing = false;
 		 this.atts = new ArrayList<>();
+		 this.feeedbacks = new ArrayList<>();
 		 checkAttributes(left, right);
 	}
 	@Override
@@ -89,16 +92,18 @@ public class Inequality extends Mistake{
 	}
 	
 	@Override
-	public void getAttributesOfError() {
+	public List<Feedback> getFeedbacks() {
 		for(int i=0; i<this.atts.size(); i++) {
 			if(this.extra) {
-				System.out.println("Das Attribute " + this.atts.get(i).getName() + " ist ueberfluessig..");
+				this.feeedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " ist ueberfluessig.."));
 			}else if(this.missing) {
-				System.out.println("Das Attribute " + this.atts.get(i).getName() + " fehlt..");
+				this.feeedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " fehlt.."));
 			}
 		}
 		if(this.atts.size() == 0) {
-			System.out.println("Prüfen Sie die Operation und die dazu verwendete Relationen");
+			this.feeedbacks.add(new Feedback("Prüfen Sie die Operation und die dazu verwendete Relationen"));
 		}
+		return this.feeedbacks;
 	}
+	
 }

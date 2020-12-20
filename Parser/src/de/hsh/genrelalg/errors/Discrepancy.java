@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.feedback.Feedback;
 
 public class Discrepancy extends Mistake{
 	
@@ -13,6 +14,7 @@ public class Discrepancy extends Mistake{
 	String difficulty;
 	boolean missing;
 	List<Attribute> atts;
+	List<Feedback> feedbacks;
 	public Discrepancy(List<Attribute> left, List<Attribute> right) {
 	
 		this.name = "Unstimmigkeit der Namen oder Reihenfolge ";
@@ -21,6 +23,7 @@ public class Discrepancy extends Mistake{
 		this.text = "Namen der Attribite stimmen nicht überein oder die Reihenfolge";
 		this.missing = false;
 		atts = new ArrayList<>();
+		this.feedbacks = new ArrayList<>();
 		checkAttributes(left, right);
 	}
 
@@ -48,14 +51,15 @@ public class Discrepancy extends Mistake{
 	}
 
 	@Override
-	public void getAttributesOfError() {
+	public List<Feedback> getFeedbacks() {
 		if(this.missing) {
 			for(int i =0; i< this.atts.size(); i++) {
-				System.out.println("Das Attribute " + this.atts.get(i).getName()+ " fehlt.");
+				this.feedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName()+ " fehlt."));
 			}
 		}else {
-			System.out.println("Die Reihenfolge der Attribute ist falsch!");
+			this.feedbacks.add(new Feedback("Die Reihenfolge der Attribute ist falsch!"));
 		}
+		return this.feedbacks;
 	}
 	
 	public void checkAttributes(List<Attribute> left, List<Attribute> right) {

@@ -18,7 +18,7 @@ import de.hsh.genrelalg.relalg.Union;
 public class Comperator {
 
 	ErrorService errorService = ErrorService.getInstance();
-	Printer printer ;
+	ReportGenerator generator ;
 	Relation correctAnswer , anwserOfStudent;
 	List<Attribute> attributes = new ArrayList<>();
 	Assignment task;
@@ -41,10 +41,10 @@ public class Comperator {
 			writeOutput(minus, "Minus ");
 			double socre = Calculator.calculatePoints(errorService, this.task.getScore());
 			if(minus.getResult().getTuples().size() == 0) {
-				printer = new Printer(minus.getResult(),errorService, socre);
+				generator = new ReportGenerator(minus.getResult(),errorService, socre);
 			}else {
 				boolean x= checkNumbersOfTupel();
-				printer = new Printer(minus.getResult(),errorService, socre, x);
+				generator = new ReportGenerator(minus.getResult(),errorService, socre, x);
 			}
 			
 			
@@ -52,7 +52,7 @@ public class Comperator {
 		// struktureller Vergleich nicht okay.
 		else {
 			double socre = Calculator.calculatePoints(errorService, this.task.getScore());
-			printer = new Printer(errorService, socre);
+			generator = new ReportGenerator(errorService, socre);
 		}
 		
 	}
@@ -73,7 +73,7 @@ public class Comperator {
 		
 		double socre = Calculator.calculatePoints(errorService, this.task.getScore());
 		boolean x = checkNumbersOfTupel();
-		printer = new Printer(minus.getResult(),errorService, socre, x);
+		generator = new ReportGenerator(minus.getResult(),errorService, socre, x);
 	}
 	
 	/*

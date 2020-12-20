@@ -1,10 +1,13 @@
 package de.hsh.genrelalg.comparison;
 
+import java.util.List;
+
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.errors.ErrorService;
+import de.hsh.genrelalg.feedback.Feedback;
 
 
-public class Printer {
+public class ReportGenerator {
 
 	ErrorService errors;
 	double score;
@@ -12,7 +15,7 @@ public class Printer {
 	Relation base;
 	
 	// Wenn Tabellen gleich sind und minus 0 Daten hat.
-	public Printer (Relation base, ErrorService errors, double score) {
+	public ReportGenerator (Relation base, ErrorService errors, double score) {
 		this.base = base;
 		this.errors = errors;
 		this.score = score;
@@ -20,14 +23,14 @@ public class Printer {
 	}
 
 	// Wenn der strukturelle Verleich fehlschlägt
-	public Printer (ErrorService errors, double score) {
+	public ReportGenerator (ErrorService errors, double score) {
 		this.errors = errors;
 		this.score = score;
 		this.printReport();
 	}
 	
 	// Wenn Minus noch Daten hat
-	public Printer(Relation base,ErrorService erros, double score, boolean x) {
+	public ReportGenerator(Relation base,ErrorService erros, double score, boolean x) {
 		this.errors = erros;
 		this.score = score;
 		this.x = x;
@@ -37,10 +40,7 @@ public class Printer {
 
 	// struktureller Vergleich ist fehlgeschlagen
 	public void printReport() {
-		for(int i = 0; i<errors.getMistakes().size(); i++) {
-			System.out.println("Feedbacks: ");
-			errors.getMistakes().get(i).getAttributesOfError();
-		}
+		printFeedbacks();
 		printErrorsAndScore();
 		printFinaleResult();
 	}
@@ -62,12 +62,24 @@ public class Printer {
 		}
 		
 			printErrorsAndScore();
-			for(int i = 0; i<errors.getMistakes().size(); i++) {
-				System.out.println("Feedbacks: ");
-				errors.getMistakes().get(i).getAttributesOfError();
-			}
+			printFeedbacks();
 			printFinaleResult();
 		}
+	
+	
+   /*
+	* Diese Methode gibt die Feedbacks jedes Fehlers aus.
+	*/
+	public void printFeedbacks() {
+		List<Feedback> feedbacks;
+		for(int i = 0; i <errors.getMistakes().size(); i++){
+			feedbacks = errors.getMistakes().get(i).getFeedbacks();
+			for(int j = 0; j < feedbacks.size(); j++){
+				System.out.println("Feedback: " + feedbacks.get(j).getText());
+			}
+		}
+	}
+	
 	
 	/*
 	 * Diese Methode gibt die Fehler und die erreichte Punkte einer Lösung aus.

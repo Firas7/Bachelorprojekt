@@ -1,1 +1,1 @@
-SL [gehalt >5000 ] (P [newname] (ANGEST))
+PR [name,gehalt] ((ANGEST) JN [angest.angnr = ang_pro.angnr] (ANG_PRO))
