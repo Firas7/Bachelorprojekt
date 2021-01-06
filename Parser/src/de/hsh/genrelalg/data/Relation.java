@@ -108,9 +108,18 @@ public class Relation extends RelationalAlgebra {
 	public void setName(String newName) {
 		this.name = newName;
 	}
+	
+	public boolean containsAttribute(Attribute att) {
+		for(int i = 0; i< this.getAttributes().size(); i++) {
+			if(att.getName().toUpperCase().equals(this.getAttributes().get(i).getName().toUpperCase())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
 		// TODO Auto-generated method stub
 		
 	}

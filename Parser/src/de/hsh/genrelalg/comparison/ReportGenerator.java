@@ -1,5 +1,6 @@
 package de.hsh.genrelalg.comparison;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Relation;
@@ -19,6 +20,7 @@ public class ReportGenerator {
 		this.base = base;
 		this.errors = errors;
 		this.score = score;
+		printErrorsAndScore();
 		printFinaleResult();
 	}
 
@@ -26,7 +28,9 @@ public class ReportGenerator {
 	public ReportGenerator (ErrorService errors, double score) {
 		this.errors = errors;
 		this.score = score;
-		this.printReport();
+		printErrorsAndScore();
+		printFinaleResult();
+		printFeedbacks();
 	}
 	
 	// Wenn Minus noch Daten hat
@@ -35,35 +39,15 @@ public class ReportGenerator {
 		this.score = score;
 		this.x = x;
 		this.base =base;
-		this.printReport2();
-	}
-
-	// struktureller Vergleich ist fehlgeschlagen
-	public void printReport() {
-		printFeedbacks();
 		printErrorsAndScore();
 		printFinaleResult();
+		printFeedbacks();
+		printTable();
 	}
-	
-	// Ausgabe der übrigen Daten in Minus
-	public void printReport2() {
-			String table;
-		if(this.x) {
-			// left hat mehr Daten als right --> Mangel
-			
-			System.out.println("In dem Ergebnisrelation fehlen folgende Zeilen, prüfen Sie das eingegebene Prädikat oder die durchgeführt Operation. ");
-			table = this.base.getResult().contentToText("");
-			System.out.println(table);
-		}else {
-			// right hat mehr Daten als left --> Überfluss
-			System.out.println("In dem Ergebnisrelation sind folgende Zeilen überflüssig, prüfen Sie das eingegebene Prädikat oder die durchgeführt Operation. ");
-			table = this.base.getResult().contentToText("");
-			System.out.println(table);
-		}
-		
-			printErrorsAndScore();
-			printFeedbacks();
-			printFinaleResult();
+
+	// gibt die Datensätze aus, die durch den inhaltlichen Vergleich entstehen können
+	public void printTable() {
+			System.out.println(this.base.getResult().contentToText(""));
 		}
 	
 	
@@ -71,12 +55,12 @@ public class ReportGenerator {
 	* Diese Methode gibt die Feedbacks jedes Fehlers aus.
 	*/
 	public void printFeedbacks() {
-		List<Feedback> feedbacks;
+		List<Feedback> feedbacks = new ArrayList<>();
 		for(int i = 0; i <errors.getMistakes().size(); i++){
 			feedbacks = errors.getMistakes().get(i).getFeedbacks();
-			for(int j = 0; j < feedbacks.size(); j++){
-				System.out.println("Feedback: " + feedbacks.get(j).getText());
-			}
+		}
+		for(int j = 0; j < feedbacks.size(); j++){
+			System.out.println("Feedback: " + feedbacks.get(j).getText());
 		}
 	}
 	
@@ -88,10 +72,10 @@ public class ReportGenerator {
 	
 	public void printErrorsAndScore() {
 		
-		String leftAlignFormat = "| %-15s | %-15s | %-15s| %n";
-		String socre = "| %-15s | %-41s |%n";
+		String leftAlignFormat = "| %-15s | %-38s | %-23s| %n";
+		String socre = "| %-15s | %-63s |%n";
 		System.out.format("+-----------------+-----------------------------------------------------------------+%n");
-		System.out.format("| Errors          | Tetx                	           |   Minus                |%n");
+		System.out.format("| Errors          | Text                	           | Minus                  |%n");
 		System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		for (int i = 0; i < errors.getMistakes().size(); i++) {
 		    System.out.format(leftAlignFormat, errors.getMistakes().get(i).getName(), errors.getMistakes().get(i).getText() , 
@@ -107,24 +91,19 @@ public class ReportGenerator {
 	 * */
 	public void printFinaleResult() {
 		
-		String result = "| %-15s | %-41s |%n";
-		System.out.format("+-----------------+-------------------------------------------+%n");
+		String result = "| %-15s | %-63s |%n";
+		System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		if(this.base == null) {
-			System.out.format(result,"Restul"," Result is not correct ");
-			System.out.format("+-----------------+-------------------------------------------+%n");
+			System.out.format(result,"Restul","  is not correct ");
+			System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		}
 		else if(this.base.getResult().getTuples().size() == 0 && this.errors.getMistakes().size() == 0) {
 			System.out.format(result,"Result", " is correct");
-			System.out.format("+-----------------+-------------------------------------------+%n");
+			System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		} else {
 			// Error --> check predicate.
 			System.out.format(result,"Result","  is not correct ");
-			System.out.format("+-----------------+-------------------------------------------+%n");
-			if(this.x) {
-				//writeOutput(minus, " In der Tabelle fehlen die folgende Datensätze  ");
-			}else {
-				//writeOutput(minus, " Die Tabelle enthält überflüssige Datensätze ");
-			}	
+			System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		}
 	}
 }

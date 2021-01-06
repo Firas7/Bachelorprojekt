@@ -51,7 +51,7 @@ public class Carstesian extends RelationalAlgebra{
 	}
 
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,13 +1,10 @@
 package de.hsh.genrelalg.relalg;
 
 import java.util.List;
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
-import de.hsh.genrelalg.errors.Discrepancy;
-import de.hsh.genrelalg.errors.ErrorService;
-import de.hsh.genrelalg.errors.Inequality;
+
 
 public class Union extends RelationalAlgebra {
 
@@ -29,29 +26,21 @@ public class Union extends RelationalAlgebra {
 	public Relation getResult() {
 		Relation left = this.left.getResult();
 		Relation right = this.right.getResult();
-		String [] names = new String [left.getAttributes().size()];
-		for(int i = 0 ; i < left.getAttributes().size(); i++) {
-			names[i] = left.getAttributes().get(i).getName();
-		}
-		Relation result = new Relation("RES", names);
+		Relation result = new Relation(left.getAttributes());
 		
-		if(left.getAttributes().size() == right.getAttributes().size()) {
-			checkAttributesNumber(left, right);
-		}else {
-			System.out.println("Anzahl der Attribute ist ungleich");
-		}
-
+		checkAttributesNumber(left, right);
 		
-			if(matched) {
-				for(Tuple tl : left.getTuples()) {
-					result.addTuple(tl);
-				}
-				for(Tuple tr : right.getTuples()) {
-					result.addTuple(tr);
-				}
-				return result;
+		if(matched) {
+			for(Tuple tl : left.getTuples()) {
+				result.addTuple(tl);
 			}
-		 return result;
+			for(Tuple tr : right.getTuples()) {
+				result.addTuple(tr);
+			}
+				return result;
+		}
+		 
+		return result;
 	}
 
 	@Override
@@ -66,22 +55,17 @@ public class Union extends RelationalAlgebra {
 	}
 
 
-	/*
-	 * Diese Methode prüft die Anzahl der Attribute beider Relationen
-	 * gleiche Anzahl: werden dann die Namen der Attribute geprüft.
-	 * ungleiche Anzahl: Fehlererzeugung.
-	 * 
-	 */
 	public void checkAttributesNumber(Relation left, Relation right) {
 		
 		int anzahlLeft = left.getAttributes().size();
 		int anzahlRight = right.getAttributes().size();
 		if(anzahlLeft == anzahlRight) {
-			// check the consistency of the attribute names
-			checkAttributesNames(left.getAttributes(),right.getAttributes());
+			// prüfe die Datentypen der Attribute in beider Relationen
+			checkAttributesDataTypes(left.getAttributes(),right.getAttributes());
 		} else {
-			matched = false;
-			ErrorService.addError(new Inequality(left.getAttributes(),right.getAttributes()));
+			this.matched = false;
+			System.out.println("Union Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+			System.exit(-1);
 		}
 	}
 	
@@ -92,22 +76,15 @@ public class Union extends RelationalAlgebra {
 	 */
 
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
 	
-		boolean found = false;
-		for(int i = 0; i < right.size(); i++) {
-			for(int j = 0; j< left.size(); j++) {
-				found = false;
-				if(right.get(i).getName().toUpperCase().equals(left.get(i).getName().toUpperCase())) {
-					found = true;	
-				}
-			}
-			
-			if(!found) {
-				// Attribute stimmen nicht überein oder die Reihenfolge der Attribute
-				System.out.println("Die Namen oder die Reihenfolge stimmen nicht überein");
-				matched = false;
-				ErrorService.addError(new Discrepancy(left,right));
+		for(int i = 0; i < left.size(); i++ ) {
+			if(left.get(i).getClass() != right.get(i).getClass()) {
+				System.out.println("Union Error: Die Datentypen der folgenden Attribute stimmen nicht überein :");
+				System.out.print(left.get(i).getName() + " | ");
+				System.out.println(right.get(i).getName());
+				this.matched = false;
+				System.exit(-1);
 			}
 		}
 	}

@@ -1,1 +1,1 @@
-PR [name,gehalt] ((ANGEST) JN [angest.angnr = ang_pro.angnr] (ANG_PRO))
+PR [wohnort,name] (ANGEST)

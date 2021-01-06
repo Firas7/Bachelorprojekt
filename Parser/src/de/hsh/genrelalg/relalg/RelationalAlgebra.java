@@ -8,7 +8,7 @@ import de.hsh.genrelalg.data.Relation;
 public abstract class RelationalAlgebra {
 
 	public abstract Relation getResult();
-	public abstract void checkAttributesNames(List<Attribute> left , List <Attribute> right);
+	public abstract void checkAttributesDataTypes(List<Attribute> left , List <Attribute> right);
 	public String toText(String indent, boolean results) {
 		if (results)
 			return getResult().contentToText(indent) + "\n";

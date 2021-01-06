@@ -3,6 +3,7 @@ package de.hsh.genrelalg.errors;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hsh.genrelalg.comparison.PointsReader;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.feedback.Feedback;
 
@@ -11,22 +12,15 @@ import de.hsh.genrelalg.feedback.Feedback;
  * */
 public class Inequality extends Mistake{
 
-	String name ;
-	String text  ;
-	double minus ;
-	String difficulty;
-	List<Attribute> atts;
-	List<Feedback> feeedbacks;
 	boolean extra, missing ;
 	public Inequality(List<Attribute> left, List<Attribute> right) {
 		 this.name = "Ungleichheit";
 		 this.text = "Die Spaltenanzahl stimmt nicht überein" ;
-		 this.minus = 0.3;
-		 this.difficulty = "Medium";
+		 this.difficulty = "Medium";	
 		 this.extra = false;
 		 this.missing = false;
 		 this.atts = new ArrayList<>();
-		 this.feeedbacks = new ArrayList<>();
+		 this.feedbacks = new ArrayList<>();
 		 checkAttributes(left, right);
 	}
 	@Override
@@ -42,7 +36,7 @@ public class Inequality extends Mistake{
 
 	@Override
 	public double getMinus() {
-		return this.minus;
+		return PointsReader.getMinus(this);
 	}
 
 	@Override
@@ -95,15 +89,16 @@ public class Inequality extends Mistake{
 	public List<Feedback> getFeedbacks() {
 		for(int i=0; i<this.atts.size(); i++) {
 			if(this.extra) {
-				this.feeedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " ist ueberfluessig.."));
+				this.feedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " ist ueberfluessig.."));
 			}else if(this.missing) {
-				this.feeedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " fehlt.."));
+				this.feedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " fehlt.."));
 			}
 		}
 		if(this.atts.size() == 0) {
-			this.feeedbacks.add(new Feedback("Prüfen Sie die Operation und die dazu verwendete Relationen"));
+			this.feedbacks.add(new Feedback("Prüfen Sie die Operation und die dazu verwendete Relationen"));
 		}
-		return this.feeedbacks;
+		return this.feedbacks;
 	}
+	
 	
 }

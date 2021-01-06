@@ -1,7 +1,7 @@
 grammar RelAlgebra;
 
 prog: 
-	expr # Program  
+	expr # Program
 ;
 
 expr: select #Selection
@@ -51,7 +51,7 @@ select:
 ;
 
 project: 
-	PROJECT '[' attribut  (',' attribut)+ ']' '('relation')'
+	PROJECT '[' attribut  (',' attribut)* ']' '('relation')'
 ;
 
 // cross join
@@ -97,7 +97,7 @@ CARTESIAN:
 ;
 
 RENAME:
-	'P'
+	'R'
 ;
 
 UNION:
@@ -131,7 +131,7 @@ OR:
 ;
 
 ISNOT:
-	'<>'
+	'!'
 ;
 WS:
 	[ \t\r\n]+ -> skip	

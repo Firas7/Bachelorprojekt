@@ -1,0 +1,22 @@
+{
+	"Errors": [
+		
+		{
+			"Name": "Sequence",
+			"Minus": "0.3"
+		},
+		{
+			"Name": "Discrepancy",
+			"Minus": "0.5"
+		},
+		{
+			"Name": "Inequality",
+			"Minus": "0.2"
+		},
+		{
+			"Name": "Fehler",
+			"Minus": "0.1"
+		}	
+	]
+
+}

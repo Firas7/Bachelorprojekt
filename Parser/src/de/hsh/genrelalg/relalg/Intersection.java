@@ -21,21 +21,20 @@ public class Intersection extends RelationalAlgebra{
 	public Relation getResult() {
 		Relation left = this.left.getResult();
 		Relation right = this.right.getResult();
-		Relation res = new Relation(left.getAttributes());
-		
+		Relation result = new Relation(left.getAttributes());
 		
 		checkAttributesNumber(left, right);
 		
 		if(matched) {
 			for(Tuple tl: left.getTuples()) {
 				if(right.contains(tl)) {
-					res.addTuple(tl);
+					result.addTuple(tl);
 				}
 			}
-			return res;
+			return result;
 		}
 		
-		return res;
+		return result;
 	}
 
 
@@ -61,11 +60,11 @@ public class Intersection extends RelationalAlgebra{
 				int anzahlLeft = left.getAttributes().size();
 				int anzahlRight = right.getAttributes().size();
 				if(anzahlLeft == anzahlRight) {
-					// gleich
-					checkAttributesNames(left.getAttributes(),right.getAttributes());
+					checkAttributesDataTypes(left.getAttributes(),right.getAttributes());
 				}else {
-					// ungleich
-					matched = false;
+					this.matched = false;
+					System.out.println("Intersection Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+					System.exit(-1);
 				}
 			
 			}
@@ -77,17 +76,14 @@ public class Intersection extends RelationalAlgebra{
 		 */
 	
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
-		
-		for(int i = 0; i < right.size(); i++) {
-			boolean found = false;
-				if(right.get(i).getName().toUpperCase().equals(left.get(i).getName().toUpperCase())) {
-					found = true;
-				}
-			if(!found) {
-			// Attribute stimmen miteinander nicht überein oder die Reihfolge der Attribute
-			matched = false;
-			System.out.println("Attribute stimmen nicht überein oder die Reihenfolge der Attribute");
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
+		for(int i = 0; i < left.size(); i++ ) {
+			if(left.get(i).getClass() != right.get(i).getClass()) {
+				System.out.println("Intersection Error: Die Datentypen der folgenden Attribute stimmen nicht überein :");
+				System.out.print(left.get(i).getName() + " | ");
+				System.out.println(right.get(i).getName());
+				this.matched = false;
+				System.exit(-1);
 			}
 		}
 	}

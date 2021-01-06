@@ -19,8 +19,8 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Assignment aufgabe = new Assignment("Aufgabe 1", database,"PR [name , gehalt] (ANGEST)",1.0);
-	
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"PR [name, wohnort] (ANGEST)",1.0);
+
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
 		try {
@@ -38,7 +38,8 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
 		Program progOfAnswer = progVisitorOfAnswer.visit(ast);
-		//writeOutput(progOfAnswer.getResult().getResult(), "The correct Answer is");
+		//progOfAnswer.getResult().setName("Die korrekte Lösung ");
+		//writeOutput(progOfAnswer.getResult().getResult(), "");
 		
 		/*
 		 * get Parser for input answer
@@ -49,7 +50,7 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
-		prog.getResult().setName("Answer of student");
+		//prog.getResult().setName("Das Ergebnis der studentischen Lösung: ");
 		//writeOutput(prog.getResult().getResult(), aufgabe.getText());	
 		
 		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
