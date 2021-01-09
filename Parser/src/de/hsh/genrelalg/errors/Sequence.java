@@ -3,7 +3,7 @@ package de.hsh.genrelalg.errors;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hsh.genrelalg.comparison.PointsReader;
+import de.hsh.genrelalg.comparison.DeductionReader;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.feedback.Feedback;
 
@@ -34,7 +34,7 @@ public class Sequence extends Mistake{
 
 	@Override
 	public double getMinus() {
-		return PointsReader.getMinus(this);
+		return DeductionReader.getMinus(this);
 	}
 
 	@Override

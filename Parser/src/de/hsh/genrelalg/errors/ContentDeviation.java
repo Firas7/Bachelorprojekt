@@ -3,17 +3,17 @@ package de.hsh.genrelalg.errors;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hsh.genrelalg.comparison.PointsReader;
+import de.hsh.genrelalg.comparison.DeductionReader;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.feedback.Feedback;
 
-public class Fehler extends Mistake{
+public class ContentDeviation extends Mistake{
 
 	
 	Relation relation;
 	boolean x;
-	public Fehler(Relation r , boolean x) {
-		this.name = "Fehler";
+	public ContentDeviation(Relation r , boolean x) {
+		this.name = "Inhalt";
 		this.difficulty = "Medium";
 		this.text = "Abweichung des Inhaltes";
 		this.feedbacks = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Fehler extends Mistake{
 
 	@Override
 	public double getMinus() {
-		return PointsReader.getMinus(this);
+		return DeductionReader.getMinus(this);
 	}
 
 	@Override

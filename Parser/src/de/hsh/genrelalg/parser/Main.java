@@ -19,7 +19,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Assignment aufgabe = new Assignment("Aufgabetext", database,"PR [name, wohnort] (ANGEST)",1.0);
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"PR[name] (ANGEST)",1.0);
 
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
@@ -50,8 +50,8 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
-		//prog.getResult().setName("Das Ergebnis der studentischen Lösung: ");
-		//writeOutput(prog.getResult().getResult(), aufgabe.getText());	
+		prog.getResult().setName("Das Ergebnis der studentischen Lösung: ");
+		writeOutput(prog.getResult().getResult(), aufgabe.getText());	
 		
 		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
 		

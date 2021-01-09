@@ -1,6 +1,5 @@
 package de.hsh.genrelalg.comparison;
 
-
 import java.io.FileReader;
 import java.util.HashMap;
 
@@ -8,18 +7,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import de.hsh.genrelalg.errors.ContentDeviation;
 import de.hsh.genrelalg.errors.Discrepancy;
-import de.hsh.genrelalg.errors.Fehler;
 import de.hsh.genrelalg.errors.Inequality;
 import de.hsh.genrelalg.errors.Mistake;
 import de.hsh.genrelalg.errors.Sequence;
 
 
-public class PointsReader {
+public class DeductionReader {
 
 	static HashMap<String, String> deduction = new HashMap<>();
 	
-	public static void getPointsDeductions() {
+	public static void getDeductions() {
 		
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = null;
@@ -50,8 +49,8 @@ public class PointsReader {
 			return Double.parseDouble(deduction.get("Inequality"));
 		}else if(m instanceof Discrepancy) {
 			return Double.parseDouble(deduction.get("Discrepancy"));
-		}else if(m instanceof Fehler) {
-			return Double.parseDouble(deduction.get("Fehler"));
+		}else if(m instanceof ContentDeviation) {
+			return Double.parseDouble(deduction.get("ContentDeviation"));
 		}
 		else {
 			return 0.0;
