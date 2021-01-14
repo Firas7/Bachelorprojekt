@@ -6,7 +6,6 @@ import de.hsh.genrelalg.data.Relation;
 /* a model class for expression */
 public abstract class Expr{
 
-	
 	public abstract String getName();
 	public abstract String getBase();
 	public abstract List<String> getAttributes();

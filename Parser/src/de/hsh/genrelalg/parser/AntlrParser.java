@@ -17,14 +17,13 @@ public class AntlrParser {
 		/* this method returns a Antlr Parser */
 		RelAlgebraParser parser = null;
 		try {
-			CharStream input = CharStreams.fromFileName("test1");
+			CharStream input = CharStreams.fromFileName("answerOfStudent");
 			RelAlgebraLexer lexer = new RelAlgebraLexer(input);
 			lexer.removeErrorListeners();
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			parser = new RelAlgebraParser(tokens);
 			parser.removeErrorListeners();
-			//ParseTree tree = parser.expr();		
-			//ParseTreeWalker walker = new ParseTreeWalker();
+			
 			
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -40,8 +39,7 @@ public class AntlrParser {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		parser = new RelAlgebraParser(tokens);
 		parser.removeErrorListeners();
-		//ParseTree tree = parser.expr();		
-		//ParseTreeWalker walker = new ParseTreeWalker();
+		
 		return parser;
 	}
 }

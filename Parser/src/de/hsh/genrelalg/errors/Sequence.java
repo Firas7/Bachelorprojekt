@@ -3,9 +3,9 @@ package de.hsh.genrelalg.errors;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hsh.genrelalg.comparison.DeductionReader;
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.feedback.Feedback;
+import de.hsh.genrelalg.score.DeductionReader;
 
 public class Sequence extends Mistake{
 
@@ -21,7 +21,7 @@ public class Sequence extends Mistake{
 		atts.add(left);
 		atts.add(right);
 	}
-		
+	
 	@Override
 	public String getName() {
 		return this.name;

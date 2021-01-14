@@ -1,4 +1,4 @@
-package de.hsh.genrelalg.comparison;
+package de.hsh.genrelalg.report;
 
 import java.util.ArrayList;
 import java.util.List;

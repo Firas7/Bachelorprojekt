@@ -16,6 +16,9 @@ import de.hsh.genrelalg.relalg.Intersection;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 import de.hsh.genrelalg.relalg.SetMinus;
 import de.hsh.genrelalg.relalg.Union;
+import de.hsh.genrelalg.report.ReportGenerator;
+import de.hsh.genrelalg.score.Calculator;
+import de.hsh.genrelalg.score.DeductionReader;
 
 public class Comperator {
 

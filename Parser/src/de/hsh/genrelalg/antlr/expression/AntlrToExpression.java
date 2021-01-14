@@ -174,7 +174,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		Relation relation = visit(ctx.select().relation());
 		BooleanExpression bol = visitorPredicate.visit(ctx.select().conditions());
 		Selection selection = new Selection(relation,bol);
-		//writeOutput(selection, "Selection :");
+		writeOutput(selection, "Selection :");
 		return selection.getResult();
 
 	}

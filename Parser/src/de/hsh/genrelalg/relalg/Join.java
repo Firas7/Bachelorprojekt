@@ -16,10 +16,10 @@ public class Join extends RelationalAlgebra {
 	double spread;
 	boolean leftOuter, rightOuter;
 	
-	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread) {
+	public Join(RelationalAlgebra left, RelationalAlgebra right, BooleanExpression cond, double spread) {
 		this(left, right, cond, spread, false, false);
 	}
-	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread, boolean leftOuter, boolean rightOuter) {
+	public Join(RelationalAlgebra left, RelationalAlgebra right, BooleanExpression cond, double spread, boolean leftOuter, boolean rightOuter) {
 		this.left = left;
 		this.right = right;
 		this.cond = cond;

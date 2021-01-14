@@ -19,7 +19,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Assignment aufgabe = new Assignment("Aufgabetext", database,"PR[name] (ANGEST)",1.0);
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"SL[gehalt != 5000 & name != Schmidt] (ANGEST)",1.0);
 
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;

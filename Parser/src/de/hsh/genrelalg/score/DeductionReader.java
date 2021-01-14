@@ -1,4 +1,4 @@
-package de.hsh.genrelalg.comparison;
+package de.hsh.genrelalg.score;
 
 import java.io.FileReader;
 import java.util.HashMap;
