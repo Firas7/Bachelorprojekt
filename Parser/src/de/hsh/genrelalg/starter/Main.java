@@ -1,4 +1,4 @@
-package de.hsh.genrelalg.parser;
+package de.hsh.genrelalg.starter;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import de.hsh.genrelalg.antlr.expression.Program;
 import de.hsh.genrelalg.comparison.Comperator;
 import de.hsh.genrelalg.data.Assignment;
 import de.hsh.genrelalg.database.Database;
+import de.hsh.genrelalg.parser.RelAlgebraParser;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {

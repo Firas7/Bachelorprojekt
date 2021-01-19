@@ -123,18 +123,6 @@ public class RelAlgebraBaseListener implements RelAlgebraListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEOF(RelAlgebraParser.EOFContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEOF(RelAlgebraParser.EOFContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDifference(RelAlgebraParser.DifferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}

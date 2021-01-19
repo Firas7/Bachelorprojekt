@@ -1,4 +1,4 @@
-package de.hsh.genrelalg.parser;
+package de.hsh.genrelalg.starter;
 
 import java.io.IOException;
 
@@ -7,6 +7,9 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
+
+import de.hsh.genrelalg.parser.RelAlgebraLexer;
+import de.hsh.genrelalg.parser.RelAlgebraParser;
 
 
 

@@ -115,18 +115,6 @@ public interface RelAlgebraListener extends ParseTreeListener {
 	 */
 	void exitDifference_(RelAlgebraParser.Difference_Context ctx);
 	/**
-	 * Enter a parse tree produced by the {@code EOF}
-	 * labeled alternative in {@link RelAlgebraParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterEOF(RelAlgebraParser.EOFContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code EOF}
-	 * labeled alternative in {@link RelAlgebraParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitEOF(RelAlgebraParser.EOFContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link RelAlgebraParser#difference}.
 	 * @param ctx the parse tree
 	 */

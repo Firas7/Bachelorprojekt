@@ -11,9 +11,9 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.errors.Discrepancy;
 import de.hsh.genrelalg.errors.ErrorService;
 import de.hsh.genrelalg.errors.Sequence;
-import de.hsh.genrelalg.parser.AntlrParser;
 import de.hsh.genrelalg.score.Calculator;
 import de.hsh.genrelalg.score.DeductionReader;
+import de.hsh.genrelalg.starter.AntlrParser;
 
 public class Testing {
 
