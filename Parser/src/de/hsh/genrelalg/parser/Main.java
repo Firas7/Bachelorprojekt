@@ -19,7 +19,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Assignment aufgabe = new Assignment("Aufgabetext", database,"SL[gehalt != 5000 & name != Schmidt] (ANGEST)",1.0);
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"SL[Wohnort= Hannover & Gehalt > 5000] (ANGEST)",1.0);
 
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
@@ -54,7 +54,6 @@ public class Main {
 		writeOutput(prog.getResult().getResult(), aufgabe.getText());	
 		
 		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
-		
 		
 	}
 	

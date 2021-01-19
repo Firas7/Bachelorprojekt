@@ -9,7 +9,7 @@ public class Feedback {
 	}
 
 	public String getText() {
-		return text;
+		return this.text;
 	}
 	
 }

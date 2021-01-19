@@ -7,7 +7,6 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.expr.ExprEquals;
 
 public class Join extends RelationalAlgebra {
 

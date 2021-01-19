@@ -2,8 +2,6 @@ package de.hsh.genrelalg.relalg;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;

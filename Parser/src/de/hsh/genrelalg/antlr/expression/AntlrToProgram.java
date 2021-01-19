@@ -15,10 +15,9 @@ public class AntlrToProgram extends RelAlgebraBaseVisitor<Program>{
 		// helper visitor for transforming each subtree into an Expression object
 		AntlrToExpression exprVisitor = new AntlrToExpression();
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			if(i == ctx.getChildCount()) {
-				/* last child of the start symbol prog is EOF*/
-				// Do not visit this child and attempt to convert it to an Expression object
-				System.out.println("Program has no Input");
+			if(ctx.getChildCount() == 0) {
+				System.out.println("Answer of student doesn't exist");
+				System.exit(0);
 			}else {
 				prog.setResult(exprVisitor.visit(ctx.getChild(i)));
 			}

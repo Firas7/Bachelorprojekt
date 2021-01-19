@@ -12,7 +12,6 @@ expr: select #Selection
 	| union #Union_
 	| intersection #Intersection_
 	| difference #Difference_
-	| EOF #EOF
 ;
 
 difference:
@@ -54,13 +53,12 @@ project:
 	PROJECT '[' attribut  (',' attribut)* ']' '('relation')'
 ;
 
-// cross join
 cartesian:
 	'(' relation ')' (CARTESIAN '(' relation ')')+
 ;
 
 join:
-	'(' relation ')' var JOIN  '[' predicate ']' '(' relation ')'
+	'(' relation ')' var JOIN  '[' conditions ']' '(' relation ')'
 ;
 
 attribut:
@@ -75,64 +73,70 @@ comparator:
 var:
 	( 'R' | 'L' | 'F' )?
 ;
-// lexer rules
 
-// Terminaltype: SELECT , nicht terminaltype: 'SL'
+/* Lexer rules */
 
 /* Select Token */
 SELECT: 
 	'SL'
 ;
+
 /* Project Token */
 PROJECT:
 	'PR'
 ;
+
 /* Join Token */
 JOIN: 
 	'JN'
 ;
 
+/* Cartesian Token */
 CARTESIAN: 
 	'X'
 ;
 
+/* Rename Token */
 RENAME:
 	'R'
 ;
 
+/* Union Token */
 UNION:
 	'UN'
 ;
 
+/* Intersection Token */
 INTERSECTION:
 	'IN'
 ;
 
+/* Difference Token */
 DIFFERENCE:
 	'DI'
 ;
 
-/* Relation Token */
-
+/* ID Token */
 ID:
 	[a-zA-Z0-9] [a-zA-Z0-9_]*
 ;
 
-VALUE:
-	'"' .*? '"'
-;
-
+/* And Token */
 AND:
 	'&'
 ;
 
+/* Or Token */
 OR:
 	'|'
 ;
 
+/* Is not Token */
 ISNOT:
 	'!'
 ;
+
+/* ignore whitespace  */
 WS:
 	[ \t\r\n]+ -> skip	
 ;
