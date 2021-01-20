@@ -11,15 +11,14 @@ public class Sequence extends Mistake{
 
 	boolean missing;
 	static double minus;
-	public Sequence(Attribute left, Attribute right) {
+	public Sequence(Attribute att) {
 		this.name = "Reihenfolge";
 		this.difficulty = "Medium";
 		this.text = "Abweichung der Reihenfolge";
 		this.missing = false;
 		atts = new ArrayList<>();
 		this.feedbacks = new ArrayList<>();
-		atts.add(left);
-		atts.add(right);
+		atts.add(att);
 	}
 	
 	@Override
@@ -46,7 +45,7 @@ public class Sequence extends Mistake{
 	public List<Feedback> getFeedbacks() {	
 		String feedback;
 		for(int i=0; i<this.atts.size(); i++) {
-			feedback = " Die Reihenfolge des '"+this.atts.get(i).getName()+"' Attributs ist falsch.";
+			feedback = " Das Attribut '"+this.atts.get(i).getName()+"' steht an der falschen Stelle";
 			this.feedbacks.add(new Feedback(feedback));
 		}
 		return this.feedbacks;

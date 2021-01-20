@@ -14,9 +14,9 @@ public class Discrepancy extends Mistake{
 	
 	public Discrepancy(Attribute att) {
 	
-		this.name = "Unstimmigkeit der Namen";
+		this.name = "Unstimmigkeit";
 		this.difficulty = "Medium";
-		this.text = "Namen der Attribite stimmen nicht überein";
+		this.text = "Schemata stimmen nicht überein";
 		this.missing = false;
 		this.atts = att;
 		this.feedbacks = new ArrayList<>();

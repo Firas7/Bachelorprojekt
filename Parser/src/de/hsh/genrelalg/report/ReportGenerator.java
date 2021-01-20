@@ -58,9 +58,9 @@ public class ReportGenerator {
 		List<Feedback> feedbacks = new ArrayList<>();
 		for(int i = 0; i <errors.getMistakes().size(); i++){
 			feedbacks = errors.getMistakes().get(i).getFeedbacks();
-		}
-		for(int j = 0; j < feedbacks.size(); j++){
-			System.out.println("Feedback: " + feedbacks.get(j).getText());
+			for(int j = 0; j < feedbacks.size(); j++){
+				System.out.println("Feedback: " + feedbacks.get(j).getText());
+			}
 		}
 	}
 	
