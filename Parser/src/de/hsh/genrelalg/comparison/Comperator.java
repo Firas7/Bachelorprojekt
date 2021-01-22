@@ -61,11 +61,11 @@ public class Comperator {
 					generator = new ReportGenerator(errorService,socre);
 				}else {
 					Union union = new Union(this.correctAnswer,this.anwserOfStudent);
-					writeOutput(union, "Union");
+					//writeOutput(union, "Union");
 					Intersection intersection = new Intersection(this.correctAnswer,this.anwserOfStudent);
-					writeOutput(intersection, "Intersection");
+					//writeOutput(intersection, "Intersection");
 					SetMinus minus = new SetMinus(union.getResult(),intersection.getResult(),12);
-					writeOutput(minus, "Minus ");
+					//writeOutput(minus, "Minus ");
 					
 					double socre = Calculator.calculatePoints(errorService, this.task.getScore());
 					// Keine Datensätze übrig

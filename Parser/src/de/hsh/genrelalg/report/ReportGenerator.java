@@ -94,7 +94,7 @@ public class ReportGenerator {
 		String result = "| %-15s | %-63s |%n";
 		System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		if(this.base == null) {
-			System.out.format(result,"Restul","  is not correct ");
+			System.out.format(result,"Result","  is not correct ");
 			System.out.format("+-----------------+-----------------------------------------------------------------+%n");
 		}
 		else if(this.base.getResult().getTuples().size() == 0 && this.errors.getMistakes().size() == 0) {

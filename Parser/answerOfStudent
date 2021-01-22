@@ -1,1 +1,1 @@
-SL[wohnort = Hamburg](ANGEST)
+PR[ANGEST.name, beruf] (SL[PROJEKT.name = Intranet]((ANGEST) JN[angest.angnr = Projekt.p_leiter] (Projekt)))

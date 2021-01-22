@@ -15,7 +15,7 @@ public class Inequality extends Mistake{
 	boolean extra, missing ;
 	public Inequality(List<Attribute> left, List<Attribute> right) {
 		 this.name = "Ungleichheit";
-		 this.text = "Die Spaltenanzahl stimmt nicht überein" ;
+		 this.text = "Die Spaltenzahl stimmt nicht überein" ;
 		 this.difficulty = "Medium";	
 		 this.extra = false;
 		 this.missing = false;
@@ -89,9 +89,9 @@ public class Inequality extends Mistake{
 	public List<Feedback> getFeedbacks() {
 		for(int i=0; i<this.atts.size(); i++) {
 			if(this.extra) {
-				this.feedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " ist ueberfluessig.."));
+				this.feedbacks.add(new Feedback("Das Attribut " + this.atts.get(i).getName() + " ist ueberfluessig.."));
 			}else if(this.missing) {
-				this.feedbacks.add(new Feedback("Das Attribute " + this.atts.get(i).getName() + " fehlt.."));
+				this.feedbacks.add(new Feedback("Das Attribut " + this.atts.get(i).getName() + " fehlt.."));
 			}
 		}
 		if(this.atts.size() == 0) {

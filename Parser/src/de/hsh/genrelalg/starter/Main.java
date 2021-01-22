@@ -20,7 +20,7 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Assignment aufgabe = new Assignment("Aufgabetext", database,"SL[name= Winter] (ANGEST)",5);
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"PR[ANGEST.name, beruf] ((ANGEST) JN[angest.angnr = Projekt.p_leiter] (Projekt))",5);
 
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
@@ -39,8 +39,8 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
 		Program progOfAnswer = progVisitorOfAnswer.visit(ast);
-		//progOfAnswer.getResult().setName("Die korrekte Lösung ");
-		//writeOutput(progOfAnswer.getResult().getResult(), "");
+		progOfAnswer.getResult().setName("Die korrekte Lösung ");
+		writeOutput(progOfAnswer.getResult().getResult(), "");
 		
 		/*
 		 * get Parser for input answer
@@ -52,14 +52,14 @@ public class Main {
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
 		prog.getResult().setName("Das Ergebnis der studentischen Lösung: ");
-		writeOutput(prog.getResult().getResult(), aufgabe.getText());	
+		writeOutput(prog.getResult().getResult(), "");
 		
 		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
 		
 	}
 	
 	public static void writeOutput(RelationalAlgebra expr, String task) {
-		System.out.println("Aufgabe: " + task + "\n");		
+		System.out.println(task + "\n");		
 		System.out.println(expr.toText("", false));
 		System.out.println("\n");
 		System.out.println(expr.toText("", true));

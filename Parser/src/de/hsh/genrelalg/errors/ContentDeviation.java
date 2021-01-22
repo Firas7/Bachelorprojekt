@@ -43,7 +43,7 @@ public class ContentDeviation extends Mistake{
 
 	@Override
 	public List<Feedback> getFeedbacks() {
-		this.feedbacks.add(new Feedback("Prüfen Sie das eingegebene Prädikat oder ändern Sie die ausgeführte Operation"));
+		this.feedbacks.add(new Feedback("Ein Prädikat könnte falsch sein oder die ausgeführte Operation passt nicht zur Aufgabe"));
 		if(this.x) {
 			// Die korrekte Lösung hat mehr Datensätze 
 			this.feedbacks.add(new Feedback("Folgende Datensätze fehlen"));
