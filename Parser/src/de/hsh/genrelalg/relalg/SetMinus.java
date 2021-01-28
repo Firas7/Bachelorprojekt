@@ -19,6 +19,9 @@ public class SetMinus extends RelationalAlgebra {
 		this.spread = spread;
 	}
 	
+	public void setMatched(Boolean x) {
+		this.matched = x;
+	}
 
 	@Override
 	public Relation getResult() {
@@ -68,7 +71,7 @@ public class SetMinus extends RelationalAlgebra {
 				
 				this.matched = false;
 				System.out.println("Difference Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
-				System.exit(-1);
+				
 			}
 		
 		}

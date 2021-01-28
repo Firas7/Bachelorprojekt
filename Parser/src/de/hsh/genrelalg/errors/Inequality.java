@@ -44,6 +44,14 @@ public class Inequality extends Mistake{
 		return this.difficulty;
 	}
 
+	public void setExtra(boolean extra) {
+		this.extra = extra;
+	}
+	
+	public void setMissing(boolean missing) {
+		this.missing = missing;
+	}
+	
 	public boolean getExtra() {
 		return this.extra;
 	}

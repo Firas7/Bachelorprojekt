@@ -18,6 +18,9 @@ public class Union extends RelationalAlgebra {
 	}
 
 	
+	public void setMatched(Boolean x) {
+		this.matched = x;
+	}
 	
 	public boolean getMatched() {
 		return this.matched;
@@ -65,7 +68,6 @@ public class Union extends RelationalAlgebra {
 		} else {
 			this.matched = false;
 			System.out.println("Union Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
-			System.exit(-1);
 		}
 	}
 	
@@ -84,7 +86,6 @@ public class Union extends RelationalAlgebra {
 				System.out.print(left.get(i).getName() + " | ");
 				System.out.println(right.get(i).getName());
 				this.matched = false;
-				System.exit(-1);
 			}
 		}
 	}

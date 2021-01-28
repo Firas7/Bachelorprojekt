@@ -17,6 +17,10 @@ public class Intersection extends RelationalAlgebra{
 	}
 
 	
+	public void setMatched(Boolean x) {
+		this.matched = x;
+	}
+	
 	@Override
 	public Relation getResult() {
 		Relation left = this.left.getResult();
@@ -64,7 +68,6 @@ public class Intersection extends RelationalAlgebra{
 				}else {
 					this.matched = false;
 					System.out.println("Intersection Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
-					System.exit(-1);
 				}
 			
 			}

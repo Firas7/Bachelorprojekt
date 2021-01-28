@@ -15,9 +15,7 @@ public class Predicate {
 	String right, left, expr;
 	BooleanExpression booleanexpression = null;
 	
-	//  the left is an Attribute, the right one could be an attribute or a value (ExprConstant)
-	public Predicate() {
-	}
+	
 	
 	public String getRight() {
 		return right;
@@ -29,6 +27,10 @@ public class Predicate {
 
 	public String getExpr() {
 		return expr;
+	}
+	
+	public void setExpr(String expr) {
+		this.expr = expr;
 	}
 
 	public Predicate(String left, String expr,String right) {

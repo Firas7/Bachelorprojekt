@@ -1,4 +1,4 @@
-package de.hsh.genrelalg;
+/*package de.hsh.genrelalg;
 
 import java.io.IOException;
 
@@ -207,4 +207,4 @@ public class VorlageTestMain {
 		System.out.println(expr.toText("", true));
 	}
 
-}
+}*/

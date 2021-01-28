@@ -51,6 +51,9 @@ public class Sequence extends Mistake{
 		return this.feedbacks;
 	}
 
+	public void addFeedback(Feedback fed) {
+		this.feedbacks.add(fed);
+	}
 
 
 }

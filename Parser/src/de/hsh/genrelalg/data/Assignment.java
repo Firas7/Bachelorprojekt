@@ -10,10 +10,10 @@ public class Assignment {
 	double score;
 	
 	public Assignment(String text, Database base, String answer, double score) {
-		this.setText(text);
-		this.setDatabase(base);
-		this.setScore(score);
-		this.setAnswer(answer);
+		this.text = text;
+		this.base = base;
+		this.score = score;
+		this.answer = answer;
 	}
 	
 	public double getScore() {
@@ -23,12 +23,7 @@ public class Assignment {
 	public void setScore(double p) {
 		this.score = p;
 	}
-	public  Database getDatabase() {
-		return this.base;
-	};
-	public  void setDatabase(Database database) {
-		this.base = database;
-	};
+	
 	public  String getText() {
 		return this.text;
 	};
@@ -43,7 +38,5 @@ public class Assignment {
 		return this.answer;
 	}
 	
-	public void printTextofTask() {
-		System.out.println(this.text);
-	}
+	
 }

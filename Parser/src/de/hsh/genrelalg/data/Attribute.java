@@ -51,6 +51,9 @@ public class Attribute {
 		return true;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String toText() {
 		String res;
 		if (relation != null)
@@ -68,8 +71,6 @@ public class Attribute {
 		this.relation = name;
 	}
 	public Attribute searchAttributByName(String name) {
-		
-		
 		return null;
 		
 	}

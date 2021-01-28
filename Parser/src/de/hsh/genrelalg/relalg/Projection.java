@@ -12,11 +12,6 @@ public class Projection extends RelationalAlgebra{
 	List<Attribute> attributes = new LinkedList<>();
 	RelationalAlgebra base;
 	
-	/* this constructor will get a list of attributes and a base and both have the type String */
-	public Projection() {
-		
-	}
-
 	public Projection(RelationalAlgebra base, Attribute ... attributes) {
 		this.base = base;
 		for (Attribute att : attributes)
@@ -25,6 +20,7 @@ public class Projection extends RelationalAlgebra{
 	
 	@Override
 	public Relation getResult() {
+		
 		Relation rbase = base.getResult();
 		Relation result = new Relation();
 		int [] indices = new int[attributes.size()];
@@ -74,8 +70,5 @@ public class Projection extends RelationalAlgebra{
 	}
 
 	@Override
-	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {}
 }

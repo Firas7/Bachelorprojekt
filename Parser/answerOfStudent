@@ -1,1 +1,1 @@
-PR[ANGEST.name, beruf] (SL[PROJEKT.name = Intranet]((ANGEST) JN[angest.angnr = Projekt.p_leiter] (Projekt)))
+PR[ANGEST.name, Beruf, gehalt ] (SL[gehalt >= 6000  ] ((ANGEST)JN[angest.angnr = projekt.p_leiter] (PROJEKT)))
