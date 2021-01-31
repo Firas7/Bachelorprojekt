@@ -7,14 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.errors.Discrepancy;
 import de.hsh.genrelalg.errors.ErrorService;
 import de.hsh.genrelalg.errors.Sequence;
 import de.hsh.genrelalg.feedback.Feedback;
-import de.hsh.genrelalg.relalg.RelationalAlgebra;
 import de.hsh.genrelalg.report.ReportGenerator;
 
 public class ReportGeneratorTest {

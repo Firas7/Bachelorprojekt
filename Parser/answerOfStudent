@@ -1,1 +1,1 @@
-PR[ANGEST.name, Beruf, gehalt ] (SL[gehalt >= 6000  ] ((ANGEST)JN[angest.angnr = projekt.p_leiter] (PROJEKT)))
+(ANGEST) JN [ANGEST.angnr = 112] (ANGESTELLTE)

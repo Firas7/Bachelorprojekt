@@ -1,9 +1,11 @@
 package de.hsh.genrelalg.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -20,7 +22,7 @@ public class AssignmentTest {
 	@Mock
 	Database base;
 	
-	
+	@InjectMocks
 	Assignment assignment = new Assignment("Test1", base, "Answer1", 3.0);
 	
 	@Test
@@ -28,6 +30,7 @@ public class AssignmentTest {
 		assertEquals("Test1", assignment.getText());
 		assertEquals("Answer1", assignment.getAnswer());
 		assertEquals(3.0, assignment.getScore(), 0.0);
+		assertNotNull("Database was not initialized",assignment.getBase());
 	}
 	
 	@Test

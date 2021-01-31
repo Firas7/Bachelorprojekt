@@ -2,28 +2,19 @@ package de.hsh.genrelalg.tests;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
-import org.junit.Before;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.database.Database;
 
 public class DBTest {
 
-	@Before
-	public void setUp() throws Exception {
-		 MockitoAnnotations.initMocks(this);
-	 }
-	 
-	@Mock
-	Database mockedDB;
+	Database db = new Database();
 
 	@Test
 	public void testRelations() {
-		assertNotNull("there is no DB Relations ", mockedDB.getRelations());
+		assertNotNull("there is no Relations in the DB", db.getRelations());
+		assertTrue("Relation List size is 0", db.getRelations().size() != 0);
 	}
 	
 	@Test

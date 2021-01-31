@@ -21,18 +21,17 @@ public class DiscrapancyErrorTest {
 	}
 	
 	
-	@InjectMocks
-	Discrepancy dis;
-	
 	@Mock
-	Attribute att;
+	Attribute att= new Attribute("Test");
+	
+	@InjectMocks
+	Discrepancy dis = new Discrepancy(att);
 	
 	@Test
 	public void testDiscrepancy() {
-		att.setName("TestAttribut");
 		assertEquals("Unstimmigkeit", dis.getName());
 		assertEquals("Medium", dis.getDifficulty());
 		assertEquals("Schemata stimmen nicht überein", dis.getText());
-		assertNotNull("Feedback list should be not NULL", dis.getFeedbacks());
+		assertNotNull("Feedbacks list should not be NULL", dis.getFeedbacks());
 	}
 }

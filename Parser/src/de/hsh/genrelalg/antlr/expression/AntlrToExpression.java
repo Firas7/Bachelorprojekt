@@ -115,7 +115,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 
 	/*
 	 * Implementation of Union operation
-	 * */
+	 */
 	@Override
 	public Relation visitUnion_(Union_Context ctx) {
 		Relation left = visit(ctx.union().relation(0));
@@ -141,7 +141,6 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	 */
 	@Override
 	public Relation visitSelection(SelectionContext ctx) {
-
 		Relation relation = visit(ctx.select().relation());
 		BooleanExpression bol = visitorPredicate.visit(ctx.select().conditions());
 		Selection selection = new Selection(relation,bol);

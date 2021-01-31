@@ -4,16 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
-import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.relalg.RelationalAlgebra;
-import de.hsh.genrelalg.relalg.Selection;
 import de.hsh.genrelalg.relalg.Union;
 
 public class UnionTest {

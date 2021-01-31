@@ -19,9 +19,6 @@ public class SetMinus extends RelationalAlgebra {
 		this.spread = spread;
 	}
 	
-	public void setMatched(Boolean x) {
-		this.matched = x;
-	}
 
 	@Override
 	public Relation getResult() {

@@ -19,19 +19,29 @@ public class ContentDeviationErrorTest {
 		MockitoAnnotations.initMocks(this);
 	}
 	
-	@InjectMocks
-	ContentDeviation cont;
-
 	@Mock
 	Relation r;
 	
-	boolean x;
+	boolean x = true;
 	
-	/*@Test
+	@InjectMocks
+	ContentDeviation cont = new ContentDeviation(r, x);
+
+
+	@Test
 	public void testContent() {
 		assertEquals("Inhalt", cont.getName());
 		assertEquals("Medium", cont.getDifficulty());
 		assertEquals("Abweichung des Inhaltes",cont.getText());
 		assertNotNull("Feedback list should be not NULL", cont.getFeedbacks());
-	}*/
+	}
+	
+	@Test
+	public void xIsFalse() {
+		cont = new ContentDeviation(r, false);
+		assertEquals("Inhalt", cont.getName());
+		assertEquals("Medium", cont.getDifficulty());
+		assertEquals("Abweichung des Inhaltes",cont.getText());
+		assertNotNull("Feedback list should be not NULL", cont.getFeedbacks());
+	}
 }

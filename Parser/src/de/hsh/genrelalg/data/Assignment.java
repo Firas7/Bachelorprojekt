@@ -4,10 +4,10 @@ package de.hsh.genrelalg.data;
 import de.hsh.genrelalg.database.Database;
 
 public class Assignment {
-	String text;
-	Database base;
-	String answer;
-	double score;
+	private String text;
+	private Database base;
+	private String answer;
+	private double score;
 	
 	public Assignment(String text, Database base, String answer, double score) {
 		this.text = text;
@@ -36,6 +36,10 @@ public class Assignment {
 	
 	public String getAnswer() {
 		return this.answer;
+	}
+	
+	public Database getBase() {
+		return this.base;
 	}
 	
 	

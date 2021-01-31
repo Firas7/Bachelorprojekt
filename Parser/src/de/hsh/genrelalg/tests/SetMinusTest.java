@@ -1,42 +1,54 @@
 package de.hsh.genrelalg.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.mockito.InjectMocks;
 
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
+import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.relalg.SetMinus;
 
 public class SetMinusTest {
 
 
-	Relation left = new Relation();
-	Relation right = new Relation();
+	@InjectMocks
+	Relation left1 = DBFactory.getRelationByName("ANGEST");
+	
+	@InjectMocks
+	Relation left2 = DBFactory.getRelationByName("PROJEKT");
+	
+	@InjectMocks
+	Relation right = DBFactory.getRelationByName("ANGESTELLTE");
+	
 	double x = 20;
-	
-	SetMinus minus = new SetMinus(left,right, x);
-	
+	SetMinus minus1, minus2, minus3;
 	
 	@Test
-	public void testMatchedTrue() {
-		assertNotNull(minus.getResult());
-		assertNotNull(minus.toText("Test", true));
+	public void matchedTrue() {
+		minus1 = new SetMinus(left1,right, x);
+		assertNotNull(minus1.getResult());
+		for(int i = 0; i < left1.getAttributes().size(); i++) {
+			assertTrue(left1.getAttributes().get(i).getName().equals(right.getAttributes().get(i).getName()));
+		}
 	}
 	
 	@Test
-	public void testMatchedFalse() {
-		minus.setMatched(false);
-		assertNotNull(minus.toText("Test", true));
-		assertNotNull(minus.getResult());
+	public void matchedFalse() {
+		minus2 = new SetMinus(left1,right, x);
+		assertNotNull(minus2.toText("Test", false));
+		assertNotNull(minus2.getResult());
 	}
 	
 	@Test
-	public void testLeftEqualsRight() {
-		left.addAttribute(new Attribute("att1OfLeftRelation"));
-		left.addAttribute(new Attribute("att2OfLeftRelation"));
-		right.addAttribute(new Attribute("att1OfRightRelation"));
-		assertNotNull(minus.getResult());
+	public void testLeftNotEqualsRight() {
+		minus3 = new SetMinus(left2,right, x);
+		assertTrue(left2.getAttributes().size() != right.getAttributes().size());
+		assertNotNull(minus3.getResult());
 	}
 	
 }

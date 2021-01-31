@@ -2,21 +2,19 @@ package de.hsh.genrelalg.tests;
 
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.antlr.v4.tool.Attribute;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.data.Relation;
+import de.hsh.genrelalg.database.DBFactory;
 import de.hsh.genrelalg.relalg.Projection;
-import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class ProjectionTest {
 
@@ -25,18 +23,34 @@ public class ProjectionTest {
 		MockitoAnnotations.initMocks(this);
 	}
 	
+	@InjectMocks
+	Relation base = DBFactory.getRelationByName("ANGEST");
 	
-	@Mock
-	RelationalAlgebra base;
+	Attribute [] atts = new Attribute [2];
 	
-	/*List<Attribute>  atts = new ArrayList<>();
+	Projection proj1, proj2;
 	
-	Projection proj = new Projection(base, atts);
+	@Test
+	public void test() {
+		atts[0] = new Attribute("ANGNR");
+		atts[1] = new Attribute("GEHALT");
+		proj2 = new Projection(base, atts);
+		assertNotNull(proj2.getResult());
+		assertEquals("ANGNR", proj2.getResult().getAttributes().get(0).getName());
+		assertEquals("GEHALT", proj2.getResult().getAttributes().get(1).getName());
+		assertEquals(2, proj2.getResult().getAttributes().size());
+	}
 	
 	@Test
 	public void testProjektion() {
-		assertNull("Result of Projction should not be NULL", proj.getResult());
-	}*/
+		atts[0] = new Attribute("att1");
+		atts[1] = new Attribute("att2");
+		proj1 = new Projection(base, atts);
+		
+		assertNotNull(proj1.getResult());
+	}
+	
+	
 	
 	
 }

@@ -11,13 +11,13 @@ public class FilesTest {
 	
 	
 	@Test
-	public void testPonitsDeductionsFile(){
+	public void filePonitsDeductionsFile(){
 		File file = new File("points.json");
 		assertTrue("Points deductions file is not found",file.exists());
 	}
 	
 	@Test
-	public void testAnswerOfStudentFile() {
+	public void fileAnswerOfStudentFile() {
 		File file = new File("answerOfStudent");
 		assertTrue("Answer of student is not found", file.exists());
 	}

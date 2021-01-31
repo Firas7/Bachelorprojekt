@@ -26,6 +26,7 @@ public class Join extends RelationalAlgebra {
 		this.leftOuter = leftOuter;
 		this.rightOuter = rightOuter;
 	}
+	
 
 	@Override
 	public Relation getResult() {
@@ -88,9 +89,6 @@ public class Join extends RelationalAlgebra {
 		return res;
 	}
 	@Override
-	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {}
 
 }

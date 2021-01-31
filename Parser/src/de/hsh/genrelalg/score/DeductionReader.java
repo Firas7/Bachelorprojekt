@@ -52,8 +52,6 @@ public class DeductionReader {
 		}else if(m instanceof ContentDeviation) {
 			return Double.parseDouble(deduction.get("ContentDeviation"));
 		}
-		else {
-			return 0.0;
-		}
+		return 0.0;
 	}
 }

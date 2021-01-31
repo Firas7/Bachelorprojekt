@@ -22,6 +22,10 @@ public class Discrepancy extends Mistake{
 		this.feedbacks = new ArrayList<>();
 	}
 
+	public String getAttributeName() {
+		return this.atts.getName();
+	}
+	
 	@Override
 	public String getText() {
 		return this.text;
@@ -43,7 +47,7 @@ public class Discrepancy extends Mistake{
 
 	@Override
 	public List<Feedback> getFeedbacks() {
-		this.feedbacks.add(new Feedback("Das Attribut "+ this.atts.getName() + " gehört nicht zur Lösung"));
+		this.feedbacks.add(new Feedback("Das Attribut "+ this.getAttributeName() + " gehört nicht zur Lösung"));
 		return this.feedbacks;
 	}
 

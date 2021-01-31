@@ -19,7 +19,7 @@ public class Attribute {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
