@@ -7,6 +7,9 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.feedback.Feedback;
 import de.hsh.genrelalg.score.DeductionReader;
 
+/*
+ *  Fehler der Reihenfolge der Attribute
+ */
 public class Sequence extends Mistake{
 
 	boolean missing;

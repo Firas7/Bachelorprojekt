@@ -12,7 +12,6 @@ public class AntlrToProgram extends RelAlgebraBaseVisitor<Program>{
 	@Override
 	public Program visitProgram(ProgramContext ctx) {
 		Program prog = new Program();
-		// helper visitor for transforming each subtree into an Expression object
 		AntlrToExpression exprVisitor = new AntlrToExpression();
 		for (int i = 0; i < ctx.getChildCount(); i++) {
 			if(ctx.getChildCount() == 0) {

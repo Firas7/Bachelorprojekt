@@ -8,8 +8,8 @@ import de.hsh.genrelalg.feedback.Feedback;
 import de.hsh.genrelalg.score.DeductionReader;
 
 /*
- * Dieser Fehler repäestiert die Ungleichheit der Spaltenanzahl.
- * */
+ * Fehler der Ungleichheit der Spaltenanzahl.
+ */
 public class Inequality extends Mistake{
 
 	boolean extra, missing ;

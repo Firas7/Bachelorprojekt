@@ -3,12 +3,18 @@ package de.hsh.genrelalg.data;
 
 import de.hsh.genrelalg.database.Database;
 
+/*
+ * bildet eine Aufgabe ab
+ */
 public class Assignment {
 	private String text;
 	private Database base;
 	private String answer;
 	private double score;
 	
+	/*
+	 * Konstruktor der Aufgabe
+	 */
 	public Assignment(String text, Database base, String answer, double score) {
 		this.text = text;
 		this.base = base;
@@ -34,10 +40,16 @@ public class Assignment {
 		this.answer = solution;
 	}
 	
+	/*
+	 * Liefert die korrekte Antwort einer Aufgabe
+	 */
 	public String getAnswer() {
 		return this.answer;
 	}
 	
+	/*
+	 * Liefert die Datenbank, auf der die Lösung ausgewertet wird. 
+	 */
 	public Database getBase() {
 		return this.base;
 	}

@@ -11,6 +11,9 @@ import de.hsh.genrelalg.expr.ExprLess;
 import de.hsh.genrelalg.expr.ExprLessEquals;
 import de.hsh.genrelalg.expr.ExprNotEquals;
 
+/*
+ * bildet eine Bedingung ab 
+ */
 public class Predicate {
 	String right, left, expr;
 	BooleanExpression booleanexpression = null;

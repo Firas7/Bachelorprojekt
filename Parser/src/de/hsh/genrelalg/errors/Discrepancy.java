@@ -7,6 +7,9 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.feedback.Feedback;
 import de.hsh.genrelalg.score.DeductionReader;
 
+/*
+ * Fehler der Unstimmigkeit der Schemata
+ */
 public class Discrepancy extends Mistake{
 	
 	boolean missing;

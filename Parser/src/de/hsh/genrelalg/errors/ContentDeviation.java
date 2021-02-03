@@ -7,6 +7,9 @@ import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.feedback.Feedback;
 import de.hsh.genrelalg.score.DeductionReader;
 
+/*
+ * Fehler des Inhaltes
+ */
 public class ContentDeviation extends Mistake{
 
 	

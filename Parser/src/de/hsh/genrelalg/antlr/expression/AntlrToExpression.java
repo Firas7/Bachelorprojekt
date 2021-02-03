@@ -25,9 +25,6 @@ import de.hsh.genrelalg.relalg.Carstesian;
 import de.hsh.genrelalg.relalg.Intersection;
 import de.hsh.genrelalg.relalg.Join;
 
-/* visitor class of the expression rule
- * here we will instantiate this to an expression <Expr>
- */
 
 public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	
@@ -37,7 +34,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		
 	}
 	
-	/* Implementation of Rename Operation */
+	/* Implementierung der Rename Operation */
 	@Override
 	public Relation visitRename_(Rename_Context ctx) {
 		Relation relation = visit(ctx.rename().relation());
@@ -48,7 +45,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 
-	/* Implementation of Difference Operation */
+	/* Implementierung der Differenz Operation */
 	@Override
 	public Relation visitDifference_(Difference_Context ctx) {
 		Relation left =  visit(ctx.difference().relation(0));
@@ -58,7 +55,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return difference.getResult();
 	}
 
-	/* Implementation of Carstesian Operation */
+	/* Implementierung des kartesischen Produkt */
 	@Override
 	public Relation visitCarstesian(CarstesianContext ctx) {
 		Relation relationLeft = visit(ctx.cartesian().relation(0));
@@ -68,7 +65,9 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return carstesian.getResult();
 	}
 	
-	/* this method is visited, if the relation is a simple relation name */
+	/* 
+	 * Diese Methode wird besucht, wenn die eingegebene Relation eine konkrete Relation aus der DB ist.
+	 */
 	@Override
 	public Relation visitSimple(SimpleContext ctx) {
 		String relationName = ctx.getText();
@@ -76,9 +75,8 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return relation;
 	}
 
-	/* this method is visited, if the relation is an Expression  
-	 * Here visit.expr is called to visit the expression in the relation
-	 * 
+	/* 
+	 * Diese Methode wird besucht, wenn die Relation eine weitere Operation ist
 	 */
 	@Override
 	public Relation visitNested(NestedContext ctx) {
@@ -86,7 +84,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 	/*
-	 *  Implementation of join operation
+	 *  Implementierung der Join Operation
 	 */
 	@Override
 	public Relation visitJoin_(Join_Context ctx) {
@@ -114,7 +112,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 	/*
-	 * Implementation of Union operation
+	 * Implementierung der Vereinigung
 	 */
 	@Override
 	public Relation visitUnion_(Union_Context ctx) {
@@ -126,7 +124,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 
-	/* Implementation of Intersection Operation */
+	/* Implementierung des Durchschnittes */
 	@Override
 	public Relation visitIntersection_(Intersection_Context ctx) {
 		Relation left = visit(ctx.intersection().relation(0));
@@ -137,7 +135,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 	/*
-	 * Implementation of selection operation
+	 * Implementierung der Selektion
 	 */
 	@Override
 	public Relation visitSelection(SelectionContext ctx) {
@@ -150,7 +148,7 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 	}
 
 
-	/* Implementation of Projection Operation */
+	/* Implementierung der Projektion */
 	@Override
 	public Relation visitProjection(ProjectionContext ctx) {
 
@@ -169,7 +167,9 @@ public class AntlrToExpression extends RelAlgebraBaseVisitor<Relation>{
 		return projection.getResult();
 	}
 
-	
+	/*
+	 * Diese Methode gibt das Ergebnis jeder ausgeführten Operation aus.
+	 */
 	public static void writeOutput(RelationalAlgebra expr, String task) {
 		System.out.println("performed operation " + task + "\n");
 		System.out.println(expr.toText("", false));
