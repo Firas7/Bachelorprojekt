@@ -1,4 +1,4 @@
-package de.hsh.genrelalg;
+/*package de.hsh.genrelalg;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ import de.hsh.genrelalg.relalg.Rename;
 import de.hsh.genrelalg.relalg.Selection;
 import de.hsh.genrelalg.relalg.SetMinus;
 
-public class Main {
+public class VorlageTestMain {
 
 	static Relation ANGEST, ANG_PRO, PROJEKT;
 	static Relation REZEPT, ZUTAT, SCHRITT, ZUTAT_REZEPT;
@@ -207,4 +207,4 @@ public class Main {
 		System.out.println(expr.toText("", true));
 	}
 
-}
+}*/

@@ -10,19 +10,10 @@ public class Rename extends RelationalAlgebra {
 
 	RelationalAlgebra base;
 	String name;
-	String attributeName;
-	boolean changeAttribut = false;
 
 	public Rename(RelationalAlgebra base, String name) {
 		this.base = base;
 		this.name = name;
-	}
-	
-	public Rename(RelationalAlgebra base, String name, String attributeName) {
-		this.base = base;
-		this.name = name;
-		this.attributeName = attributeName;
-		this.changeAttribut = true;
 	}
 	
 	@Override
@@ -30,14 +21,11 @@ public class Rename extends RelationalAlgebra {
 		Relation rbase = base.getResult();
 		Relation result = new Relation();
 	
-			for (Attribute att : rbase.getAttributes()) {
-				if(!changeAttribut) {
-					result.setName(name);
-					result.addAttribute(new Attribute(name, att.getName()));
-				}else {
-					System.out.println("Attribut muss geändert werden " + this.attributeName);
-				}
+			for (Attribute att : rbase.getAttributes()) {	
+				result.setName(name);
+				result.addAttribute(new Attribute(name, att.getName()));
 			}
+			
  		for (Tuple t : rbase.getTuples()) {
 			result.addTuple(t);
 		}
@@ -54,10 +42,7 @@ public class Rename extends RelationalAlgebra {
 	}
 
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {}
 	
 
 }

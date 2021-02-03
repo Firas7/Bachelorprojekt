@@ -2,8 +2,6 @@ package de.hsh.genrelalg.relalg;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
@@ -51,7 +49,7 @@ public class Carstesian extends RelationalAlgebra{
 	}
 
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
 		// TODO Auto-generated method stub
 		
 	}

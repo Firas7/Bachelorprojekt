@@ -1,6 +1,5 @@
 package de.hsh.genrelalg.relalg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hsh.genrelalg.data.Attribute;
@@ -10,7 +9,6 @@ import de.hsh.genrelalg.data.Tuple;
 public class SetMinus extends RelationalAlgebra {
 
 	RelationalAlgebra left, right;
-	List<Attribute> faultyAttributes = new ArrayList<>();
 	double spread;
 	boolean matched = true;
 
@@ -21,15 +19,12 @@ public class SetMinus extends RelationalAlgebra {
 		this.spread = spread;
 	}
 	
-	public List<Attribute> getFaultyAttributes(){
-		return this.faultyAttributes;
-	}
 
 	@Override
 	public Relation getResult() {
 		Relation left = this.left.getResult();
 		Relation right = this.right.getResult();
-		Relation res = new Relation(left.getAttributes());
+		Relation result = new Relation(left.getAttributes());
 				
 		checkAttributesNumber(left, right);
 		
@@ -37,12 +32,12 @@ public class SetMinus extends RelationalAlgebra {
 		if(matched) { 
 			for(Tuple tl : left.getTuples()) {
 				if (!right.contains(tl))
-					res.addTuple(tl);
+					result.addTuple(tl);
 				
 			}
-			return res;
+			return result;
 		}
-		return res;
+		return result;
 	}
 
 	@Override
@@ -67,11 +62,13 @@ public class SetMinus extends RelationalAlgebra {
 			int anzahlLeft = left.getAttributes().size();
 			int anzahlRight = right.getAttributes().size();
 			if(anzahlLeft == anzahlRight) {
-				// gleich
-				checkAttributesNames(left.getAttributes(),right.getAttributes());
+				
+				checkAttributesDataTypes(left.getAttributes(),right.getAttributes());
 			}else {
-				// ungleich
-				matched = false;
+				
+				this.matched = false;
+				System.err.println("Difference Error: Anzahl der Spalten beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+				System.exit(-1);
 			}
 		
 		}
@@ -82,19 +79,14 @@ public class SetMinus extends RelationalAlgebra {
 	 * Auﬂerdem wird ein Fehler erzeugt, dass Schemen beider Relationen voneinander abweichen
 	 */
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
-
-
-		for(int i = 0; i < right.size(); i++) {
-			boolean found = false;
-				if(right.get(i).getName().toUpperCase().equals(left.get(i).getName().toUpperCase())) {
-					found = true;
-				}
-			if(!found) {
-			// Attribute stimmen miteinander nicht ¸berein oder die Reihfolge der Attribute
-			faultyAttributes.add(right.get(i));
-			matched = false;
-			System.out.println("Attribute stimmen nicht ¸berein oder die Reihenfolge der Attribute");
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {
+		for(int i = 0; i < left.size(); i++ ) {
+			if(left.get(i).getClass() != right.get(i).getClass()) {
+				System.out.println("Difference Error: Die Datentypen der folgenden Attribute stimmen nicht ¸berein :");
+				System.out.print(left.get(i).getName() + " | ");
+				System.out.println(right.get(i).getName());
+				this.matched = false;
+				System.exit(-1);
 			}
 		}
 	}

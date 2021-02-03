@@ -1,4 +1,4 @@
-package de.hsh.genrelalg.parser;
+package de.hsh.genrelalg.starter;
 
 import java.io.IOException;
 
@@ -7,8 +7,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import de.hsh.genrelalg.antlr.expression.AntlrToProgram;
 import de.hsh.genrelalg.antlr.expression.Program;
 import de.hsh.genrelalg.comparison.Comperator;
-import de.hsh.genrelalg.data.Aufgabe;
+import de.hsh.genrelalg.data.Assignment;
 import de.hsh.genrelalg.database.Database;
+import de.hsh.genrelalg.parser.RelAlgebraParser;
 import de.hsh.genrelalg.relalg.RelationalAlgebra;
 
 public class Main {
@@ -19,8 +20,8 @@ public class Main {
 		
 		
 		/* A task that must be solved */
-		Aufgabe aufgabe = new Aufgabe("Aufgabe 1", database,"(ANGEST) UN (ANGESTELLTE)");
-		
+		Assignment aufgabe = new Assignment("Aufgabetext", database,"(ANGEST) IN (ANG_PRO)",5);
+
 		RelAlgebraParser parser = AntlrParser.getParser();
 		RelAlgebraParser parserOfAnswer = null;
 		try {
@@ -38,7 +39,8 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitorOfAnswer = new AntlrToProgram();
 		Program progOfAnswer = progVisitorOfAnswer.visit(ast);
-		//writeOutput(progOfAnswer.getResult().getResult(), "The correct Answer is");
+		progOfAnswer.getResult().setName("Die korrekte Lösung ");
+		writeOutput(progOfAnswer.getResult().getResult(), "");
 		
 		/*
 		 * get Parser for input answer
@@ -49,15 +51,15 @@ public class Main {
 		 * */
 		AntlrToProgram progVisitor = new AntlrToProgram();
 		Program prog = progVisitor.visit(antlrAST);
-		prog.getResult().setName("Answer of student");
-		//writeOutput(prog.getResult().getResult(), aufgabe.getText());	
+		prog.getResult().setName("Das Ergebnis der studentischen Lösung: ");
+		writeOutput(prog.getResult().getResult(), "");
 		
-		Comperator com = new Comperator(progOfAnswer.getResult().getResult(),prog.getResult().getResult());
+		Comperator com = new Comperator(aufgabe,progOfAnswer.getResult().getResult(),prog.getResult().getResult());
 		
 	}
 	
 	public static void writeOutput(RelationalAlgebra expr, String task) {
-		System.out.println("Aufgabe: " + task + "\n");		
+		System.out.println(task + "\n");		
 		System.out.println(expr.toText("", false));
 		System.out.println("\n");
 		System.out.println(expr.toText("", true));

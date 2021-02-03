@@ -9,14 +9,16 @@ import de.hsh.genrelalg.expr.ExprGreater;
 import de.hsh.genrelalg.expr.ExprGreaterEquals;
 import de.hsh.genrelalg.expr.ExprLess;
 import de.hsh.genrelalg.expr.ExprLessEquals;
+import de.hsh.genrelalg.expr.ExprNotEquals;
 
+/*
+ * bildet eine Bedingung ab 
+ */
 public class Predicate {
 	String right, left, expr;
 	BooleanExpression booleanexpression = null;
 	
-	//  the left is an Attribute, the right one could be an attribute or a value (ExprConstant)
-	public Predicate() {
-	}
+	
 	
 	public String getRight() {
 		return right;
@@ -28,6 +30,10 @@ public class Predicate {
 
 	public String getExpr() {
 		return expr;
+	}
+	
+	public void setExpr(String expr) {
+		this.expr = expr;
 	}
 
 	public Predicate(String left, String expr,String right) {
@@ -61,7 +67,9 @@ public class Predicate {
 			}else if(this.expr.equals(">=")) {
 				booleanexpression = new ExprGreaterEquals (new ExprAttribute(relationName1,attributName1.toUpperCase()),  new ExprAttribute(relationName2,attributName2.toUpperCase()));
 			}else if(this.expr.equals("<=")) {
-				booleanexpression = new ExprLessEquals(new ExprAttribute(relationName1,relationName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
+				booleanexpression = new ExprLessEquals(new ExprAttribute(relationName1,attributName1.toUpperCase()), new ExprAttribute(relationName2,attributName2.toUpperCase()));
+			}else if(this.expr.equals("!=")) {
+				booleanexpression = new ExprNotEquals(new ExprAttribute(relationName1, attributName1.toUpperCase()), new ExprAttribute(relationName2, attributName2.toUpperCase()));
 			}
 		}else if(this.left.contains(".")) {
 
@@ -77,6 +85,8 @@ public class Predicate {
 					booleanexpression = new ExprGreaterEquals (new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}else if(this.expr.equals("<=")) {
 					booleanexpression = new ExprLessEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
+				}else if(this.expr.equals("!=")) {
+					booleanexpression = new ExprNotEquals(new ExprAttribute(relationName,attributName.toUpperCase()), new ExprConstant(this.right));
 				}
 		}else {
 			if(this.expr.equals(">")) {
@@ -89,6 +99,8 @@ public class Predicate {
 				booleanexpression = new ExprGreaterEquals (new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}else if(this.expr.equals("<=")) {
 				booleanexpression = new ExprLessEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
+			}else if(this.expr.equals("!=")) {
+				booleanexpression = new ExprNotEquals(new ExprAttribute(this.left.toUpperCase()), new ExprConstant(this.right));
 			}
 		}
 		return booleanexpression;

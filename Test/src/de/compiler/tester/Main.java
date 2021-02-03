@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String []args) throws IOException {
 		
-		CharStream input = CharStreams.fromFileName("test1");
+		/*CharStream input = CharStreams.fromFileName("test1");
 		GramLexer lexer = new GramLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		// parser wird mit tokens gefüttert
@@ -19,6 +19,6 @@ public class Main {
 		
 		// hier wird die Regel aufgerufen, mit der der Parser anfangen soll, zu parsen (Addition)
 		ParseTree tree = parser.addition();
-		System.out.println(new MyVisitor().visit(tree));
+		System.out.println(new MyVisitor().visit(tree));*/
 	}
 }

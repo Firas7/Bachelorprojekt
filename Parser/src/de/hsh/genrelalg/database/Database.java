@@ -22,15 +22,18 @@ public class Database {
 		ANGEST.addTuple(new Tuple("117", "MatthÃ¤us", "OsnabrÃ¼ck", "Werbefachfrau", "8000", "5"));
 		ANGEST.addTuple(new Tuple("198", "Schmidt", "Hannover", "Ingenieur", "6400", "4"));
 		ANGEST.addTuple(new Tuple("199", "Huber", "Hannover", "Administrator", "5000", "3"));
+		ANGEST.addTuple(new Tuple("200", "Schulze", "Hannover", "Daten Analytiker", "7000", "6"));
+		ANGEST.addTuple(new Tuple("201", "Dammann", "Hannover", "Programmierer", "4800", "6"));
 		relations.add(ANGEST);
 		
-		ANGESTELLTE = new Relation("ANGESTELLTE", "ANGNR", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
+		ANGESTELLTE = new Relation("ANGESTELLTE", "NUM", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
 		ANGESTELLTE.addTuple(new Tuple("10", "Firas", "Hannover", "Programmiererin", "6000", "3"));
 		ANGESTELLTE.addTuple(new Tuple("50", "Schulze", "Hamburg", "Analytikerin", "5600", "3"));
 		ANGESTELLTE.addTuple(new Tuple("12", "Heiko", "OsnabrÃ¼ck", "Werbefachfrau", "8000", "5"));
 		ANGESTELLTE.addTuple(new Tuple("117", "Olbrech", "Hannover", "Ingenieur", "6400", "4"));
 		ANGESTELLTE.addTuple(new Tuple("199", "Huber", "Hannover", "Administrator", "5000", "3"));
 		relations.add(ANGESTELLTE);
+		
 		
 		
 		
@@ -42,6 +45,8 @@ public class Database {
 		ANG_PRO.addTuple(new Tuple("17", "198", "30"));
 		ANG_PRO.addTuple(new Tuple("18", "198", "80"));
 		ANG_PRO.addTuple(new Tuple("33", "198", "50"));
+		ANG_PRO.addTuple(new Tuple("27", "200", "20"));
+		ANG_PRO.addTuple(new Tuple("29", "201", "22"));
 		relations.add(ANG_PRO);
 		
 		// Projekt Tabelle mit Daten füllen
@@ -50,6 +55,8 @@ public class Database {
 		PROJEKT.addTuple(new Tuple("18", "Intranet", "...", "117"));
 		PROJEKT.addTuple(new Tuple("17", "Projekt DBMigration", "...", "198"));
 		PROJEKT.addTuple(new Tuple("33", "VU", "...", "198"));
+		PROJEKT.addTuple(new Tuple("27", "Klima Analyse", "...", "200"));
+		PROJEKT.addTuple(new Tuple("29", "Green Software", "...", "201"));
 		relations.add(PROJEKT);
 		
 		// Rezept Tabelle mit Daten füllen	
@@ -100,16 +107,4 @@ public class Database {
 		return this.relations;
 	}
 	
-	public Relation getRelation(Relation r) {
-		Relation relation = new Relation();
-		for(int i=0; i < this.relations.size()-1; i++) {
-			if(!relations.get(i).getName().equals(r.getName())) {
-				
-			}else {
-				relation = relations.get(i);
-				break;
-			}
-		}
-		return relation;
-	}
 }

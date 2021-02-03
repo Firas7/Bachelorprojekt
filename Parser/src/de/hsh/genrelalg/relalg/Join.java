@@ -7,7 +7,6 @@ import de.hsh.genrelalg.data.Attribute;
 import de.hsh.genrelalg.data.Relation;
 import de.hsh.genrelalg.data.Tuple;
 import de.hsh.genrelalg.expr.BooleanExpression;
-import de.hsh.genrelalg.expr.ExprEquals;
 
 public class Join extends RelationalAlgebra {
 
@@ -16,10 +15,10 @@ public class Join extends RelationalAlgebra {
 	double spread;
 	boolean leftOuter, rightOuter;
 	
-	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread) {
+	public Join(RelationalAlgebra left, RelationalAlgebra right, BooleanExpression cond, double spread) {
 		this(left, right, cond, spread, false, false);
 	}
-	public Join(RelationalAlgebra left, RelationalAlgebra right, ExprEquals cond, double spread, boolean leftOuter, boolean rightOuter) {
+	public Join(RelationalAlgebra left, RelationalAlgebra right, BooleanExpression cond, double spread, boolean leftOuter, boolean rightOuter) {
 		this.left = left;
 		this.right = right;
 		this.cond = cond;
@@ -27,6 +26,7 @@ public class Join extends RelationalAlgebra {
 		this.leftOuter = leftOuter;
 		this.rightOuter = rightOuter;
 	}
+	
 
 	@Override
 	public Relation getResult() {
@@ -89,9 +89,6 @@ public class Join extends RelationalAlgebra {
 		return res;
 	}
 	@Override
-	public void checkAttributesNames(List<Attribute> left, List<Attribute> right) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void checkAttributesDataTypes(List<Attribute> left, List<Attribute> right) {}
 
 }

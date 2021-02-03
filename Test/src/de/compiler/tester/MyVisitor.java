@@ -1,4 +1,4 @@
-package de.compiler.tester;
+/*package de.compiler.tester;
 
 import de.compiler.tester.GramParser.AdditionContext;
 import de.compiler.tester.GramParser.PlusContext;
@@ -31,7 +31,7 @@ public class MyVisitor extends GramBaseVisitor<String>{
 		}
 		
 		return aggregate + "\n" + nextResult;
-	}
+	}*/
 	
 	
 	
@@ -47,5 +47,5 @@ public class MyVisitor extends GramBaseVisitor<String>{
 			
 		}
 		return null;
-	}*/
-}
+	}
+}*/

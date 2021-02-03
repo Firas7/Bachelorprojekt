@@ -1,20 +1,34 @@
 package de.hsh.genrelalg.errors;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hsh.genrelalg.data.Attribute;
+import de.hsh.genrelalg.feedback.Feedback;
+import de.hsh.genrelalg.score.DeductionReader;
+
+/*
+ * Fehler der Unstimmigkeit der Schemata
+ */
 public class Discrepancy extends Mistake{
 	
-	String name;
-	String text;
-	double minus;
-	String difficulty;
-
-	public Discrepancy() {
+	boolean missing;
+	Attribute atts;
 	
-		this.name = "Discrepancy Error";
+	public Discrepancy(Attribute att) {
+	
+		this.name = "Unstimmigkeit";
 		this.difficulty = "Medium";
-		this.minus = 0.3;
-		this.text = "Zeilen oder Spalten stimmen nicht überein";
+		this.text = "Schemata stimmen nicht überein";
+		this.missing = false;
+		this.atts = att;
+		this.feedbacks = new ArrayList<>();
 	}
 
+	public String getAttributeName() {
+		return this.atts.getName();
+	}
+	
 	@Override
 	public String getText() {
 		return this.text;
@@ -22,7 +36,8 @@ public class Discrepancy extends Mistake{
 	
 	@Override
 	public double getMinus() {
-		return this.minus;
+		return DeductionReader.getMinus(this);
+		
 	}
 	@Override
 	public String getName() {
@@ -32,5 +47,13 @@ public class Discrepancy extends Mistake{
 	public String getDifficulty() {
 		return this.difficulty;
 	}
+
+	@Override
+	public List<Feedback> getFeedbacks() {
+		this.feedbacks.add(new Feedback("Das Attribut "+ this.getAttributeName() + " gehört nicht zur Lösung"));
+		return this.feedbacks;
+	}
+
+	
 	
 }

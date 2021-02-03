@@ -16,6 +16,7 @@ public class VisitorPredicate extends RelAlgebraBaseVisitor<BooleanExpression>{
 	public  VisitorPredicate() {
 		
 	}
+	
 	@Override
 	public BooleanExpression visitSubPredicate(SubPredicateContext ctx) {
 		BooleanExpression p = null;
