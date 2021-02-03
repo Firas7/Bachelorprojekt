@@ -67,7 +67,8 @@ public class Union extends RelationalAlgebra {
 			checkAttributesDataTypes(left.getAttributes(),right.getAttributes());
 		} else {
 			this.matched = false;
-			System.out.println("Union Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+			System.err.println("Union Error: Anzahl der Spalten beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+			System.exit(-1);
 		}
 	}
 	
@@ -82,7 +83,7 @@ public class Union extends RelationalAlgebra {
 	
 		for(int i = 0; i < left.size(); i++ ) {
 			if(left.get(i).getClass() != right.get(i).getClass()) {
-				System.out.println("Union Error: Die Datentypen der folgenden Attribute stimmen nicht überein :");
+				System.err.println("Union Error: Die Datentypen der folgenden Attribute stimmen nicht überein :");
 				System.out.print(left.get(i).getName() + " | ");
 				System.out.println(right.get(i).getName());
 				this.matched = false;

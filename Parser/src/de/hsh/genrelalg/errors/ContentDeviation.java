@@ -48,7 +48,7 @@ public class ContentDeviation extends Mistake{
 			// Die korrekte Lösung hat mehr Datensätze 
 			this.feedbacks.add(new Feedback("Folgende Datensätze fehlen"));
 		}else {
-			// studentische Lösung hat mehr Datensätze
+			// student solution has more records
 			this.feedbacks.add(new Feedback("Folgende Datensätze sind Überflüssig"));
 		}
 		return this.feedbacks;

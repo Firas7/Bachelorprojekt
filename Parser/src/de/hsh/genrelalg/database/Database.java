@@ -26,13 +26,14 @@ public class Database {
 		ANGEST.addTuple(new Tuple("201", "Dammann", "Hannover", "Programmierer", "4800", "6"));
 		relations.add(ANGEST);
 		
-		ANGESTELLTE = new Relation("ANGESTELLTE", "ANGNR", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
+		ANGESTELLTE = new Relation("ANGESTELLTE", "NUM", "NAME", "WOHNORT", "BERUF", "GEHALT", "ABTNR");
 		ANGESTELLTE.addTuple(new Tuple("10", "Firas", "Hannover", "Programmiererin", "6000", "3"));
 		ANGESTELLTE.addTuple(new Tuple("50", "Schulze", "Hamburg", "Analytikerin", "5600", "3"));
 		ANGESTELLTE.addTuple(new Tuple("12", "Heiko", "Osnabrück", "Werbefachfrau", "8000", "5"));
 		ANGESTELLTE.addTuple(new Tuple("117", "Olbrech", "Hannover", "Ingenieur", "6400", "4"));
 		ANGESTELLTE.addTuple(new Tuple("199", "Huber", "Hannover", "Administrator", "5000", "3"));
 		relations.add(ANGESTELLTE);
+		
 		
 		
 		

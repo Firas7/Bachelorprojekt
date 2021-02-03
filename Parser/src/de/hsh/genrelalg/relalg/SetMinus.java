@@ -67,8 +67,8 @@ public class SetMinus extends RelationalAlgebra {
 			}else {
 				
 				this.matched = false;
-				System.out.println("Difference Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
-				
+				System.err.println("Difference Error: Anzahl der Spalten beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+				System.exit(-1);
 			}
 		
 		}

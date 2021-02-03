@@ -67,7 +67,8 @@ public class Intersection extends RelationalAlgebra{
 					checkAttributesDataTypes(left.getAttributes(),right.getAttributes());
 				}else {
 					this.matched = false;
-					System.out.println("Intersection Error: Spaltenanzahl beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+					System.err.println("Intersection Error: Anzahl der Spalten beider Relation "+ left.getName() +" und " + right.getName() +" ist ungleich");
+					System.exit(-1);
 				}
 			
 			}
